@@ -3,7 +3,25 @@
 // Protected Premium Course Access
 // ========================================
 
-const API_URL = "http://localhost:5000/api/enrollments";
+
+// ========================================
+// API
+// ========================================
+
+// Local development
+// → http://localhost:5000
+//
+// Live Render website
+// → https://machpadacoglobalservices-api.onrender.com
+
+const API_BASE_URL =
+    (window.location.hostname === "localhost" ||
+     window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000"
+        : "https://machpadacoglobalservices-api.onrender.com";
+
+const API_URL = `${API_BASE_URL}/api/enrollments`;
+
 
 const token = localStorage.getItem("token");
 
