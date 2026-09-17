@@ -39,7 +39,7 @@ if (!loginForm) {
             window.location.hostname === "127.0.0.1"
         )
             ? "http://localhost:5000"
-            : "";
+            : "https://machpadacoglobalservices-api.onrender.com";
 
 
     // ========================================
@@ -260,7 +260,7 @@ if (!loginForm) {
 
 
                 showError(
-                    "Server connection failed. Make sure the backend is running on port 5000."
+                    "Server connection failed. Please try again."
                 );
 
             }
