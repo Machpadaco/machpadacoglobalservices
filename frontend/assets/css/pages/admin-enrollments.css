@@ -209,6 +209,40 @@
 
 
 /* ========================================
+   COURSE NAME
+   ======================================== */
+
+.admin-contacts-page
+.course-pricing-admin-table
+.course-pricing-course strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+/* ========================================
+   COURSE DESCRIPTION
+   ======================================== */
+
+.admin-contacts-page
+.course-pricing-admin-table
+.course-pricing-course small {
+
+    display: block;
+
+    line-height: 1.5;
+
+    font-weight: 400;
+
+    overflow-wrap: break-word;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
    COURSE PRICE INPUT
    ======================================== */
 
@@ -314,7 +348,8 @@
    COURSE PRICING MESSAGE
    ======================================== */
 
-.course-pricing-message {
+.admin-contacts-page
+#course-pricing-message {
 
     margin-bottom: 20px;
 
@@ -325,10 +360,11 @@
 
 
 /* ========================================
-   HIDDEN MESSAGE
+   HIDDEN COURSE PRICING MESSAGE
    ======================================== */
 
-.course-pricing-message[hidden] {
+.admin-contacts-page
+#course-pricing-message[hidden] {
 
     display: none;
 }
@@ -623,7 +659,7 @@
 
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-verify-btn {
+.enrollment-action.verify {
 
     display: inline-block;
 
@@ -659,7 +695,7 @@
 
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-reject-btn {
+.enrollment-action.reject {
 
     display: inline-block;
 
@@ -695,7 +731,7 @@
 
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-verify-btn:hover {
+.enrollment-action.verify:hover {
 
     opacity: 0.85;
 }
@@ -703,7 +739,7 @@
 
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-reject-btn:hover {
+.enrollment-action.reject:hover {
 
     opacity: 0.85;
 }
@@ -715,10 +751,10 @@
 
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-verify-btn:disabled,
+.enrollment-action.verify:disabled,
 .admin-contacts-page
 .enrollments-admin-table
-.enrollment-reject-btn:disabled {
+.enrollment-action.reject:disabled {
 
     opacity: 0.6;
 
@@ -746,6 +782,7 @@
 @media (max-width: 900px) {
 
     .enrollment-table-wrapper {
+
         overflow-x: auto;
     }
 
@@ -758,6 +795,7 @@
 
 
     .course-pricing-table-wrapper {
+
         overflow-x: auto;
     }
 
