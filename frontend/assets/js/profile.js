@@ -3,6 +3,7 @@
 // Profile Page
 // ========================================
 
+
 // ========================================
 // IMPORT SHARED AUTH FUNCTIONS
 // ========================================
@@ -17,19 +18,31 @@ import {
 // API
 // ========================================
 
+// Local development
+// → http://localhost:5000
+//
+// Live Render website
+// → https://machpadacoglobalservices-api.onrender.com
+
+const API_BASE_URL =
+    (window.location.hostname === "localhost" ||
+     window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000"
+        : "https://machpadacoglobalservices-api.onrender.com";
+
 const USER_API_URL =
-    "http://localhost:5000/api/user";
+    `${API_BASE_URL}/api/user`;
 
 
 // ========================================
 // PROFILE INITIALIZATION
 // ========================================
-//
+
 // IMPORTANT:
 // This file is dynamically imported by main.js.
 // Therefore, do NOT wrap the code in
 // DOMContentLoaded.
-// ========================================
+
 
 const userJson =
     localStorage.getItem("user");
@@ -65,13 +78,16 @@ if (!userJson) {
             err
         );
 
+
         localStorage.removeItem(
             "user"
         );
 
+
         localStorage.removeItem(
             "token"
         );
+
 
         window.location.href =
             "login.html";
@@ -95,40 +111,48 @@ if (!userJson) {
                 "editName"
             );
 
+
         const editPhone =
             document.getElementById(
                 "editPhone"
             );
+
 
         const profileName =
             document.getElementById(
                 "profileName"
             );
 
+
         const profileEmail =
             document.getElementById(
                 "profileEmail"
             );
+
 
         const profilePhone =
             document.getElementById(
                 "profilePhone"
             );
 
+
         const saveBtn =
             document.getElementById(
                 "saveProfileBtn"
             );
+
 
         const imageUpload =
             document.getElementById(
                 "imageUpload"
             );
 
+
         const profileImage =
             document.getElementById(
                 "profileImage"
             );
+
 
         const changePhotoBtn =
             document.getElementById(
@@ -242,6 +266,7 @@ if (!userJson) {
                     const fullName =
                         editName.value.trim();
 
+
                     const phone =
                         editPhone.value.trim();
 
@@ -263,6 +288,7 @@ if (!userJson) {
 
                     saveBtn.disabled =
                         true;
+
 
                     saveBtn.textContent =
                         "Saving...";
@@ -393,6 +419,7 @@ if (!userJson) {
                             "Unable to connect to the server."
                         );
 
+
                     } finally {
 
                         // ========================================
@@ -401,6 +428,7 @@ if (!userJson) {
 
                         saveBtn.disabled =
                             false;
+
 
                         saveBtn.textContent =
                             "Save Changes";
@@ -471,8 +499,10 @@ if (!userJson) {
                             "Please select an image file."
                         );
 
+
                         imageUpload.value =
                             "";
+
 
                         return;
 
@@ -506,6 +536,7 @@ if (!userJson) {
 
                     changePhotoBtn.disabled =
                         true;
+
 
                     changePhotoBtn.textContent =
                         "Uploading...";
@@ -638,6 +669,7 @@ if (!userJson) {
                         changePhotoBtn.disabled =
                             false;
 
+
                         changePhotoBtn.textContent =
                             "Change Photo";
 
@@ -667,11 +699,11 @@ if (!userJson) {
         // ========================================
         // NOTE ABOUT LOGOUT
         // ========================================
-        //
+
         // Logout is handled centrally by auth.js.
         // We intentionally do NOT attach another
         // logout listener here.
-        //
+
         // This prevents duplicate logout handlers.
         // ========================================
 
