@@ -5,10 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!contactForm) return;
 
-    // Detect environment to point to Node.js backend on port 5000 during local dev
-    const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-        ? 'http://localhost:5000'
-        : '';
+    // Detect environment
+    // Local development → http://localhost:5000
+    // Live Render website → https://machpadacoglobalservices-api.onrender.com
+    const API_BASE_URL =
+        (window.location.hostname === 'localhost' ||
+         window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:5000'
+            : 'https://machpadacoglobalservices-api.onrender.com';
 
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -37,19 +41,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             feedbackBox.style.display = 'block';
+
             if (response.ok && result.success) {
                 feedbackBox.className = 'form-feedback-box success';
-                feedbackBox.textContent = result.message || 'Thank you! Your message has been sent.';
+                feedbackBox.textContent =
+                    result.message ||
+                    'Thank you! Your message has been sent.';
+
                 contactForm.reset();
             } else {
                 feedbackBox.className = 'form-feedback-box error';
-                feedbackBox.textContent = result.message || 'Something went wrong. Please try again.';
+                feedbackBox.textContent =
+                    result.message ||
+                    'Something went wrong. Please try again.';
             }
+
         } catch (error) {
-            console.error('Contact form submission error:', error);
+            console.error(
+                'Contact form submission error:',
+                error
+            );
+
             feedbackBox.style.display = 'block';
             feedbackBox.className = 'form-feedback-box error';
-            feedbackBox.textContent = 'Network error. Please check your connection and try again.';
+            feedbackBox.textContent =
+                'Network error. Please check your connection and try again.';
+
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Send Message';
