@@ -1,6 +1,51 @@
 const Enrollment = require("../models/Enrollment");
 const User = require("../models/User");
-const { getCourse } = require("../config/courseCatalog");
+const Course = require("../models/Course");
+const { courses } = require("../config/courseCatalog");
+
+
+// ========================================
+// GET OR CREATE COURSE IN DATABASE
+// ========================================
+// Course names/descriptions come from courseCatalog.js.
+// The price is only taken from the environment variables
+// when the course is created for the first time.
+//
+// After that, the price stored in MongoDB is used.
+// This allows the Admin Panel to change prices without
+// changing Render environment variables.
+
+async function getStoredCourse(courseSlug) {
+    const catalogCourse = courses[courseSlug];
+
+    if (!catalogCourse) {
+        return null;
+    }
+
+    const course = await Course.findOneAndUpdate(
+        { slug: courseSlug },
+        {
+            $setOnInsert: {
+                slug: courseSlug,
+                name: catalogCourse.name,
+                description: catalogCourse.description,
+                price: catalogCourse.price
+            }
+        },
+        {
+            new: true,
+            upsert: true,
+            setDefaultsOnInsert: true
+        }
+    ).lean();
+
+    return course;
+}
+
+
+// ========================================
+// PUBLIC ENROLLMENT DATA
+// ========================================
 
 function publicEnrollment(enrollment) {
     return {
@@ -19,40 +64,78 @@ function publicEnrollment(enrollment) {
     };
 }
 
-// GET /api/enrollments/courses
-exports.listCourses = async (req, res) => {
-    const { courses } = require("../config/courseCatalog");
 
-    res.status(200).json({
-        success: true,
-        data: Object.entries(courses).map(([slug, course]) => ({
-            slug,
-            name: course.name,
-            price: course.price,
-            description: course.description
-        }))
-    });
+// ========================================
+// GET /api/enrollments/courses
+// ========================================
+// Public endpoint used by enroll.html.
+
+exports.listCourses = async (req, res) => {
+    try {
+        const courseEntries = Object.entries(courses);
+
+        const data = await Promise.all(
+            courseEntries.map(async ([slug]) => {
+                const course = await getStoredCourse(slug);
+
+                return {
+                    slug,
+                    name: course.name,
+                    price: course.price,
+                    description: course.description
+                };
+            })
+        );
+
+        res.status(200).json({
+            success: true,
+            data
+        });
+
+    } catch (error) {
+        console.error("LIST COURSES ERROR:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to retrieve courses."
+        });
+    }
 };
 
+
+// ========================================
 // GET /api/enrollments/payment-details
+// ========================================
+
 exports.getPaymentDetails = async (req, res) => {
     res.status(200).json({
         success: true,
         data: {
             bankName: process.env.PAYMENT_BANK_NAME || "",
-            accountName: process.env.PAYMENT_ACCOUNT_NAME || "Machpadaco Global Services",
+            accountName:
+                process.env.PAYMENT_ACCOUNT_NAME ||
+                "Machpadaco Global Services",
             accountNumber: process.env.PAYMENT_ACCOUNT_NUMBER || "",
             whatsappNumber: process.env.PAYMENT_WHATSAPP_NUMBER || ""
         }
     });
 };
 
+
+// ========================================
 // POST /api/enrollments
-// Creates a pending enrollment. It NEVER grants premium access.
+// ========================================
+// Creates a pending enrollment.
+// It NEVER grants premium access.
+
 exports.createEnrollment = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { courseSlug, paymentReference } = req.body;
+
+        const {
+            courseSlug,
+            paymentReference
+        } = req.body;
 
         if (!courseSlug || !paymentReference) {
             return res.status(400).json({
@@ -61,7 +144,9 @@ exports.createEnrollment = async (req, res) => {
             });
         }
 
-        const course = getCourse(courseSlug);
+        // Get the LIVE course from MongoDB.
+        const course = await getStoredCourse(courseSlug);
+
         if (!course) {
             return res.status(400).json({
                 success: false,
@@ -72,11 +157,13 @@ exports.createEnrollment = async (req, res) => {
         if (!course.price || course.price <= 0) {
             return res.status(503).json({
                 success: false,
-                message: "The fee for this course has not been configured yet. Please contact Machpadaco."
+                message:
+                    "The fee for this course has not been configured yet. Please contact Machpadaco."
             });
         }
 
         const user = await User.findById(userId);
+
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -85,6 +172,7 @@ exports.createEnrollment = async (req, res) => {
         }
 
         const reference = String(paymentReference).trim();
+
         if (reference.length < 3 || reference.length > 120) {
             return res.status(400).json({
                 success: false,
@@ -100,7 +188,8 @@ exports.createEnrollment = async (req, res) => {
         if (existing && existing.status === "verified") {
             return res.status(409).json({
                 success: false,
-                message: "You already have verified access to this course.",
+                message:
+                    "You already have verified access to this course.",
                 data: publicEnrollment(existing)
             });
         }
@@ -108,19 +197,23 @@ exports.createEnrollment = async (req, res) => {
         if (existing && existing.status === "pending") {
             return res.status(409).json({
                 success: false,
-                message: "A payment verification request for this course is already pending.",
+                message:
+                    "A payment verification request for this course is already pending.",
                 data: publicEnrollment(existing)
             });
         }
 
-        // A rejected record can be submitted again by updating it.
-        const enrollment = existing || new Enrollment({
-            user: userId,
-            courseSlug,
-            courseName: course.name,
-            amount: course.price
-        });
+        const enrollment =
+            existing ||
+            new Enrollment({
+                user: userId,
+                courseSlug,
+                courseName: course.name,
+                amount: course.price
+            });
 
+        // Always use the current MongoDB course price
+        // for new/re-submitted enrollment requests.
         enrollment.courseName = course.name;
         enrollment.amount = course.price;
         enrollment.paymentReference = reference;
@@ -133,24 +226,38 @@ exports.createEnrollment = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: "Enrollment submitted. Your payment is awaiting verification.",
+            message:
+                "Enrollment submitted. Your payment is awaiting verification.",
             data: publicEnrollment(enrollment)
         });
+
     } catch (error) {
         console.error("CREATE ENROLLMENT ERROR:", error);
+
         res.status(500).json({
             success: false,
-            message: "Unable to submit enrollment. Please try again."
+            message:
+                "Unable to submit enrollment. Please try again."
         });
     }
 };
 
+
+// ========================================
 // GET /api/enrollments/access/:courseSlug
+// ========================================
+
 exports.checkCourseAccess = async (req, res) => {
     try {
-        const course = getCourse(req.params.courseSlug);
+        const course = await getStoredCourse(
+            req.params.courseSlug
+        );
+
         if (!course) {
-            return res.status(404).json({ success: false, message: "Course not found." });
+            return res.status(404).json({
+                success: false,
+                message: "Course not found."
+            });
         }
 
         const enrollment = await Enrollment.findOne({
@@ -167,108 +274,177 @@ exports.checkCourseAccess = async (req, res) => {
                 name: course.name
             }
         });
+
     } catch (error) {
-        console.error("CHECK COURSE ACCESS ERROR:", error);
-        res.status(500).json({ success: false, message: "Unable to check course access." });
+        console.error(
+            "CHECK COURSE ACCESS ERROR:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message:
+                "Unable to check course access."
+        });
     }
 };
 
+
+// ========================================
 // GET /api/enrollments/my
+// ========================================
+
 exports.getMyEnrollments = async (req, res) => {
     try {
-        const enrollments = await Enrollment.find({ user: req.user.id })
-            .sort({ createdAt: -1 });
+        const enrollments = await Enrollment.find({
+            user: req.user.id
+        }).sort({
+            createdAt: -1
+        });
 
         res.status(200).json({
             success: true,
             data: enrollments.map(publicEnrollment)
         });
+
     } catch (error) {
-        console.error("GET MY ENROLLMENTS ERROR:", error);
+        console.error(
+            "GET MY ENROLLMENTS ERROR:",
+            error
+        );
+
         res.status(500).json({
             success: false,
-            message: "Unable to retrieve your enrollments."
+            message:
+                "Unable to retrieve your enrollments."
         });
     }
 };
 
-// GET /api/enrollments/admin
+
+// ========================================
+// ADMIN — GET ALL ENROLLMENTS
+// ========================================
+
 exports.getAllEnrollments = async (req, res) => {
     try {
         const enrollments = await Enrollment.find()
-            .populate("user", "fullName email phone")
-            .sort({ createdAt: -1 });
+            .populate(
+                "user",
+                "fullName email phone"
+            )
+            .sort({
+                createdAt: -1
+            });
 
         res.status(200).json({
             success: true,
             count: enrollments.length,
             data: enrollments.map(publicEnrollment)
         });
+
     } catch (error) {
-        console.error("GET ENROLLMENTS ERROR:", error);
+        console.error(
+            "GET ENROLLMENTS ERROR:",
+            error
+        );
+
         res.status(500).json({
             success: false,
-            message: "Unable to retrieve enrollments."
+            message:
+                "Unable to retrieve enrollments."
         });
     }
 };
 
+
+// ========================================
+// ADMIN — UPDATE ENROLLMENT STATUS
+// ========================================
 // PATCH /api/enrollments/admin/:id
+
 exports.updateEnrollmentStatus = async (req, res) => {
     try {
-        const { status, adminNote = "" } = req.body;
+        const {
+            status,
+            adminNote = ""
+        } = req.body;
 
         if (!["verified", "rejected"].includes(status)) {
             return res.status(400).json({
                 success: false,
-                message: "Status must be verified or rejected."
+                message:
+                    "Status must be verified or rejected."
             });
         }
 
-        const enrollment = await Enrollment.findById(req.params.id);
+        const enrollment =
+            await Enrollment.findById(req.params.id);
+
         if (!enrollment) {
             return res.status(404).json({
                 success: false,
-                message: "Enrollment not found."
+                message:
+                    "Enrollment not found."
             });
         }
 
-        const user = await User.findById(enrollment.user);
+        const user =
+            await User.findById(enrollment.user);
+
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: "Student account not found."
+                message:
+                    "Student account not found."
             });
         }
 
         enrollment.status = status;
-        enrollment.adminNote = String(adminNote).trim().slice(0, 500);
+
+        enrollment.adminNote =
+            String(adminNote)
+                .trim()
+                .slice(0, 500);
 
         if (status === "verified") {
             enrollment.verifiedAt = new Date();
             enrollment.rejectedAt = null;
 
-            if (!user.enrolledCourses.includes(enrollment.courseSlug)) {
-                user.enrolledCourses.push(enrollment.courseSlug);
+            if (
+                !user.enrolledCourses.includes(
+                    enrollment.courseSlug
+                )
+            ) {
+                user.enrolledCourses.push(
+                    enrollment.courseSlug
+                );
             }
+
             user.isPaidStudent = true;
+
         } else {
             enrollment.rejectedAt = new Date();
             enrollment.verifiedAt = null;
 
-            // Remove access to this course if it had previously been verified.
-            user.enrolledCourses = user.enrolledCourses.filter(
-                courseSlug => courseSlug !== enrollment.courseSlug
-            );
+            user.enrolledCourses =
+                user.enrolledCourses.filter(
+                    courseSlug =>
+                        courseSlug !==
+                        enrollment.courseSlug
+                );
 
-            // Keep paid status when another verified course still exists.
-            const verifiedCount = await Enrollment.countDocuments({
-                user: user._id,
-                status: "verified",
-                _id: { $ne: enrollment._id }
-            });
+            const verifiedCount =
+                await Enrollment.countDocuments({
+                    user: user._id,
+                    status: "verified",
+                    _id: {
+                        $ne: enrollment._id
+                    }
+                });
 
-            user.isPaidStudent = verifiedCount > 0;
+            user.isPaidStudent =
+                verifiedCount > 0;
         }
 
         await enrollment.save();
@@ -276,16 +452,158 @@ exports.updateEnrollmentStatus = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: status === "verified"
-                ? "Payment verified and course access granted."
-                : "Enrollment rejected.",
+            message:
+                status === "verified"
+                    ? "Payment verified and course access granted."
+                    : "Enrollment rejected.",
             data: publicEnrollment(enrollment)
         });
+
     } catch (error) {
-        console.error("UPDATE ENROLLMENT ERROR:", error);
+        console.error(
+            "UPDATE ENROLLMENT ERROR:",
+            error
+        );
+
         res.status(500).json({
             success: false,
-            message: "Unable to update enrollment."
+            message:
+                "Unable to update enrollment."
+        });
+    }
+};
+
+
+// ========================================
+// ADMIN — GET COURSE PRICES
+// ========================================
+// GET /api/enrollments/admin/courses
+
+exports.listAdminCourses = async (req, res) => {
+    try {
+        const courseEntries =
+            Object.entries(courses);
+
+        const data = await Promise.all(
+            courseEntries.map(async ([slug]) => {
+                const course =
+                    await getStoredCourse(slug);
+
+                return {
+                    slug,
+                    name: course.name,
+                    description: course.description,
+                    price: course.price
+                };
+            })
+        );
+
+        res.status(200).json({
+            success: true,
+            data
+        });
+
+    } catch (error) {
+        console.error(
+            "LIST ADMIN COURSES ERROR:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message:
+                "Unable to retrieve course pricing."
+        });
+    }
+};
+
+
+// ========================================
+// ADMIN — UPDATE COURSE PRICE
+// ========================================
+// PATCH /api/enrollments/admin/courses/:slug
+
+exports.updateCoursePrice = async (req, res) => {
+    try {
+        const {
+            price
+        } = req.body;
+
+        const slug =
+            String(req.params.slug || "").trim();
+
+        // Make sure the course exists in our
+        // official catalog.
+        const catalogCourse =
+            courses[slug];
+
+        if (!catalogCourse) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "Course not found."
+            });
+        }
+
+        const numericPrice =
+            Number(price);
+
+        if (
+            !Number.isFinite(numericPrice) ||
+            !Number.isInteger(numericPrice) ||
+            numericPrice <= 0
+        ) {
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Course price must be a positive whole number."
+            });
+        }
+
+        const updatedCourse =
+            await Course.findOneAndUpdate(
+                { slug },
+                {
+                    $set: {
+                        price: numericPrice
+                    },
+                    $setOnInsert: {
+                        slug,
+                        name: catalogCourse.name,
+                        description:
+                            catalogCourse.description
+                    }
+                },
+                {
+                    new: true,
+                    upsert: true,
+                    runValidators: true
+                }
+            ).lean();
+
+        res.status(200).json({
+            success: true,
+            message:
+                "Course price updated successfully.",
+            data: {
+                slug: updatedCourse.slug,
+                name: updatedCourse.name,
+                description:
+                    updatedCourse.description,
+                price: updatedCourse.price
+            }
+        });
+
+    } catch (error) {
+        console.error(
+            "UPDATE COURSE PRICE ERROR:",
+            error
+        );
+
+        res.status(500).json({
+            success: false,
+            message:
+                "Unable to update course price."
         });
     }
 };
