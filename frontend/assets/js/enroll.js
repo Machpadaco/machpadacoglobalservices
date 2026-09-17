@@ -1,9 +1,19 @@
 // ========================================
-// Machpadaco Premium Enrolment
+// MACHpadaco Premium Enrolment
 // ========================================
 
-// Backend API server
-const API_BASE_URL = "http://localhost:5000";
+// ========================================
+// BACKEND API
+// ========================================
+
+// Use local backend during development
+// Use Render backend when the website is live
+
+const API_BASE_URL =
+    (window.location.hostname === "localhost" ||
+     window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000"
+        : "https://machpadacoglobalservices-api.onrender.com";
 
 const token = localStorage.getItem("token");
 const userJson = localStorage.getItem("user");
@@ -530,9 +540,13 @@ async function loadExistingEnrollment() {
         // Token expired
         if (response.status === 401) {
 
-            localStorage.removeItem("token");
+            localStorage.removeItem(
+                "token"
+            );
 
-            localStorage.removeItem("user");
+            localStorage.removeItem(
+                "user"
+            );
 
             window.location.href =
                 "login.html";
