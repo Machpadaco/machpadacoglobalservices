@@ -10,16 +10,20 @@
     <link rel="stylesheet" href="assets/css/admin-enrollment.css">
 </head>
 
-<body data-page="admin-enrollments">
+<body
+    class="admin-contacts-page"
+    data-page="admin-enrollments"
+>
 
     <div id="header-placeholder"></div>
 
 
     <main class="admin-enrollments-container">
 
+
         <!-- ========================================
              PAGE HEADER
-        ========================================= -->
+        ======================================== -->
 
         <section class="admin-enrollments-header">
 
@@ -64,7 +68,7 @@
 
         <!-- ========================================
              ENROLLMENT MESSAGE
-        ========================================= -->
+        ======================================== -->
 
         <div
             id="enrollment-admin-message"
@@ -75,7 +79,7 @@
 
         <!-- ========================================
              COURSE PRICING SECTION
-        ========================================= -->
+        ======================================== -->
 
         <section class="admin-course-pricing">
 
@@ -105,27 +109,27 @@
             ></div>
 
 
-            <div class="admin-table-wrapper">
+            <div class="course-pricing-table-wrapper">
 
-                <table class="admin-enrollments-table">
+                <table class="course-pricing-admin-table">
 
                     <thead>
 
                         <tr>
 
-                            <th>
+                            <th class="course-pricing-col-course">
                                 Course
                             </th>
 
-                            <th>
+                            <th class="course-pricing-col-current">
                                 Current Fee
                             </th>
 
-                            <th>
+                            <th class="course-pricing-col-new">
                                 New Fee
                             </th>
 
-                            <th>
+                            <th class="course-pricing-col-action">
                                 Action
                             </th>
 
@@ -155,7 +159,7 @@
 
         <!-- ========================================
              ENROLLMENTS SECTION
-        ========================================= -->
+        ======================================== -->
 
         <section class="admin-enrollments-section">
 
@@ -177,39 +181,43 @@
             </div>
 
 
-            <div class="admin-table-wrapper">
+            <div class="enrollment-table-wrapper">
 
-                <table class="admin-enrollments-table">
+                <table class="enrollments-admin-table">
 
                     <thead>
 
                         <tr>
 
-                            <th>
+                            <th class="enrollment-col-date">
                                 Date
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-student">
                                 Student
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-email">
+                                Email
+                            </th>
+
+                            <th class="enrollment-col-course">
                                 Course
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-amount">
                                 Amount
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-reference">
                                 Payment Reference
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-status">
                                 Status
                             </th>
 
-                            <th>
+                            <th class="enrollment-col-action">
                                 Action
                             </th>
 
@@ -222,7 +230,7 @@
 
                         <tr>
 
-                            <td colspan="7">
+                            <td colspan="8">
                                 Loading enrollments...
                             </td>
 
