@@ -3,36 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Premium Enrollments | Admin</title>
+
     <link rel="stylesheet" href="assets/css/style.css">
-    
+    <link rel="stylesheet" href="assets/css/admin-enrollment.css">
 </head>
+
 <body data-page="admin-enrollments">
+
     <div id="header-placeholder"></div>
+
+
     <main class="admin-enrollments-container">
-        <div class="admin-enrollments-header">
-            <div>
-                <span class="admin-eyebrow">ADMIN PORTAL</span>
-                <h1>Premium Enrollments</h1>
-                <p>Review payment references and grant or reject course access.</p>
+
+        <!-- ========================================
+             PAGE HEADER
+        ========================================= -->
+
+        <section class="admin-enrollments-header">
+
+            <div class="admin-enrollments-title">
+
+                <span class="admin-eyebrow">
+                    ADMIN PORTAL
+                </span>
+
+                <h1>
+                    Premium Enrollments
+                </h1>
+
+                <p>
+                    Review payment references and grant
+                    or reject course access.
+                </p>
+
             </div>
+
+
             <div class="admin-enrollments-actions">
-                <button type="button" id="refresh-enrollments">Refresh</button>
-                <button type="button" id="logout-enrollments">Logout</button>
+
+                <button
+                    type="button"
+                    id="refresh-enrollments"
+                >
+                    Refresh
+                </button>
+
+                <button
+                    type="button"
+                    id="logout-enrollments"
+                >
+                    Logout
+                </button>
+
             </div>
-        </div>
-        <div id="enrollment-admin-message" class="admin-enrollment-message" hidden></div>
-        <div class="admin-enrollments-table-wrapper">
-            <table class="admin-enrollments-table">
-                <thead>
-                    <tr><th>Date</th><th>Student</th><th>Course</th><th>Amount</th><th>Payment Reference</th><th>Status</th><th>Action</th></tr>
-                </thead>
-                <tbody id="enrollments-table-body"><tr><td colspan="7">Loading enrollments...</td></tr></tbody>
-            </table>
-        </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ENROLLMENT MESSAGE
+        ========================================= -->
+
+        <div
+            id="enrollment-admin-message"
+            class="admin-enrollment-message"
+            hidden
+        ></div>
+
+
+        <!-- ========================================
+             COURSE PRICING SECTION
+        ========================================= -->
+
+        <section class="admin-course-pricing">
+
+            <div class="admin-section-header">
+
+                <span class="admin-eyebrow">
+                    COURSE MANAGEMENT
+                </span>
+
+                <h2>
+                    Course Pricing
+                </h2>
+
+                <p>
+                    Update the price of any premium course.
+                    Changes made here will be used for new
+                    enrollments.
+                </p>
+
+            </div>
+
+
+            <div
+                id="course-pricing-message"
+                class="admin-enrollment-message"
+                hidden
+            ></div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-enrollments-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Current Fee
+                            </th>
+
+                            <th>
+                                New Fee
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="course-pricing-table-body">
+
+                        <tr>
+
+                            <td colspan="4">
+                                Loading course pricing...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ENROLLMENTS SECTION
+        ========================================= -->
+
+        <section class="admin-enrollments-section">
+
+            <div class="admin-section-header">
+
+                <span class="admin-eyebrow">
+                    STUDENT MANAGEMENT
+                </span>
+
+                <h2>
+                    Premium Enrollments
+                </h2>
+
+                <p>
+                    Review student payment references and
+                    manage enrollment verification.
+                </p>
+
+            </div>
+
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-enrollments-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment Reference
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="enrollments-table-body">
+
+                        <tr>
+
+                            <td colspan="7">
+                                Loading enrollments...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
     </main>
+
+
     <div id="footer-placeholder"></div>
-    <!-- Main JavaScript -->
-    <script type="module" src="assets/js/main.js"></script>
+
+
+    <script
+        type="module"
+        src="assets/js/main.js"
+    ></script>
+
 </body>
 </html>
