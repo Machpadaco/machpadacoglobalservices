@@ -1,0 +1,116 @@
+/* =========================================================
+   MACHpadaco Global Services
+   GLOBAL DESIGN VARIABLES
+   FILE: assets/css/variables.css
+
+   Purpose:
+   Central location for website colors, spacing,
+   typography and common design values.
+========================================================= */
+
+:root {
+
+    /* =====================================================
+       BRAND COLORS
+    ===================================================== */
+
+    /* Primary MACHpadaco Blue */
+    --brand-blue: #007BFF;
+
+    /* Darker Blue */
+    --brand-blue-dark: #0056B3;
+
+    /* MACHpadaco Logo Orange */
+    --brand-orange: #F47B20;
+
+    /* Darker Orange - hover states */
+    --brand-orange-dark: #D96316;
+
+
+    /* =====================================================
+       TEXT COLORS
+    ===================================================== */
+
+    --heading-color: #102A43;
+
+    --text-color: #52667A;
+
+    --muted-text: #718096;
+
+
+    /* =====================================================
+       BACKGROUND COLORS
+    ===================================================== */
+
+    --white: #FFFFFF;
+
+    --light-bg: #F7FAFC;
+
+    --soft-blue-bg: #EEF7FF;
+
+    --border-color: #E2EAF1;
+
+
+    /* =====================================================
+       TYPOGRAPHY
+    ===================================================== */
+
+    --body-font:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    --heading-font:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+
+    /* =====================================================
+       COMMON SPACING
+    ===================================================== */
+
+    --section-padding: 100px;
+
+    --container-width: 1180px;
+
+
+    /* =====================================================
+       BORDER RADIUS
+    ===================================================== */
+
+    --radius-small: 8px;
+
+    --radius-medium: 12px;
+
+    --radius-large: 18px;
+
+
+    /* =====================================================
+       SHADOWS
+    ===================================================== */
+
+    --shadow-small:
+        0 8px 20px rgba(16, 42, 67, 0.06);
+
+    --shadow-medium:
+        0 15px 40px rgba(16, 42, 67, 0.08);
+
+    --shadow-large:
+        0 25px 60px rgba(16, 42, 67, 0.10);
+
+
+    /* =====================================================
+       TRANSITIONS
+    ===================================================== */
+
+    --transition-fast:
+        0.2s ease;
+
+    --transition-normal:
+        0.3s ease;
+
+    --transition-slow:
+        0.4s ease;
+
+}

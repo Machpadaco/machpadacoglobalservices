@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Portal | Machpadaco Global Services</title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+</head>
+
+
+<body
+    data-page="admin-contacts"
+    class="admin-contacts-page"
+>
+
+
+    <!-- ========================================
+         SHARED WEBSITE HEADER
+    ========================================= -->
+
+    <div id="header-placeholder"></div>
+
+
+    <!-- ========================================
+         ADMIN CONTENT
+    ========================================= -->
+
+    <main class="admin-container">
+
+
+        <!-- ========================================
+             ADMIN HEADER
+        ========================================= -->
+
+        <div class="controls-bar">
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMIN PORTAL
+                </span>
+
+                <h1 id="admin-page-title">
+                    Contact Form Submissions
+                </h1>
+
+                <p id="admin-page-description">
+                    Review and manage messages submitted
+                    through the website contact forms.
+                </p>
+
+            </div>
+
+
+            <div class="admin-controls">
+
+
+                <!-- CONTACT MESSAGES -->
+
+                <button
+                    type="button"
+                    id="messages-view-btn"
+                    class="refresh-btn"
+                >
+                    📩 Contact Messages
+                </button>
+
+
+                <!-- PREMIUM ENROLLMENTS -->
+
+                <button
+                    type="button"
+                    id="enrollments-view-btn"
+                    class="refresh-btn"
+                >
+                    🎓 Premium Enrollments
+                </button>
+
+
+                <!-- REFRESH -->
+
+                <button
+                    type="button"
+                    id="refresh-btn"
+                    class="refresh-btn"
+                >
+                    🔄 Refresh
+                </button>
+
+
+                <!-- LOGOUT -->
+
+                <button
+                    type="button"
+                    id="logout-btn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             ADMIN ERROR MESSAGE
+        ========================================= -->
+
+        <div
+            id="admin-error"
+            class="admin-error"
+            hidden
+        ></div>
+
+
+        <!-- ========================================
+             CONTACT MESSAGES SECTION
+        ========================================= -->
+
+        <section
+            id="contacts-section"
+        >
+
+            <div class="contacts-table-wrapper">
+
+                <table class="contacts-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Service</th>
+
+                            <th>Message</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="contacts-table-body">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                style="text-align: center;"
+                            >
+                                Loading messages...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             PREMIUM ENROLLMENTS SECTION
+        ========================================= -->
+
+        <section
+            id="enrollments-section"
+            hidden
+        >
+
+            <div class="contacts-table-wrapper enrollment-table-wrapper">
+
+                <table
+                    class="contacts-table enrollments-admin-table"
+                >
+
+                    <!-- ========================================
+                         FIXED COLUMN STRUCTURE
+                    ========================================= -->
+
+                    <colgroup>
+
+                        <col class="enrollment-col-date">
+
+                        <col class="enrollment-col-student">
+
+                        <col class="enrollment-col-email">
+
+                        <col class="enrollment-col-course">
+
+                        <col class="enrollment-col-amount">
+
+                        <col class="enrollment-col-reference">
+
+                        <col class="enrollment-col-status">
+
+                        <col class="enrollment-col-action">
+
+                    </colgroup>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Student</th>
+
+                            <th>Email</th>
+
+                            <th>Course</th>
+
+                            <th>Amount</th>
+
+                            <th>Payment Reference</th>
+
+                            <th>Status</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="enrollments-table-body">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                style="text-align: center;"
+                            >
+                                Loading enrollments...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ========================================
+         SHARED WEBSITE FOOTER
+    ========================================= -->
+
+    <div id="footer-placeholder"></div>
+
+
+    <!-- ========================================
+         MAIN JAVASCRIPT CONTROLLER
+    ========================================= -->
+
+    <script
+        type="module"
+        src="assets/js/main.js"
+    ></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+/* ========================================
+   MACHpadaco Global Services
+   Admin Login Page
+   ======================================== */
+
+/* ========================================
+   ADMIN LOGIN PAGE
+   ======================================== */
+
+body.admin-login-page {
+    background-color: #050c17;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ========================================
+   LOGIN CARD
+   ======================================== */
+
+.admin-login-page .login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: #0b192c;
+    color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #007BFF;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   TITLE
+   ======================================== */
+
+.admin-login-page .login-card h2 {
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   INPUTS
+   ======================================== */
+
+.admin-login-page .login-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #1e293b;
+    background: #132238;
+    color: #ffffff;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.admin-login-page .login-card input:focus {
+    border-color: #007BFF;
+}
+
+
+/* ========================================
+   LOGIN BUTTON
+   ======================================== */
+
+.admin-login-page .login-card button {
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background 0.2s ease;
+}
+
+.admin-login-page .login-card button:hover {
+    background: #0056b3;
+}
+
+.admin-login-page .login-card button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   LOGIN ERROR
+   ======================================== */
+
+.admin-login-page #login-error {
+    color: #ff4d4d;
+    margin-top: 15px;
+    display: none;
+    font-size: 14px;
+    text-align: center;
+}

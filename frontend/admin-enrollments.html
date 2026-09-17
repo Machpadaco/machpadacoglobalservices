@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Enrollments | Admin</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+</head>
+<body data-page="admin-enrollments">
+    <div id="header-placeholder"></div>
+    <main class="admin-enrollments-container">
+        <div class="admin-enrollments-header">
+            <div>
+                <span class="admin-eyebrow">ADMIN PORTAL</span>
+                <h1>Premium Enrollments</h1>
+                <p>Review payment references and grant or reject course access.</p>
+            </div>
+            <div class="admin-enrollments-actions">
+                <button type="button" id="refresh-enrollments">Refresh</button>
+                <button type="button" id="logout-enrollments">Logout</button>
+            </div>
+        </div>
+        <div id="enrollment-admin-message" class="admin-enrollment-message" hidden></div>
+        <div class="admin-enrollments-table-wrapper">
+            <table class="admin-enrollments-table">
+                <thead>
+                    <tr><th>Date</th><th>Student</th><th>Course</th><th>Amount</th><th>Payment Reference</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="enrollments-table-body"><tr><td colspan="7">Loading enrollments...</td></tr></tbody>
+            </table>
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <!-- Main JavaScript -->
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

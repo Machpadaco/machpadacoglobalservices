@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | Machpadaco Global Services</title>
+
+    <meta
+        name="description"
+        content="Student dashboard for Machpadaco Global Services premium training programmes."
+    >
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/pages/student-dashboard.css">
+</head>
+
+<body data-page="student-dashboard">
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+
+    <main class="student-dashboard">
+
+        <!-- Dashboard Hero -->
+        <section class="dashboard-hero">
+            <div class="container">
+
+                <div class="dashboard-welcome">
+                    <p class="dashboard-label">STUDENT DASHBOARD</p>
+
+                    <h1>
+                        Welcome back,
+                        <span id="student-name">Student</span>
+                    </h1>
+
+                    <p class="dashboard-intro">
+                        Manage your training programmes, continue your learning,
+                        and keep track of your progress from one place.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Dashboard Content -->
+        <section class="dashboard-content">
+            <div class="container">
+
+                <!-- Account Summary -->
+                <div class="dashboard-summary">
+
+                    <div class="summary-card">
+                        <span class="summary-icon">👤</span>
+
+                        <div>
+                            <span class="summary-title">Student</span>
+                            <strong id="dashboard-student-name">
+                                Loading...
+                            </strong>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-card">
+                        <span class="summary-icon">✉️</span>
+
+                        <div>
+                            <span class="summary-title">Email</span>
+                            <strong id="dashboard-student-email">
+                                Loading...
+                            </strong>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-card">
+                        <span class="summary-icon">🎓</span>
+
+                        <div>
+                            <span class="summary-title">Enrolled Courses</span>
+                            <strong id="course-count">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- My Courses -->
+                <section class="dashboard-section">
+
+                    <div class="section-heading">
+                        <div>
+                            <p class="section-label">MY LEARNING</p>
+
+                            <h2>My Courses</h2>
+
+                            <p>
+                                Access the premium courses you have been
+                                enrolled in and continue your training.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- Course List -->
+                    <div id="student-courses" class="student-courses">
+
+                        <!-- Courses will be loaded here -->
+
+                        <div id="courses-loading" class="dashboard-message">
+                            <div class="loading-spinner"></div>
+
+                            <p>
+                                Loading your courses...
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- No Courses Message -->
+                <section
+                    id="no-courses"
+                    class="dashboard-empty"
+                    hidden
+                >
+
+                    <div class="empty-icon">🎓</div>
+
+                    <h2>No enrolled courses yet</h2>
+
+                    <p>
+                        You have not been enrolled in a premium training
+                        programme yet.
+                    </p>
+
+                    <a href="community.html" class="dashboard-button">
+                        Explore Training Programmes
+                    </a>
+
+                </section>
+
+
+                <!-- Learning Support -->
+                <section class="dashboard-support">
+
+                    <div class="support-content">
+
+                        <p class="section-label">
+                            LEARNING SUPPORT
+                        </p>
+
+                        <h2>Need help with your training?</h2>
+
+                        <p>
+                            Join the Machpadaco learning community for
+                            questions, clarification, announcements,
+                            useful resources and networking.
+                        </p>
+
+                        <a
+                            href="join-community.html"
+                            class="dashboard-button"
+                        >
+                            Visit Learning Community
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+
+    <!-- Main JavaScript -->
+    <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>

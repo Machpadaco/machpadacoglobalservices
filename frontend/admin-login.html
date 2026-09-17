@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login - Machpadaco</title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+</head>
+
+
+<body
+    data-page="admin-login"
+    class="admin-login-page"
+>
+
+    <main class="login-card">
+
+        <h2>Admin Access</h2>
+
+        <form id="admin-login-form">
+
+            <input
+                type="email"
+                id="admin-email"
+                placeholder="Admin Email"
+                autocomplete="email"
+                required
+            >
+
+            <input
+                type="password"
+                id="admin-password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button
+                type="submit"
+                id="login-btn"
+            >
+                Login to Dashboard
+            </button>
+
+        </form>
+
+        <p id="login-error"></p>
+
+    </main>
+
+
+    <!--
+        Main JavaScript Controller
+        Loads admin-login.js automatically
+        based on data-page="admin-login"
+    -->
+    <script
+        type="module"
+        src="assets/js/main.js"
+    ></script>
+
+</body>
+
+</html>

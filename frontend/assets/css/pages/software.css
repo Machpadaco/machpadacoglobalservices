@@ -1,0 +1,1345 @@
+/* =========================================================
+   SOFTWARE DEVELOPMENT PAGE
+   Machpadaco Global Services
+========================================================= */
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.software-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+.software-section-heading {
+    max-width: 760px;
+    margin-bottom: 55px;
+}
+
+.software-section-heading.centered {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.software-eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.software-section-heading h2 {
+    margin: 0 0 18px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.software-section-heading p {
+    margin: 0 0 12px;
+
+    color: var(--text-color, #52667A);
+
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.software-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 13px 24px;
+
+    border-radius: 7px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.software-btn:hover {
+    transform: translateY(-2px);
+}
+
+.software-btn-primary {
+    background: var(--brand-blue, #007BFF);
+    color: #ffffff;
+
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.22);
+}
+
+.software-btn-primary:hover {
+    background: var(--brand-blue-dark, #0056B3);
+}
+
+.software-btn-secondary {
+    background: #ffffff;
+    color: var(--brand-blue, #007BFF);
+
+    border: 1px solid var(--brand-blue, #007BFF);
+}
+
+.software-btn-secondary:hover {
+    background: #f1f7ff;
+}
+
+.software-btn-light {
+    background: #ffffff;
+    color: var(--brand-blue-dark, #0056B3);
+}
+
+.software-btn-light:hover {
+    background: #f2f7fc;
+}
+
+.software-btn-outline {
+    background: transparent;
+    color: var(--brand-blue, #007BFF);
+
+    border: 1px solid var(--brand-blue, #007BFF);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.software-hero {
+    position: relative;
+
+    padding: 105px 0 95px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f9ff 0%,
+            #ffffff 55%,
+            #eef6ff 100%
+        );
+
+    overflow: hidden;
+}
+
+.software-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    top: -180px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 123, 255, 0.06);
+}
+
+.software-hero-content {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(340px, 0.85fr);
+
+    align-items: center;
+
+    gap: 70px;
+}
+
+.software-hero-text h1 {
+    margin: 0 0 22px;
+
+    max-width: 720px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+}
+
+.software-hero-intro {
+    max-width: 680px;
+
+    margin: 0 0 22px;
+
+    color: var(--text-color, #52667A);
+
+    font-size: 1.12rem;
+
+    line-height: 1.8;
+}
+
+.software-hero-tech {
+    margin: 0 0 30px;
+
+    color: var(--brand-blue-dark, #0056B3);
+
+    font-size: 0.92rem;
+
+    font-weight: 700;
+
+    line-height: 1.9;
+}
+
+.software-hero-tech span {
+    color: #9aabb8;
+    margin: 0 5px;
+}
+
+.software-hero-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+}
+
+
+/* =========================================================
+   CODE CARD
+========================================================= */
+
+.software-tech-card {
+    width: 100%;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: var(--heading-color, #102A43);
+
+    box-shadow:
+        0 25px 60px rgba(16, 42, 67, 0.22);
+}
+
+.software-code-window {
+    overflow: hidden;
+}
+
+.software-code-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 15px 18px;
+
+    background: #0b2035;
+}
+
+.software-code-header span {
+    width: 10px;
+    height: 10px;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: #78909c;
+}
+
+.software-code-body {
+    min-height: 320px;
+
+    padding: 28px 25px;
+
+    color: #dce9f4;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 0.88rem;
+
+    line-height: 1.8;
+
+    overflow-x: auto;
+}
+
+.code-keyword {
+    color: #69b7ff;
+}
+
+.code-string {
+    color: #a9dfbf;
+}
+
+.code-indent {
+    padding-left: 25px;
+}
+
+.code-spacer {
+    height: 15px;
+}
+
+.software-tech-card-footer {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    padding: 18px 20px;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.software-tech-card-footer span {
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: #dce9f4;
+
+    font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.software-introduction {
+    padding: 100px 0;
+
+    background: #ffffff;
+}
+
+.software-intro-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.software-intro-card {
+    padding: 32px 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2eaf1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.software-intro-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 40px rgba(16, 42, 67, 0.10);
+}
+
+.software-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 22px;
+
+    border-radius: 10px;
+
+    background: #eaf4ff;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 1rem;
+
+    font-weight: 800;
+}
+
+.software-intro-card h3 {
+    margin: 0 0 12px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1.25rem;
+}
+
+.software-intro-card p {
+    margin: 0;
+
+    color: var(--text-color, #52667A);
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   TECHNOLOGIES
+========================================================= */
+
+.software-technologies {
+    padding: 100px 0;
+
+    background: #f7fafc;
+}
+
+.software-tech-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.software-tech-item {
+    padding: 25px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2eaf1;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.software-tech-item:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--brand-blue, #007BFF);
+}
+
+.software-tech-item strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1.05rem;
+}
+
+.software-tech-item span {
+    color: #697b8c;
+
+    font-size: 0.84rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.software-services {
+    padding: 105px 0;
+
+    background: #ffffff;
+}
+
+.software-services-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.software-service-card {
+    position: relative;
+
+    padding: 35px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e9f0;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.05);
+
+    overflow: hidden;
+}
+
+.software-service-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: var(--brand-blue, #007BFF);
+}
+
+.software-service-number {
+    margin-bottom: 20px;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.82rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.software-service-card h3 {
+    margin: 0 0 13px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1.3rem;
+}
+
+.software-service-card p {
+    margin: 0 0 20px;
+
+    color: var(--text-color, #52667A);
+
+    line-height: 1.7;
+}
+
+.software-service-card ul {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.software-service-card li {
+    position: relative;
+
+    margin-bottom: 9px;
+
+    padding-left: 20px;
+
+    color: var(--text-color, #52667A);
+
+    font-size: 0.9rem;
+}
+
+.software-service-card li::before {
+    content: "✓";
+
+    position: absolute;
+
+    left: 0;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CLIENT PROJECTS
+========================================================= */
+
+.software-projects {
+    padding: 105px 0;
+
+    background: #f7fafc;
+}
+
+.software-project-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 30px;
+}
+
+.software-project-card {
+    display: grid;
+
+    grid-template-columns: 0.75fr 1.25fr;
+
+    min-height: 300px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e9f0;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(16, 42, 67, 0.07);
+}
+
+.software-project-visual {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-blue-dark, #0056B3)
+        );
+
+    color: #ffffff;
+}
+
+.software-project-label {
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.software-project-symbol {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+    height: 90px;
+
+    border: 2px solid rgba(255,255,255,0.65);
+
+    border-radius: 50%;
+
+    font-size: 1.7rem;
+
+    font-weight: 800;
+}
+
+.software-project-content {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    padding: 35px 30px;
+}
+
+.software-project-category {
+    margin-bottom: 10px;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.software-project-content h3 {
+    margin: 0 0 12px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1.5rem;
+}
+
+.software-project-content p {
+    margin: 0 0 18px;
+
+    color: var(--text-color, #52667A);
+
+    line-height: 1.7;
+}
+
+.software-project-tech {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: auto;
+}
+
+.software-project-tech span {
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    background: #edf5fc;
+
+    color: var(--brand-blue-dark, #0056B3);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+}
+
+.software-project-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 25px;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.software-project-link:hover {
+    color: var(--brand-blue-dark, #0056B3);
+}
+
+.software-project-link span {
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   REMOTE OPPORTUNITIES
+========================================================= */
+
+.software-remote {
+    padding: 95px 0;
+
+    background: #ffffff;
+}
+
+.software-remote-box {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        0.6fr;
+
+    gap: 50px;
+
+    padding: 55px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-blue-dark, #0056B3)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0, 86, 179, 0.18);
+}
+
+.software-remote .software-eyebrow {
+    color: #dceeff;
+}
+
+.software-remote-content h2 {
+    max-width: 680px;
+
+    margin: 0 0 18px;
+
+    color: #ffffff;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.15;
+}
+
+.software-remote-content p {
+    max-width: 680px;
+
+    margin: 0 0 28px;
+
+    color: #e7f3ff;
+
+    line-height: 1.8;
+}
+
+.software-remote-side {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding-left: 35px;
+
+    border-left: 1px solid rgba(255,255,255,0.2);
+}
+
+.software-availability {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 28px;
+
+    color: #ffffff;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+}
+
+.software-status-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 5px rgba(255,255,255,0.14);
+}
+
+.software-remote-points {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+.software-remote-points span {
+    color: #e7f3ff;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   TRAINING
+========================================================= */
+
+.software-training {
+    padding: 105px 0;
+
+    background: #f7fafc;
+}
+
+.software-training-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.software-training-content h2 {
+    max-width: 650px;
+
+    margin: 0 0 20px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.15;
+}
+
+.software-training-content p {
+    max-width: 650px;
+
+    margin: 0 0 15px;
+
+    color: var(--text-color, #52667A);
+
+    line-height: 1.8;
+}
+
+.software-training-content .software-btn {
+    margin-top: 15px;
+}
+
+.software-training-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.software-training-item {
+    display: flex;
+
+    gap: 20px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e9f0;
+
+    border-radius: 10px;
+}
+
+.software-training-item > span {
+    flex: 0 0 auto;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.78rem;
+
+    font-weight: 800;
+}
+
+.software-training-item h3 {
+    margin: 0 0 5px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1rem;
+}
+
+.software-training-item p {
+    margin: 0;
+
+    color: #697b8c;
+
+    font-size: 0.85rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.software-process {
+    padding: 105px 0;
+
+    background: #ffffff;
+}
+
+.software-process-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.software-process-item {
+    padding: 30px 24px;
+
+    border-top: 3px solid var(--brand-blue, #007BFF);
+
+    background: #f7fafc;
+
+    border-radius: 0 0 10px 10px;
+}
+
+.software-process-item > span {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: var(--brand-blue, #007BFF);
+
+    font-size: 0.8rem;
+
+    font-weight: 800;
+}
+
+.software-process-item h3 {
+    margin: 0 0 10px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: 1.15rem;
+}
+
+.software-process-item p {
+    margin: 0;
+
+    color: var(--text-color, #52667A);
+
+    font-size: 0.88rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.software-final-cta {
+    padding: 105px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef6ff,
+            #ffffff
+        );
+
+    text-align: center;
+}
+
+.software-final-content {
+    max-width: 780px;
+
+    margin: 0 auto;
+}
+
+.software-final-content h2 {
+    margin: 0 0 18px;
+
+    color: var(--heading-color, #102A43);
+
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+
+    line-height: 1.15;
+}
+
+.software-final-content p {
+    margin: 0 auto 30px;
+
+    color: var(--text-color, #52667A);
+
+    line-height: 1.8;
+}
+
+.software-final-actions {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+}
+
+
+
+/* =========================================================
+   BRAND ORANGE ACCENTS
+   Subtle MACHpadaco orange highlights
+========================================================= */
+
+.software-eyebrow {
+    color: var(--brand-orange, #F47B20);
+}
+
+.software-icon {
+    color: var(--brand-orange, #F47B20);
+    border-left: 3px solid var(--brand-orange, #F47B20);
+}
+
+.software-tech-item:hover {
+    border-color: var(--brand-orange, #F47B20);
+}
+
+.software-service-card::before {
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF) 0%,
+        var(--brand-blue, #007BFF) 72%,
+        var(--brand-orange, #F47B20) 72%,
+        var(--brand-orange, #F47B20) 100%
+    );
+}
+
+.software-service-number {
+    color: var(--brand-orange, #F47B20);
+}
+
+.software-project-category {
+    color: var(--brand-orange, #F47B20);
+}
+
+.software-project-link:hover {
+    color: var(--brand-orange, #F47B20);
+}
+
+.software-training-item > span {
+    color: var(--brand-orange, #F47B20);
+}
+
+.software-process-item {
+    border-top-color: var(--brand-orange, #F47B20);
+}
+
+.software-process-item > span {
+    color: var(--brand-orange, #F47B20);
+}
+
+/* Accessible keyboard focus */
+.software-btn:focus-visible,
+.software-project-link:focus-visible {
+    outline: 3px solid rgba(244, 123, 32, 0.35);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .software-hero-content {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .software-hero-text {
+        max-width: 800px;
+    }
+
+    .software-tech-card {
+        max-width: 700px;
+    }
+
+    .software-tech-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .software-services-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .software-project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .software-remote-box {
+        grid-template-columns: 1fr;
+    }
+
+    .software-remote-side {
+        padding-left: 0;
+
+        padding-top: 30px;
+
+        border-left: none;
+
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .software-training-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .software-process-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .software-hero {
+        padding: 75px 0 70px;
+    }
+
+    .software-hero-text h1 {
+        font-size: clamp(2.25rem, 11vw, 3.3rem);
+
+        letter-spacing: -0.8px;
+    }
+
+    .software-hero-intro {
+        font-size: 1rem;
+    }
+
+    .software-hero-tech {
+        font-size: 0.82rem;
+    }
+
+    .software-hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .software-btn {
+        width: 100%;
+    }
+
+    .software-code-body {
+        min-height: 280px;
+
+        padding: 22px 18px;
+
+        font-size: 0.76rem;
+    }
+
+    .software-introduction,
+    .software-technologies,
+    .software-services,
+    .software-projects,
+    .software-remote,
+    .software-training,
+    .software-process,
+    .software-final-cta {
+        padding: 75px 0;
+    }
+
+    .software-intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .software-tech-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .software-services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .software-project-card {
+        grid-template-columns: 1fr;
+    }
+
+    .software-project-visual {
+        min-height: 190px;
+    }
+
+    .software-remote-box {
+        padding: 35px 25px;
+    }
+
+    .software-process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .software-final-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .software-container {
+        width: 90%;
+    }
+
+    .software-section-heading h2 {
+        font-size: 1.9rem;
+    }
+
+    .software-tech-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .software-tech-card-footer {
+        flex-direction: column;
+    }
+
+    .software-tech-card-footer span {
+        text-align: center;
+    }
+
+    .software-training-item {
+        gap: 12px;
+
+        padding: 18px;
+    }
+
+    .software-project-content {
+        padding: 28px 22px;
+    }
+
+    .software-remote-box {
+        padding: 30px 20px;
+    }
+
+}

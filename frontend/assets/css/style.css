@@ -1,0 +1,57 @@
+/*====================================================
+FILE: style.css
+LOCATION: assets/css/
+
+PROJECT:
+Machpadaco Global Services
+
+DESCRIPTION:
+Master CSS Import File
+
+Author:
+Engr. Ejike Njuwa
+====================================================*/
+
+/* ===================================================
+   1. VARIABLES & CONFIG
+=================================================== */
+@import url("variables.css");
+
+/* ===================================================
+   2. GLOBAL COMPONENTS
+=================================================== */
+@import url("components/header.css");
+@import url("components/footer.css");
+
+/* ===================================================
+   3. PAGE STYLES
+=================================================== */
+@import url("pages/home.css");
+@import url("pages/about.css");
+@import url("pages/services.css");
+@import url("pages/software.css");
+@import url("pages/affiliate.css");
+@import url("pages/virtual-assistance.css");
+@import url("pages/environmental.css");
+@import url("pages/phonerepairs.css");
+@import url("pages/pricing.css");
+@import url("pages/portfolio.css");
+@import url("pages/community.css");
+@import url("pages/contact.css");
+@import url("pages/profile.css");
+@import url("pages/login.css");
+@import url("pages/signup.css");
+@import url("pages/auth.css");
+@import url("pages/admin-login.css");
+@import url("pages/admin-contacts.css");
+@import url("pages/join-community.css");
+@import url("pages/software-development.css");
+@import url("pages/digital-marketing-premium.css");
+@import url("pages/property-management-virtual-assistance-premium.css");
+@import url("pages/enroll.css");
+@import url("pages/admin-enrollments.css");
+@import url("pages/premium-course.css");
+@import url("pages/phone-engineering-course.css");
+@import url("pages/software-development-course.css");
+@import url("pages/digital-marketing-course.css");
+@import url("pages/property-management-course.css");

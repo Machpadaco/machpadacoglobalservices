@@ -1,0 +1,74 @@
+/* ========================================
+   PREMIUM ENROLMENT
+======================================== */
+
+.enrollment-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.enrollment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #111111;
+}
+
+.enrollment-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #d9dfe7;
+    border-radius: 8px;
+    font: inherit;
+    background: #ffffff;
+}
+
+.enrollment-form input:focus {
+    outline: 2px solid rgba(0, 102, 204, 0.2);
+    border-color: #0066cc;
+}
+
+.enrollment-note {
+    margin: 24px 0;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.enrollment-status {
+    margin: 25px 0;
+    padding: 15px 18px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.enrollment-status.info {
+    background: #eef5ff;
+    color: #174b7a;
+}
+
+.enrollment-status.success {
+    background: #edf8f0;
+    color: #176b35;
+}
+
+.enrollment-status.error {
+    background: #fff0f0;
+    color: #8b2020;
+}
+
+.enrollment-payment-box {
+    margin: 28px 0;
+    box-shadow: none;
+}
+
+.enrollment-whatsapp-btn {
+    margin-top: 5px;
+}
+
+@media (max-width: 700px) {
+    .enrollment-form-grid {
+        grid-template-columns: 1fr;
+    }
+}

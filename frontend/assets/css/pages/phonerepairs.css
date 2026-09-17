@@ -1,0 +1,1366 @@
+/* =========================================================
+   MACHpadaco Global Services
+   PAGE: PHONE REPAIRS
+   FILE: assets/css/pages/phonerepairs.css
+   PURPOSE:
+   GSM phone repairs, technical training,
+   apprenticeship and phone accessories.
+   COLOR SYSTEM:
+   Blue / White / Professional Neutral
+========================================================= */
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.phone-container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+/* =========================================================
+   COMMON SECTION HEADER
+========================================================= */
+
+.phone-section-header {
+    max-width: 780px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.phone-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+    color: var(--brand-orange, #F47B20);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.phone-section-header h2 {
+    margin: 0 0 18px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.2;
+}
+
+.phone-section-header p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.phone-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 13px 25px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.phone-btn:hover {
+    transform: translateY(-2px);
+}
+
+.phone-btn-primary {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: var(--brand-blue, #007BFF);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.18);
+}
+
+.phone-btn-primary::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: var(--brand-orange, #F47B20);
+    transition: width 0.25s ease;
+}
+
+.phone-btn-primary:hover {
+    background: var(--brand-blue-dark, #0056B3);
+}
+
+.phone-btn-primary:hover::after {
+    width: 100%;
+}
+
+.phone-btn-secondary {
+    color: var(--brand-blue, #007BFF);
+    background: #ffffff;
+    border: 1px solid var(--brand-blue, #007BFF);
+}
+
+.phone-btn-secondary:hover {
+    color: var(--brand-orange, #F47B20);
+    background: #ffffff;
+    border-color: var(--brand-orange, #F47B20);
+}
+
+.phone-btn-light {
+    color: var(--brand-blue, #007BFF);
+    background: #ffffff;
+}
+
+.phone-btn-light:hover {
+    color: var(--brand-orange, #F47B20);
+    background: #f1f7ff;
+}
+
+.phone-btn-outline-light {
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.phone-btn-outline-light:hover {
+    color: var(--brand-orange, #F47B20);
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.phone-hero {
+    position: relative;
+    padding: 110px 0 100px;
+    background:
+        linear-gradient(
+            135deg,
+            #f7fbff 0%,
+            #ffffff 55%,
+            #eef7ff 100%
+        );
+    overflow: hidden;
+}
+
+.phone-hero::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    top: -180px;
+    right: -130px;
+    border-radius: 50%;
+    background: rgba(0, 123, 255, 0.06);
+    pointer-events: none;
+}
+
+.phone-hero::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    left: -95px;
+    bottom: -80px;
+    border: 2px solid rgba(244, 123, 32, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.phone-hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(320px, 0.75fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.phone-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.phone-hero-content .phone-eyebrow {
+    margin-bottom: 18px;
+}
+
+.phone-hero-content h1 {
+    max-width: 800px;
+    margin: 0 0 24px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+}
+
+.phone-hero-text {
+    max-width: 720px;
+    margin: 0 0 32px;
+    color: var(--text-color, #52667A);
+    font-size: 1.08rem;
+    line-height: 1.85;
+}
+
+.phone-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 42px;
+}
+
+.phone-trust-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 700px;
+    border-top: 1px solid #dce7f0;
+    padding-top: 25px;
+}
+
+.phone-trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 20px;
+}
+
+.phone-trust-item strong {
+    color: var(--heading-color, #102A43);
+    font-size: 0.95rem;
+}
+
+.phone-trust-item span {
+    color: var(--muted-text, #718096);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   HERO CARD
+========================================================= */
+
+.phone-hero-card {
+    position: relative;
+    z-index: 1;
+    padding: 38px;
+    border: 1px solid #dce8f2;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow:
+        0 25px 60px rgba(16, 42, 67, 0.10);
+}
+
+.phone-hero-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 18px 18px 0 0;
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF) 0%,
+        var(--brand-blue, #007BFF) 72%,
+        var(--brand-orange, #F47B20) 100%
+    );
+}
+
+.phone-hero-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    background: #eaf4ff;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+    font-size: 2rem;
+}
+
+.phone-hero-card h2 {
+    margin: 0 0 14px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.45rem;
+    line-height: 1.3;
+}
+
+.phone-hero-card p {
+    margin: 0 0 25px;
+    color: var(--text-color, #52667A);
+    line-height: 1.75;
+}
+
+.phone-hero-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.phone-hero-card-list span {
+    color: var(--text-color, #52667A);
+    font-size: 0.9rem;
+}
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.phone-intro {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.phone-intro-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(300px, 0.75fr);
+    gap: 60px;
+    align-items: start;
+}
+
+.phone-intro-content p {
+    margin: 0 0 20px;
+    color: var(--text-color, #52667A);
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.phone-intro-content p:last-child {
+    margin-bottom: 0;
+}
+
+.phone-intro-highlight {
+    position: relative;
+    padding: 32px;
+    border-left: 4px solid var(--brand-orange, #F47B20);
+    border-radius: 0 14px 14px 0;
+    background: #f7fafc;
+}
+
+.phone-intro-highlight::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 3px;
+    background: var(--brand-orange, #F47B20);
+}
+
+.phone-highlight-icon {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--brand-orange, #F47B20);
+    font-size: 2rem;
+}
+
+.phone-intro-highlight h3 {
+    margin: 0 0 12px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.25rem;
+}
+
+.phone-intro-highlight p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.75;
+}
+
+/* =========================================================
+   REPAIR SERVICES
+========================================================= */
+
+.phone-services {
+    padding: 100px 0;
+    background: #f7fafc;
+}
+
+.phone-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.phone-service-card {
+    position: relative;
+    overflow: hidden;
+    padding: 32px 28px;
+    border: 1px solid #e2eaf1;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.05);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.phone-service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF) 0%,
+        var(--brand-blue, #007BFF) 72%,
+        var(--brand-orange, #F47B20) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.phone-service-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(244, 123, 32, 0.35);
+    box-shadow:
+        0 18px 40px rgba(16, 42, 67, 0.10);
+}
+
+.phone-service-card:hover::before {
+    opacity: 1;
+}
+
+.phone-service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #eaf4ff;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+    font-size: 1.45rem;
+}
+
+.phone-service-card h3 {
+    margin: 0 0 10px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.15rem;
+}
+
+.phone-service-card p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    font-size: 0.92rem;
+    line-height: 1.75;
+}
+
+/* =========================================================
+   TRAINING
+========================================================= */
+
+.phone-training {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.phone-training-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(300px, 0.75fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.phone-training-content h2 {
+    max-width: 700px;
+    margin: 0 0 20px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.2;
+}
+
+.phone-training-content > p {
+    max-width: 720px;
+    margin: 0 0 18px;
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+.phone-training-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 35px;
+}
+
+.phone-training-points div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 20px;
+    border: 1px solid #e2eaf1;
+    border-radius: 10px;
+    background: #f9fbfd;
+}
+
+.phone-training-points div:hover {
+    border-color: rgba(244, 123, 32, 0.35);
+}
+
+.phone-training-points strong {
+    color: var(--heading-color, #102A43);
+    font-size: 0.95rem;
+}
+
+.phone-training-points span {
+    color: var(--text-color, #52667A);
+    font-size: 0.85rem;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   TRAINING CARD
+========================================================= */
+
+.phone-training-card {
+    position: relative;
+    overflow: hidden;
+    padding: 38px;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            145deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-blue-dark, #0056B3)
+        );
+    color: #ffffff;
+    box-shadow:
+        0 22px 50px rgba(0, 86, 179, 0.20);
+}
+
+.phone-training-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 4px;
+    background: var(--brand-orange, #F47B20);
+}
+
+.phone-training-card-label {
+    display: block;
+    margin-bottom: 25px;
+    color: #ffd4b8;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.phone-training-card-icon {
+    margin-bottom: 20px;
+    color: #ffd4b8;
+    font-size: 2.5rem;
+}
+
+.phone-training-card h3 {
+    margin: 0 0 15px;
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.phone-training-card p {
+    margin: 0 0 28px;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.75;
+}
+
+.phone-training-card .phone-btn-primary {
+    color: var(--brand-blue, #007BFF);
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.phone-training-card .phone-btn-primary::after {
+    background: var(--brand-orange, #F47B20);
+}
+
+.phone-training-card .phone-btn-primary:hover {
+    background: #f1f7ff;
+}
+
+/* =========================================================
+   CURRENT TRAINING ENGAGEMENT
+========================================================= */
+
+.phone-engagement {
+    padding: 85px 0;
+    background: #f7fafc;
+}
+
+.phone-engagement-box {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(260px, 340px);
+    gap: 50px;
+    align-items: center;
+    padding: 50px;
+    border: 1px solid #dce7f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow:
+        0 15px 40px rgba(16, 42, 67, 0.06);
+}
+
+.phone-engagement-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF),
+        var(--brand-orange, #F47B20)
+    );
+}
+
+.phone-engagement-content h2 {
+    max-width: 700px;
+    margin: 0 0 20px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.25;
+}
+
+.phone-engagement-content p {
+    max-width: 760px;
+    margin: 0 0 17px;
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+.phone-engagement-content p:last-child {
+    margin-bottom: 0;
+}
+
+.phone-engagement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 30px;
+    border-radius: 16px;
+    background: #eef7ff;
+    border: 1px solid rgba(244, 123, 32, 0.18);
+    text-align: center;
+}
+
+.phone-engagement-icon {
+    margin-bottom: 18px;
+    color: var(--brand-orange, #F47B20);
+    font-size: 2.5rem;
+}
+
+.phone-engagement-badge strong {
+    margin-bottom: 8px;
+    color: var(--heading-color, #102A43);
+    font-size: 1rem;
+}
+
+.phone-engagement-badge > span:last-child {
+    color: var(--text-color, #52667A);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   ORGANIZATIONAL TRAINING
+========================================================= */
+
+.phone-organizations {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.phone-organization-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.phone-organization-card {
+    position: relative;
+    overflow: hidden;
+    padding: 35px 30px 30px;
+    border: 1px solid #e2eaf1;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.05);
+}
+
+.phone-organization-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF) 0%,
+        var(--brand-blue, #007BFF) 72%,
+        var(--brand-orange, #F47B20) 100%
+    );
+}
+
+.phone-organization-number {
+    display: block;
+    margin-bottom: 22px;
+    color: var(--brand-orange, #F47B20);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.phone-organization-card h3 {
+    margin: 0 0 12px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.2rem;
+}
+
+.phone-organization-card p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.75;
+}
+
+.phone-organization-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 45px;
+    padding: 28px 32px;
+    border-radius: 12px;
+    background: #f7fafc;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+}
+
+.phone-organization-cta p {
+    max-width: 700px;
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.7;
+}
+
+/* =========================================================
+   APPRENTICESHIP
+========================================================= */
+
+.phone-apprenticeship {
+    padding: 100px 0;
+    background: #f7fafc;
+}
+
+.phone-apprenticeship-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(300px, 0.9fr);
+    gap: 60px;
+    align-items: center;
+}
+
+.phone-apprenticeship-card {
+    position: relative;
+    overflow: hidden;
+    padding: 45px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e2eaf1;
+    box-shadow:
+        0 15px 40px rgba(16, 42, 67, 0.06);
+}
+
+.phone-apprenticeship-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 4px;
+    background: var(--brand-orange, #F47B20);
+}
+
+.phone-apprenticeship-card h2 {
+    margin: 0 0 20px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    line-height: 1.25;
+}
+
+.phone-apprenticeship-card p {
+    margin: 0 0 17px;
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+.phone-apprenticeship-card .phone-btn {
+    margin-top: 12px;
+}
+
+.phone-apprenticeship-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.phone-apprenticeship-list div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid #dfe8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.phone-apprenticeship-list div:hover {
+    border-color: rgba(244, 123, 32, 0.35);
+    transform: translateX(3px);
+}
+
+.phone-apprenticeship-list span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    border-radius: 50%;
+    background: #fff3e9;
+    color: var(--brand-orange, #F47B20);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.phone-apprenticeship-list strong {
+    color: var(--heading-color, #102A43);
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   PHONE ACCESSORIES
+========================================================= */
+
+.phone-accessories {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.phone-accessories-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 45px;
+}
+
+.phone-accessory-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e2eaf1;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow:
+        0 10px 30px rgba(16, 42, 67, 0.07);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.phone-accessory-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-blue, #007BFF) 0%,
+        var(--brand-blue, #007BFF) 72%,
+        var(--brand-orange, #F47B20) 100%
+    );
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.25s ease;
+}
+
+.phone-accessory-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(244, 123, 32, 0.35);
+    box-shadow:
+        0 18px 40px rgba(16, 42, 67, 0.12);
+}
+
+.phone-accessory-card:hover::before {
+    opacity: 1;
+}
+
+/* =========================================================
+   ACCESSORY IMAGE
+========================================================= */
+
+.phone-accessory-image {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #eaf0f5;
+}
+
+.phone-accessory-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+        transform 0.4s ease;
+}
+
+.phone-accessory-card:hover .phone-accessory-image img {
+    transform: scale(1.05);
+}
+
+/* =========================================================
+   ACCESSORY INFORMATION
+========================================================= */
+
+.phone-accessory-info {
+    padding: 21px 22px 24px;
+}
+
+.phone-accessory-info h3 {
+    margin: 0 0 8px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.1rem;
+}
+
+.phone-accessory-info p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   ACCESSORY CTA
+========================================================= */
+
+.phone-accessories-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 45px;
+    padding: 28px 32px;
+    border-radius: 12px;
+    background: #f7fafc;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+}
+
+.phone-accessories-note p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.7;
+}
+
+/* =========================================================
+   WHY WORK WITH ME
+========================================================= */
+
+.phone-why {
+    padding: 100px 0;
+    background: #f7fafc;
+}
+
+.phone-why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.phone-why-card {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 25px;
+    border: 1px solid #e2eaf1;
+    border-radius: 14px;
+    background: #ffffff;
+    text-align: center;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.phone-why-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--brand-orange, #F47B20);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.phone-why-card:hover {
+    border-color: rgba(244, 123, 32, 0.35);
+    transform: translateY(-4px);
+}
+
+.phone-why-card:hover::before {
+    opacity: 1;
+}
+
+.phone-why-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 20px;
+    border-radius: 14px;
+    background: #eaf4ff;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+    font-size: 1.5rem;
+}
+
+.phone-why-card h3 {
+    margin: 0 0 10px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.05rem;
+}
+
+.phone-why-card p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.phone-final-cta {
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0;
+    background:
+        linear-gradient(
+            135deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-blue-dark, #0056B3)
+        );
+}
+
+.phone-final-cta::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -110px;
+    bottom: -150px;
+    border: 2px solid rgba(244, 123, 32, 0.28);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.phone-final-content {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.phone-final-content .phone-eyebrow {
+    color: #ffd4b8;
+    border-left-color: var(--brand-orange, #F47B20);
+}
+
+.phone-final-content h2 {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.2;
+}
+
+.phone-final-content p {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.8;
+}
+
+.phone-final-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+    .phone-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .phone-hero-content {
+        max-width: 800px;
+    }
+
+    .phone-hero-card {
+        max-width: 650px;
+    }
+
+    .phone-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phone-training-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .phone-training-card {
+        max-width: 600px;
+    }
+
+    .phone-organization-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phone-why-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+    .phone-hero {
+        padding: 85px 0 75px;
+    }
+
+    .phone-intro,
+    .phone-services,
+    .phone-training,
+    .phone-organizations,
+    .phone-apprenticeship,
+    .phone-accessories,
+    .phone-why {
+        padding: 80px 0;
+    }
+
+    .phone-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .phone-engagement {
+        padding: 70px 0;
+    }
+
+    .phone-engagement-box {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 38px;
+    }
+
+    .phone-engagement-badge {
+        min-height: 180px;
+    }
+
+    .phone-apprenticeship-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .phone-accessories-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phone-organization-cta,
+    .phone-accessories-note {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+    .phone-container {
+        width: min(92%, 520px);
+    }
+
+    .phone-hero {
+        padding: 70px 0 65px;
+    }
+
+    .phone-hero-content h1 {
+        font-size: 2.35rem;
+    }
+
+    .phone-hero-text {
+        font-size: 0.98rem;
+    }
+
+    .phone-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .phone-hero-actions .phone-btn {
+        width: 100%;
+    }
+
+    .phone-trust-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .phone-trust-item {
+        padding-right: 0;
+    }
+
+    .phone-hero-card {
+        padding: 30px 25px;
+    }
+
+    .phone-intro,
+    .phone-services,
+    .phone-training,
+    .phone-organizations,
+    .phone-apprenticeship,
+    .phone-accessories,
+    .phone-why {
+        padding: 70px 0;
+    }
+
+    .phone-section-header {
+        margin-bottom: 40px;
+    }
+
+    .phone-section-header h2 {
+        font-size: 2rem;
+    }
+
+    .phone-services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-training-points {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-engagement-box {
+        padding: 30px 24px;
+    }
+
+    .phone-organization-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-apprenticeship-card {
+        padding: 32px 25px;
+    }
+
+    .phone-accessories-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-accessory-image {
+        height: 250px;
+    }
+
+    .phone-why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .phone-final-cta {
+        padding: 75px 0;
+    }
+
+    .phone-final-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .phone-final-actions .phone-btn {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+    .phone-hero-content h1 {
+        font-size: 2.05rem;
+    }
+
+    .phone-hero-card,
+    .phone-training-card,
+    .phone-apprenticeship-card {
+        padding: 25px 20px;
+    }
+
+    .phone-service-card,
+    .phone-why-card {
+        padding: 25px 20px;
+    }
+
+    .phone-engagement-box {
+        padding: 25px 20px;
+    }
+
+    .phone-organization-cta,
+    .phone-accessories-note {
+        padding: 24px 20px;
+    }
+}

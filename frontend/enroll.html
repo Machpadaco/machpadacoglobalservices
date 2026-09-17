@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Enroll Now | Machpadaco Digital Hub</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet"
+          href="assets/css/style.css">
+
+    <!-- Community / premium styles -->
+    <link rel="stylesheet"
+          href="assets/css/pages/join-community.css">
+
+    <!-- Enrollment styles -->
+    <link rel="stylesheet"
+          href="assets/css/pages/enroll.css">
+
+</head>
+
+
+<body data-page="enroll">
+
+
+    <!-- ====================================================
+         HEADER
+    ==================================================== -->
+
+    <div id="header-placeholder"></div>
+
+
+    <main>
+
+
+        <!-- ====================================================
+             HERO
+        ==================================================== -->
+
+        <section class="community-hero premium-package-hero">
+
+            <div class="community-hero-overlay"></div>
+
+            <div class="community-hero-content">
+
+                <span class="community-section-label">
+                    PREMIUM TRAINING ENROLMENT
+                </span>
+
+                <h1>
+                    Enroll in Your Chosen Course
+                </h1>
+
+                <p>
+                    Complete your registration, make your payment,
+                    and submit your payment reference for verification.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             STEP 1 — COURSE & STUDENT REGISTRATION
+        ==================================================== -->
+
+        <section class="premium-package-section">
+
+            <div class="community-container">
+
+                <div class="community-section-heading">
+
+                    <span class="community-section-label">
+                        STEP 1
+                    </span>
+
+                    <h2>
+                        Course & Student Registration
+                    </h2>
+
+                    <p>
+                        Your selected course and registered account
+                        details are displayed automatically.
+                    </p>
+
+                </div>
+
+
+                <!-- COURSE INFORMATION -->
+
+                <div class="premium-package-card">
+
+                    <h3 id="course-name">
+                        Loading course...
+                    </h3>
+
+                    <p id="course-description">
+                        Loading course information...
+                    </p>
+
+                    <p>
+                        <strong>
+                            Training Fee:
+                        </strong>
+
+                        <span id="course-price">
+                            Loading...
+                        </span>
+                    </p>
+
+                </div>
+
+
+                <!-- STUDENT INFORMATION -->
+
+                <form id="enrollment-form"
+                      class="premium-package-card enrollment-form">
+
+                    <div class="enrollment-form-grid">
+
+
+                        <div>
+
+                            <label for="full-name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="full-name"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="phone">
+                                Phone / WhatsApp Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="course">
+                                Selected Course
+                            </label>
+
+                            <input
+                                type="text"
+                                id="course"
+                                readonly
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="enrollment-note">
+
+                        Your registered account details are used
+                        for this enrolment. If you need to change
+                        your account information, update your
+                        Machpadaco profile before proceeding.
+
+                    </p>
+
+
+                    <button
+                        type="submit"
+                        class="community-btn community-btn-primary">
+
+                        Continue to Payment
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ====================================================
+             STEP 2 — PAYMENT
+        ==================================================== -->
+
+        <section
+            class="premium-package-section premium-package-highlight"
+            id="payment-section"
+            hidden>
+
+            <div class="community-container">
+
+
+                <div class="community-section-heading">
+
+                    <span class="community-section-label">
+                        STEP 2
+                    </span>
+
+                    <h2>
+                        Make Your Payment
+                    </h2>
+
+                    <p>
+                        Make a bank transfer using the payment
+                        details below. The exact course fee is
+                        displayed automatically.
+                    </p>
+
+                </div>
+
+
+
+                <!-- PAYMENT DETAILS -->
+
+                <div class="premium-package-card enrollment-payment-card">
+
+                    <h3>
+                        Machpadaco Global Services
+                    </h3>
+
+
+                    <div class="enrollment-payment-details">
+
+
+                        <div class="enrollment-payment-row">
+
+                            <strong>
+                                Bank
+                            </strong>
+
+                            <span id="bank-name">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                        <div class="enrollment-payment-row">
+
+                            <strong>
+                                Account Name
+                            </strong>
+
+                            <span id="account-name">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                        <div class="enrollment-payment-row">
+
+                            <strong>
+                                Account Number
+                            </strong>
+
+                            <span id="account-number">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                        <div class="enrollment-payment-row enrollment-payment-amount">
+
+                            <strong>
+                                Amount to Pay
+                            </strong>
+
+                            <span id="payment-amount">
+                                Loading...
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- IMPORTANT PAYMENT INSTRUCTION -->
+
+                    <div class="premium-package-card enrollment-payment-box">
+
+                        <h3>
+                            Important Payment Instruction
+                        </h3>
+
+                        <p>
+                            Please make sure the amount transferred
+                            matches the training fee displayed above.
+                        </p>
+
+                        <p>
+                            After making your transfer, keep your
+                            bank receipt or transaction evidence.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT REFERENCE EXPLANATION -->
+
+                    <div class="premium-package-card enrollment-payment-box">
+
+                        <h3>
+                            What is a Payment Reference?
+                        </h3>
+
+                        <p>
+                            Your payment reference is the identifier
+                            generated by your bank after the transfer.
+                        </p>
+
+                        <p>
+                            It may appear on your bank receipt or
+                            banking app as:
+                        </p>
+
+                        <ul class="premium-package-list">
+
+                            <li>
+                                Transaction Reference
+                            </li>
+
+                            <li>
+                                Transaction ID
+                            </li>
+
+                            <li>
+                                Session ID
+                            </li>
+
+                            <li>
+                                Transfer Reference
+                            </li>
+
+                            <li>
+                                Payment Reference
+                            </li>
+
+                        </ul>
+
+                        <p>
+                            Copy the reference exactly as it appears
+                            on your bank transaction record.
+                        </p>
+
+
+                        <div class="enrollment-warning">
+
+                            <strong>
+                                Do not enter:
+                            </strong>
+
+                            <span>
+                                your ATM PIN, OTP, card number,
+                                banking password, or account password.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT REFERENCE FORM -->
+
+                    <form
+                        id="payment-form"
+                        class="enrollment-payment-form">
+
+
+                        <div>
+
+                            <label for="payment-reference">
+
+                                Bank Transfer Payment Reference
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="payment-reference"
+                                name="paymentReference"
+                                placeholder="Enter your transaction reference"
+                                minlength="3"
+                                maxlength="120"
+                                autocomplete="off"
+                                required
+                            >
+
+
+                            <p class="enrollment-input-help">
+
+                                Enter the transaction/reference number
+                                shown on your bank receipt or banking app.
+
+                            </p>
+
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            class="community-btn community-btn-primary">
+
+                            Submit Payment for Verification
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- WHATSAPP RECEIPT -->
+
+                    <div class="enrollment-whatsapp-box">
+
+                        <h3>
+                            Send Your Payment Receipt
+                        </h3>
+
+                        <p>
+                            After making your payment, you may send
+                            your transfer receipt to Machpadaco through
+                            WhatsApp for payment review.
+                        </p>
+
+
+                        <a
+                            id="whatsapp-payment-link"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="community-btn community-btn-primary enrollment-whatsapp-btn">
+
+                            Send Payment Receipt via WhatsApp
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ENROLLMENT STATUS -->
+
+                <div
+                    id="enrollment-status"
+                    class="enrollment-status"
+                    hidden>
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ====================================================
+             STEP 3 — PAYMENT VERIFICATION
+        ==================================================== -->
+
+        <section class="premium-package-section">
+
+            <div class="community-container">
+
+
+                <div class="community-section-heading">
+
+                    <span class="community-section-label">
+                        STEP 3
+                    </span>
+
+                    <h2>
+                        Payment Verification
+                    </h2>
+
+                    <p>
+                        Course access is granted only after
+                        Machpadaco verifies your payment.
+                    </p>
+
+                </div>
+
+
+                <div class="premium-package-features">
+
+
+                    <div>
+
+                        <strong>
+                            01 · Payment Review
+                        </strong>
+
+                        <span>
+                            Your payment reference and payment
+                            evidence are checked.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            02 · Confirmation
+                        </strong>
+
+                        <span>
+                            Your enrolment is approved after
+                            successful payment verification.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            03 · Account Access
+                        </strong>
+
+                        <span>
+                            The verified course is added to your
+                            existing Machpadaco student account.
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            04 · Protected Learning
+                        </strong>
+
+                        <span>
+                            You can log in with your existing
+                            account and access the verified course.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+       <!-- ====================================================
+     STEP 4 — COURSE ACCESS
+==================================================== -->
+
+<section
+    class="premium-package-section premium-package-highlight">
+
+    <div
+        class="community-container premium-package-cta">
+
+        <div class="community-section-heading">
+
+            <span class="community-section-label">
+                STEP 4
+            </span>
+
+            <h2>
+                Access Your Course
+            </h2>
+
+            <p>
+                Once your payment has been verified,
+                your existing Machpadaco student account
+                will receive access to the course you
+                enrolled in.
+
+                <br><br>
+
+                No new account is required.
+
+                Use your existing Machpadaco email
+                and password to access your course.
+            </p>
+
+        </div>
+
+
+        <a
+            id="courseAccessLink"
+            href="#"
+            class="dashboard-button">
+            Access Your Course
+        </a>
+
+    </div>
+
+</section>
+
+
+    </main>
+
+
+
+    <!-- ====================================================
+         FOOTER
+    ==================================================== -->
+
+    <div id="footer-placeholder"></div>
+
+
+
+    <!-- ====================================================
+         MAIN JAVASCRIPT
+         
+         main.js will dynamically load enroll.js because
+         this page uses data-page="enroll".
+    ==================================================== -->
+
+    <script
+        type="module"
+        src="assets/js/main.js">
+    </script>
+
+
+</body>
+
+</html>

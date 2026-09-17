@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@squoosh/cli": "^0.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.3"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
+}

@@ -1,0 +1,440 @@
+/* ========================================
+   MACHpadaco Global Services
+   ADMIN PREMIUM ENROLLMENTS
+   ======================================== */
+
+
+/* ========================================
+   ENROLLMENT TABLE WRAPPER
+   ======================================== */
+
+.enrollment-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* ========================================
+   PREMIUM ENROLLMENT TABLE
+   ======================================== */
+
+.admin-contacts-page .enrollments-admin-table {
+    width: 100%;
+    min-width: 1250px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+/* ========================================
+   FIXED COLUMN WIDTHS
+   ======================================== */
+
+
+/* DATE */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-date {
+
+    width: 140px;
+}
+
+
+/* STUDENT */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-student {
+
+    width: 150px;
+}
+
+
+/* EMAIL */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-email {
+
+    width: 190px;
+}
+
+
+/* COURSE */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-course {
+
+    width: 180px;
+}
+
+
+/* AMOUNT */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-amount {
+
+    width: 100px;
+}
+
+
+/* PAYMENT REFERENCE */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-reference {
+
+    width: 230px;
+}
+
+
+/* STATUS */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-status {
+
+    width: 120px;
+}
+
+
+/* ACTION */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-col-action {
+
+    width: 180px;
+}
+
+
+/* ========================================
+   TABLE HEADERS
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th {
+
+    padding: 14px 12px;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    font-weight: 700;
+}
+
+
+/* ========================================
+   TABLE CELLS
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table td {
+
+    padding: 14px 12px;
+
+    text-align: left;
+
+    vertical-align: middle;
+}
+
+
+/* ========================================
+   DATE COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(1),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(1) {
+
+    width: 140px;
+}
+
+
+/* ========================================
+   STUDENT COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(2),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(2) {
+
+    width: 150px;
+}
+
+
+/* ========================================
+   EMAIL COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(3),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(3) {
+
+    width: 190px;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   COURSE COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(4),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(4) {
+
+    width: 180px;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ========================================
+   AMOUNT COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(5),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(5) {
+
+    width: 100px;
+
+    white-space: nowrap;
+
+    font-weight: 600;
+}
+
+
+/* ========================================
+   PAYMENT REFERENCE COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(6),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(6) {
+
+    width: 230px;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   STATUS COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(7),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(7) {
+
+    width: 120px;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   ACTION COLUMN
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table th:nth-child(8),
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(8) {
+
+    width: 180px;
+
+    min-width: 180px;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   PAYMENT REFERENCE TEXT
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(6) strong {
+
+    display: block;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   STUDENT EMAIL
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(3) a {
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   VERIFY BUTTON
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-verify-btn {
+
+    display: inline-block;
+
+    padding: 9px 12px;
+
+    margin-right: 8px;
+
+    margin-bottom: 4px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #087f23;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   REJECT BUTTON
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-reject-btn {
+
+    display: inline-block;
+
+    padding: 9px 12px;
+
+    margin-right: 0;
+
+    margin-bottom: 4px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #dc3545;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   BUTTON HOVER
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-verify-btn:hover {
+
+    opacity: 0.85;
+}
+
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-reject-btn:hover {
+
+    opacity: 0.85;
+}
+
+
+/* ========================================
+   DISABLED BUTTON
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-verify-btn:disabled,
+.admin-contacts-page
+.enrollments-admin-table
+.enrollment-reject-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   ACCESS GRANTED / REJECTED
+   ======================================== */
+
+.admin-contacts-page
+.enrollments-admin-table td:nth-child(8) span {
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   MOBILE / SMALL SCREEN
+   ======================================== */
+
+@media (max-width: 900px) {
+
+    .enrollment-table-wrapper {
+
+        overflow-x: auto;
+    }
+
+    .admin-contacts-page
+    .enrollments-admin-table {
+
+        min-width: 1250px;
+    }
+
+}

@@ -1,0 +1,223 @@
+<!-- =====================================================
+     FILE: header.html
+     LOCATION: frontend/components/
+
+     COMPONENT:
+     Website Header
+
+     PROJECT:
+     Machpadaco Global Services
+
+     AUTHOR:
+     Engr. Ejike Njuwa
+
+     DESCRIPTION:
+     Responsive website header containing:
+     • Company Logo
+     • Navigation Menu
+     • Services Dropdown
+     • Authentication
+     • User Profile
+     • Mobile Hamburger Menu
+
+====================================================== -->
+
+<header id="header-container">
+
+    <!-- =========================
+         BRANDING
+    ========================== -->
+
+    <div class="header-left">
+
+        <a href="index.html" class="header-brand">
+
+            <img
+                src="assets/img/logo.jpg"
+                alt="Machpadaco Global Services Logo"
+                class="header-logo"
+                loading="lazy"
+                draggable="false">
+
+            <h1 class="company-name">
+                Machpadaco
+            </h1>
+
+        </a>
+
+    </div>
+
+    <!-- =========================
+         MOBILE MENU BUTTON
+    ========================== -->
+
+    <button
+        id="menuToggle"
+        class="menu-toggle"
+        type="button"
+        aria-label="Open Navigation Menu"
+        aria-expanded="false"
+        aria-controls="mainNav">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+    <!-- =========================
+         MAIN NAVIGATION
+    ========================== -->
+
+    <nav id="mainNav">
+
+        <a href="index.html" class="nav-link active">
+            Home
+        </a>
+
+        <!-- =========================
+             SERVICES
+        ========================== -->
+
+        <div class="dropdown">
+
+            <button
+                id="servicesDropdownBtn"
+                class="dropbtn"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false">
+
+                Services
+
+                <span class="dropdown-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="virtual-assistance.html">
+                     Virtual Assistance
+                </a>
+
+                <a href="software.html">
+                    Software Development
+                </a>
+
+                <a href="affiliate.html">
+                    Affiliate Marketing
+                </a>
+
+                <a href="environmental.html">
+                    Environmental Consulting
+                </a>
+
+                <a href="phonerepairs.html">
+                    Phone Repairs
+                </a>
+
+            </div>
+
+        </div>
+
+        <a href="portfolio.html" class="nav-link">
+            Portfolio
+        </a>
+
+        <a href="community.html" class="nav-link community-link">
+            Community
+        </a>
+
+        <a href="contact.html" class="nav-link">
+            Contact
+        </a>
+
+        <a href="about.html" class="nav-link">
+            About
+        </a>
+
+        <!-- =========================
+             AUTHENTICATION
+        ========================== -->
+
+        <div class="auth-section">
+
+            <!-- Guest -->
+
+            <div
+                id="authGuest"
+                class="auth-guest">
+
+                <a
+                    href="login.html"
+                    class="auth-btn login-btn">
+
+                    Login
+
+                </a>
+
+                <a
+                    href="signup.html"
+                    class="auth-btn signup-btn">
+
+                    Sign Up
+
+                </a>
+
+            </div>
+
+            <!-- Logged-in User -->
+
+            <div
+                id="profileContainer"
+                class="profile-container">
+
+                <div
+                    id="profileToggle"
+                    class="profile-toggle">
+
+                    <img
+                        src="assets/img/default-user.png"
+                        alt="Profile Picture"
+                        id="navProfilePic"
+                        class="profile-pic"
+                        loading="lazy"
+                        draggable="false">
+
+                    <span id="usernameDisplay">
+
+                    </span>
+
+                </div>
+
+                <!-- Profile Dropdown -->
+
+                <div
+                    id="profileDropdown"
+                    class="profile-dropdown">
+
+                    <a href="profile.html">
+
+                        My Profile
+
+                    </a>
+
+                    <a
+                        href="#"
+                        id="logoutBtn">
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>

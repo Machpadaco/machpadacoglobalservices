@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - Machpadaco Global Services</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body data-page="profile">
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- PROFILE DASHBOARD -->
+    <main>
+
+        <section class="profile-dashboard">
+
+            <div class="profile-card">
+
+                <!-- PROFILE IMAGE -->
+                <div class="profile-image-box">
+
+                    <img
+                        src="assets/img/default-user.png"
+                        id="profileImage"
+                        class="profile-large-pic"
+                        alt="Profile"
+                    >
+
+                    <input
+                        type="file"
+                        id="imageUpload"
+                        hidden
+                    >
+
+                    <button
+                        type="button"
+                        id="changePhotoBtn"
+                    >
+                        Change Photo
+                    </button>
+
+                </div>
+
+                <!-- USER INFO -->
+                <h2 id="profileName">
+                    Loading...
+                </h2>
+
+                <p id="profileEmail">
+                    Loading...
+                </p>
+
+                <p id="profilePhone">
+                    Loading...
+                </p>
+
+                <!-- EDIT SECTION -->
+                <div class="edit-section">
+
+                    <input
+                        type="text"
+                        id="editName"
+                        placeholder="Update Name"
+                    >
+
+                    <input
+                        type="text"
+                        id="editPhone"
+                        placeholder="Update Phone"
+                    >
+
+                    <button
+                        type="button"
+                        id="saveProfileBtn"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+                <!-- DASHBOARD STATS -->
+                <div class="dashboard-stats">
+
+                    <div class="stat-box">
+                        <h3>₦0</h3>
+                        <p>Earnings</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>0</h3>
+                        <p>Referrals</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>0</h3>
+                        <p>Courses</p>
+                    </div>
+
+                </div>
+
+                <!-- LOGOUT -->
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Main JavaScript Controller -->
+    <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1144 @@
+/* =========================================================
+   ENVIRONMENTAL CONSULTING PAGE
+   Machpadaco Global Services
+========================================================= */
+
+.environmental-container {
+    width: min(var(--container-width, 1180px), 92%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY / COMMON
+========================================================= */
+
+.environmental-eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 3px solid var(--brand-orange, #F47B20);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand-orange, #F47B20);
+}
+
+.environmental-section-header {
+    max-width: 760px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.environmental-section-header h2 {
+    margin: 0 0 18px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.environmental-section-header p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.environmental-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 100px;
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(0, 123, 255, 0.12),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            var(--light-bg, #F7FAFC) 0%,
+            #eef6ff 100%
+        );
+}
+
+.environmental-hero::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: -90px;
+    bottom: -90px;
+    border: 2px solid rgba(244, 123, 32, 0.10);
+    border-radius: 50%;
+}
+
+.environmental-container.environmental-hero-content {
+    position: relative;
+}
+
+.environmental-hero .environmental-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.environmental-hero-content {
+    max-width: 700px;
+}
+
+.environmental-hero h1 {
+    margin: 0 0 25px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.environmental-hero h1 span {
+    color: var(--brand-orange, #F47B20);
+}
+
+.environmental-hero-text {
+    max-width: 650px;
+    margin: 0 0 35px;
+    color: var(--text-color, #52667A);
+    font-size: 1.08rem;
+    line-height: 1.8;
+}
+
+.environmental-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.environmental-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 25px;
+    border-radius: var(--radius-small, 8px);
+    font-weight: 700;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+        transform var(--transition-normal, 0.3s ease),
+        box-shadow var(--transition-normal, 0.3s ease),
+        background var(--transition-normal, 0.3s ease),
+        color var(--transition-normal, 0.3s ease),
+        border-color var(--transition-normal, 0.3s ease);
+}
+
+.environmental-btn:hover {
+    transform: translateY(-2px);
+}
+
+.environmental-btn:focus-visible {
+    outline: 3px solid rgba(244, 123, 32, 0.28);
+    outline-offset: 3px;
+}
+
+.environmental-btn-primary {
+    color: var(--white, #FFFFFF);
+    background: var(--brand-blue, #007BFF);
+    box-shadow:
+        0 10px 25px rgba(0, 123, 255, 0.2);
+}
+
+.environmental-btn-primary::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 32%;
+    height: 3px;
+    background: var(--brand-orange, #F47B20);
+    transition:
+        width var(--transition-normal, 0.3s ease);
+}
+
+.environmental-btn-primary:hover {
+    background: var(--brand-blue-dark, #0056B3);
+    box-shadow:
+        0 13px 28px rgba(0, 86, 179, 0.23);
+}
+
+.environmental-btn-primary:hover::after {
+    width: 100%;
+}
+
+.environmental-btn-secondary {
+    color: var(--heading-color, #102A43);
+    background: var(--white, #FFFFFF);
+    border: 1px solid #d8e3ec;
+}
+
+.environmental-btn-secondary:hover {
+    color: var(--brand-orange-dark, #D96316);
+    border-color: var(--brand-orange, #F47B20);
+    background: #fffaf6;
+    box-shadow:
+        0 8px 20px rgba(16, 42, 67, 0.08);
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.environmental-hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 390px;
+}
+
+.environmental-orbit {
+    position: relative;
+    width: 330px;
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.environmental-orbit-ring {
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    border: 1px solid rgba(0, 123, 255, 0.25);
+    border-radius: 50%;
+}
+
+.environmental-orbit-ring::before,
+.environmental-orbit-ring::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(0, 123, 255, 0.14);
+    border-radius: 50%;
+}
+
+.environmental-orbit-ring::before {
+    inset: 25px;
+}
+
+.environmental-orbit-ring::after {
+    inset: 55px;
+    border-color: rgba(244, 123, 32, 0.14);
+}
+
+.environmental-center-icon {
+    position: relative;
+    z-index: 2;
+    width: 105px;
+    height: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(244, 123, 32, 0.35);
+    border-radius: 50%;
+    color: var(--white, #FFFFFF);
+    background: var(--brand-blue, #007BFF);
+    font-size: 3rem;
+    box-shadow:
+        0 20px 45px rgba(0, 123, 255, 0.25),
+        0 0 0 8px rgba(244, 123, 32, 0.07);
+}
+
+.environmental-node {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid #dce7ef;
+    border-radius: 30px;
+    color: var(--heading-color, #102A43);
+    background: var(--white, #FFFFFF);
+    box-shadow:
+        0 10px 25px rgba(16, 42, 67, 0.08);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    transition:
+        transform var(--transition-normal, 0.3s ease),
+        border-color var(--transition-normal, 0.3s ease);
+}
+
+.environmental-node:hover {
+    border-color: rgba(244, 123, 32, 0.55);
+}
+
+.node-top {
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.node-top:hover {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.node-right {
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.node-right:hover {
+    transform: translateY(-50%) translateX(2px);
+}
+
+.node-bottom {
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.node-bottom:hover {
+    transform: translateX(-50%) translateY(2px);
+}
+
+.node-left {
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.node-left:hover {
+    transform: translateY(-50%) translateX(-2px);
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.environmental-introduction {
+    padding: 100px 0;
+    background: var(--white, #FFFFFF);
+}
+
+.environmental-intro-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.environmental-intro-content p {
+    margin: 0 0 20px;
+    color: var(--text-color, #52667A);
+    font-size: 1.03rem;
+    line-height: 1.85;
+}
+
+.environmental-intro-content strong {
+    color: var(--heading-color, #102A43);
+}
+
+.environmental-intro-highlight {
+    position: relative;
+    padding: 35px;
+    border: 1px solid var(--border-color, #E2EAF1);
+    border-radius: var(--radius-large, 18px);
+    background: var(--light-bg, #F7FAFC);
+    overflow: hidden;
+}
+
+.environmental-intro-highlight::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF) 0%,
+            var(--brand-blue, #007BFF) 72%,
+            var(--brand-orange, #F47B20) 100%
+        );
+}
+
+.environmental-highlight-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #e8f3ff;
+    border: 1px solid rgba(244, 123, 32, 0.14);
+    color: var(--brand-orange, #F47B20);
+    font-size: 1.7rem;
+}
+
+.environmental-intro-highlight h3 {
+    margin: 0 0 14px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.35rem;
+}
+
+.environmental-intro-highlight p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.environmental-services {
+    padding: 100px 0;
+    background: var(--light-bg, #F7FAFC);
+}
+
+.environmental-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.environmental-service-card {
+    position: relative;
+    padding: 32px;
+    border: 1px solid var(--border-color, #E2EAF1);
+    border-radius: 14px;
+    background: var(--white, #FFFFFF);
+    overflow: hidden;
+    transition:
+        transform var(--transition-normal, 0.3s ease),
+        box-shadow var(--transition-normal, 0.3s ease),
+        border-color var(--transition-normal, 0.3s ease);
+}
+
+.environmental-service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF) 0%,
+            var(--brand-blue, #007BFF) 72%,
+            var(--brand-orange, #F47B20) 100%
+        );
+}
+
+.environmental-service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(244, 123, 32, 0.30);
+    box-shadow:
+        0 18px 40px rgba(16, 42, 67, 0.09);
+}
+
+.environmental-service-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    color: var(--brand-orange, #F47B20);
+    background: #eaf4ff;
+    border: 1px solid rgba(244, 123, 32, 0.12);
+    font-size: 1.6rem;
+}
+
+.environmental-service-card h3 {
+    margin: 0 0 12px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.2rem;
+}
+
+.environmental-service-card p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DIGITAL WASTE
+========================================================= */
+
+.environmental-digital {
+    padding: 105px 0;
+    background: var(--white, #FFFFFF);
+}
+
+.environmental-digital-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.environmental-digital-content h2 {
+    max-width: 700px;
+    margin: 0 0 22px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.environmental-digital-content > p {
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+.environmental-digital-list {
+    margin-top: 30px;
+}
+
+.environmental-digital-list > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.environmental-digital-list span {
+    flex: 0 0 auto;
+    color: var(--brand-orange, #F47B20);
+    font-weight: 800;
+}
+
+.environmental-digital-list p {
+    margin: 0;
+    color: var(--heading-color, #102A43);
+    font-weight: 600;
+}
+
+.environmental-digital-panel {
+    position: relative;
+    padding: 28px;
+    border-radius: var(--radius-large, 18px);
+    background: var(--heading-color, #102A43);
+    box-shadow:
+        0 25px 60px rgba(16, 42, 67, 0.18);
+    overflow: hidden;
+}
+
+.environmental-digital-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF) 0%,
+            var(--brand-orange, #F47B20) 100%
+        );
+}
+
+.environmental-panel-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+    color: var(--white, #FFFFFF);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.environmental-status {
+    color: #ffc49f;
+}
+
+.environmental-data-card {
+    padding: 22px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.environmental-data-card:last-child {
+    margin-bottom: 0;
+}
+
+.environmental-data-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #a9bac9;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.environmental-data-card strong {
+    display: block;
+    margin-bottom: 15px;
+    color: var(--white, #FFFFFF);
+    font-size: 1.1rem;
+}
+
+.environmental-progress {
+    height: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.environmental-progress span {
+    display: block;
+    width: 82%;
+    height: 100%;
+    border-radius: inherit;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-orange, #F47B20)
+        );
+}
+
+
+/* =========================================================
+   SMARTWASTE
+========================================================= */
+
+.environmental-smartwaste {
+    padding: 100px 0;
+    background: #eef6ff;
+}
+
+.environmental-smartwaste-grid {
+    display: grid;
+    grid-template-columns: 0.65fr 1.35fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.environmental-smartwaste-badge {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    border-radius: 20px;
+    background: var(--heading-color, #102A43);
+    color: var(--white, #FFFFFF);
+    text-align: center;
+    box-shadow:
+        0 20px 45px rgba(16, 42, 67, 0.15);
+    overflow: hidden;
+}
+
+.environmental-smartwaste-badge::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF),
+            var(--brand-orange, #F47B20)
+        );
+}
+
+.smartwaste-logo {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    border: 2px solid rgba(244, 123, 32, 0.45);
+    border-radius: 50%;
+    color: var(--white, #FFFFFF);
+    background: var(--brand-blue, #007BFF);
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow:
+        0 0 0 7px rgba(244, 123, 32, 0.07);
+}
+
+.environmental-smartwaste-badge > span {
+    margin-bottom: 8px;
+    color: #9fb2c3;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.environmental-smartwaste-badge strong {
+    font-size: 2rem;
+}
+
+.environmental-smartwaste-content h2 {
+    margin: 0 0 22px;
+    color: var(--heading-color, #102A43);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+}
+
+.environmental-smartwaste-content p {
+    color: var(--text-color, #52667A);
+    line-height: 1.8;
+}
+
+.environmental-smartwaste-content strong {
+    color: var(--heading-color, #102A43);
+}
+
+.environmental-smartwaste-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.environmental-smartwaste-tags span {
+    padding: 9px 14px;
+    border: 1px solid #cfe0ed;
+    border-radius: 30px;
+    color: var(--heading-color, #102A43);
+    background: var(--white, #FFFFFF);
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition:
+        border-color var(--transition-fast, 0.2s ease),
+        color var(--transition-fast, 0.2s ease);
+}
+
+.environmental-smartwaste-tags span:hover {
+    color: var(--brand-orange-dark, #D96316);
+    border-color: rgba(244, 123, 32, 0.45);
+}
+
+
+/* =========================================================
+   AREAS OF FOCUS
+========================================================= */
+
+.environmental-focus {
+    padding: 100px 0;
+    background: var(--white, #FFFFFF);
+}
+
+.environmental-focus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid #dfe8ef;
+    border-radius: var(--radius-large, 18px);
+    background: #dfe8ef;
+}
+
+.environmental-focus-item {
+    position: relative;
+    padding: 32px;
+    background: var(--white, #FFFFFF);
+    transition:
+        background var(--transition-normal, 0.3s ease);
+}
+
+.environmental-focus-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--brand-orange, #F47B20);
+    transition:
+        height var(--transition-normal, 0.3s ease);
+}
+
+.environmental-focus-item:hover {
+    background: #fbfdff;
+}
+
+.environmental-focus-item:hover::before {
+    height: 100%;
+}
+
+.environmental-focus-item > span {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--brand-orange, #F47B20);
+    font-weight: 800;
+}
+
+.environmental-focus-item h3 {
+    margin: 0 0 10px;
+    color: var(--heading-color, #102A43);
+    font-size: 1.1rem;
+}
+
+.environmental-focus-item p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PARTNERS
+========================================================= */
+
+.environmental-partners {
+    padding: 100px 0;
+    background: var(--light-bg, #F7FAFC);
+}
+
+.environmental-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.environmental-partner-card {
+    position: relative;
+    padding: 30px 25px;
+    border: 1px solid var(--border-color, #E2EAF1);
+    border-radius: 14px;
+    background: var(--white, #FFFFFF);
+    text-align: center;
+    overflow: hidden;
+    transition:
+        transform var(--transition-normal, 0.3s ease),
+        border-color var(--transition-normal, 0.3s ease),
+        box-shadow var(--transition-normal, 0.3s ease);
+}
+
+.environmental-partner-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF) 0%,
+            var(--brand-blue, #007BFF) 72%,
+            var(--brand-orange, #F47B20) 100%
+        );
+}
+
+.environmental-partner-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(244, 123, 32, 0.30);
+    box-shadow:
+        0 12px 30px rgba(16, 42, 67, 0.07);
+}
+
+.environmental-partner-card > span {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.environmental-partner-card h3 {
+    margin: 0 0 10px;
+    color: var(--heading-color, #102A43);
+}
+
+.environmental-partner-card p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.environmental-process {
+    padding: 100px 0;
+    background: var(--white, #FFFFFF);
+}
+
+.environmental-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.environmental-process-item {
+    position: relative;
+    padding: 30px;
+    border-top: 3px solid transparent;
+    background: var(--light-bg, #F7FAFC);
+    overflow: hidden;
+}
+
+.environmental-process-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--brand-blue, #007BFF) 0%,
+            var(--brand-blue, #007BFF) 65%,
+            var(--brand-orange, #F47B20) 100%
+        );
+}
+
+.environmental-process-item > span {
+    display: block;
+    margin-bottom: 25px;
+    color: var(--brand-orange, #F47B20);
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.environmental-process-item h3 {
+    margin: 0 0 12px;
+    color: var(--heading-color, #102A43);
+}
+
+.environmental-process-item p {
+    margin: 0;
+    color: var(--text-color, #52667A);
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.environmental-cta {
+    position: relative;
+    padding: 110px 0;
+    background:
+        linear-gradient(
+            135deg,
+            var(--heading-color, #102A43),
+            #0b3559
+        );
+    text-align: center;
+    overflow: hidden;
+}
+
+.environmental-cta::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -130px;
+    top: -130px;
+    border: 2px solid rgba(244, 123, 32, 0.13);
+    border-radius: 50%;
+}
+
+.environmental-cta::after {
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: -70px;
+    bottom: -70px;
+    border-radius: 50%;
+    background: rgba(0, 123, 255, 0.08);
+}
+
+.environmental-cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.environmental-cta .environmental-eyebrow {
+    color: #ffc49f;
+    border-left-color: var(--brand-orange, #F47B20);
+}
+
+.environmental-cta h2 {
+    margin: 0 0 20px;
+    color: var(--white, #FFFFFF);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.12;
+}
+
+.environmental-cta p {
+    max-width: 650px;
+    margin: 0 auto 30px;
+    color: #c4d3df;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .environmental-hero .environmental-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .environmental-hero-content {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .environmental-hero-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .environmental-hero-actions {
+        justify-content: center;
+    }
+
+    .environmental-intro-grid,
+    .environmental-digital-grid,
+    .environmental-smartwaste-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .environmental-intro-highlight {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .environmental-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .environmental-focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .environmental-partner-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .environmental-process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .environmental-smartwaste-badge {
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .environmental-hero {
+        padding: 80px 0 70px;
+    }
+
+    .environmental-introduction,
+    .environmental-services,
+    .environmental-digital,
+    .environmental-smartwaste,
+    .environmental-focus,
+    .environmental-partners,
+    .environmental-process {
+        padding: 75px 0;
+    }
+
+    .environmental-services-grid,
+    .environmental-focus-grid,
+    .environmental-partner-grid,
+    .environmental-process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .environmental-hero-visual {
+        min-height: 320px;
+    }
+
+    .environmental-orbit {
+        transform: scale(0.85);
+    }
+
+    .environmental-section-header {
+        margin-bottom: 40px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .environmental-hero h1 {
+        font-size: 2.35rem;
+    }
+
+    .environmental-hero-text {
+        font-size: 0.98rem;
+    }
+
+    .environmental-hero-actions {
+        flex-direction: column;
+    }
+
+    .environmental-btn {
+        width: 100%;
+    }
+
+    .environmental-hero-visual {
+        min-height: 270px;
+    }
+
+    .environmental-orbit {
+        transform: scale(0.68);
+    }
+
+    .environmental-service-card,
+    .environmental-intro-highlight,
+    .environmental-process-item {
+        padding: 25px;
+    }
+
+    .environmental-digital-panel {
+        padding: 20px;
+    }
+
+    .environmental-panel-top {
+        flex-direction: column;
+    }
+}
