@@ -13,21 +13,90 @@ const {
     getMyEnrollments,
     checkCourseAccess,
     getAllEnrollments,
-    updateEnrollmentStatus
+    updateEnrollmentStatus,
+    listAdminCourses,
+    updateCoursePrice
 } = require("../controllers/enrollmentController");
 
-// Course catalog is public so the enrollment page can display server-controlled fees.
+
+// ========================================
+// PUBLIC COURSE ROUTES
+// ========================================
+
+// Get all premium courses and their current prices
 router.get("/courses", listCourses);
 
+// Get payment/bank details
 router.get("/payment-details", getPaymentDetails);
 
-// Student enrollment endpoints.
-router.post("/", authMiddleware, createEnrollment);
-router.get("/my", authMiddleware, getMyEnrollments);
-router.get("/access/:courseSlug", authMiddleware, checkCourseAccess);
 
-// Admin payment/enrollment management.
-router.get("/admin", authMiddleware, adminMiddleware, getAllEnrollments);
-router.patch("/admin/:id", authMiddleware, adminMiddleware, updateEnrollmentStatus);
+// ========================================
+// STUDENT ROUTES
+// ========================================
+
+// Submit an enrollment/payment verification request
+router.post(
+    "/",
+    authMiddleware,
+    createEnrollment
+);
+
+// Get the logged-in student's enrollments
+router.get(
+    "/my",
+    authMiddleware,
+    getMyEnrollments
+);
+
+// Check whether the logged-in student has
+// verified access to a particular course
+router.get(
+    "/access/:courseSlug",
+    authMiddleware,
+    checkCourseAccess
+);
+
+
+// ========================================
+// ADMIN COURSE PRICING ROUTES
+// ========================================
+
+// Get all courses and their current prices
+router.get(
+    "/admin/courses",
+    authMiddleware,
+    adminMiddleware,
+    listAdminCourses
+);
+
+// Update a course price
+router.patch(
+    "/admin/courses/:slug",
+    authMiddleware,
+    adminMiddleware,
+    updateCoursePrice
+);
+
+
+// ========================================
+// ADMIN ENROLLMENT ROUTES
+// ========================================
+
+// Get all student enrollments
+router.get(
+    "/admin",
+    authMiddleware,
+    adminMiddleware,
+    getAllEnrollments
+);
+
+// Verify or reject an enrollment
+router.patch(
+    "/admin/:id",
+    authMiddleware,
+    adminMiddleware,
+    updateEnrollmentStatus
+);
+
 
 module.exports = router;
