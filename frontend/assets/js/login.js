@@ -7,7 +7,16 @@
 // API
 // ========================================
 
-const API_URL = "http://localhost:5000/api/auth";
+// Use local backend during development
+// Use Render backend when the website is live
+
+const API_BASE_URL =
+    (window.location.hostname === "localhost" ||
+     window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000"
+        : "https://machpadacoglobalservices-api.onrender.com";
+
+const API_URL = `${API_BASE_URL}/api/auth`;
 
 // ========================================
 // LOGIN FORM
@@ -95,7 +104,9 @@ if (loginForm) {
                 err
             );
 
-            alert("Server error");
+            alert(
+                "Unable to connect to the server. Please try again."
+            );
         }
     });
 }
