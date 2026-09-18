@@ -269,6 +269,24 @@ function createStatusSelect(contact) {
 
 
 // ========================================
+// DELETE BUTTON
+// ========================================
+
+function createDeleteButton(contact) {
+
+    return `
+        <button
+            type="button"
+            class="delete-contact-btn"
+            data-contact-id="${escapeHTML(contact._id)}"
+        >
+            Delete
+        </button>
+    `;
+}
+
+
+// ========================================
 // HANDLE UNAUTHORIZED RESPONSE
 // ========================================
 
@@ -324,7 +342,7 @@ async function loadContacts() {
     contactsTableBody.innerHTML = `
         <tr>
             <td
-                colspan="6"
+                colspan="7"
                 style="text-align: center;"
             >
                 Loading messages...
@@ -404,7 +422,7 @@ async function loadContacts() {
             contactsTableBody.innerHTML = `
                 <tr>
                     <td
-                        colspan="6"
+                        colspan="7"
                         style="text-align: center;"
                     >
                         No contact messages found.
@@ -426,6 +444,7 @@ async function loadContacts() {
         // SERVICE
         // MESSAGE
         // STATUS
+        // DELETE
         // ========================================
 
         contactsTableBody.innerHTML =
@@ -509,6 +528,12 @@ async function loadContacts() {
                                 ${createStatusSelect(contact)}
                             </td>
 
+
+                            <!-- DELETE -->
+                            <td>
+                                ${createDeleteButton(contact)}
+                            </td>
+
                         </tr>
                     `;
 
@@ -536,6 +561,26 @@ async function loadContacts() {
         });
 
 
+        // ========================================
+        // ATTACH DELETE EVENTS
+        // ========================================
+
+        const deleteButtons =
+            document.querySelectorAll(
+                ".delete-contact-btn"
+            );
+
+
+        deleteButtons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                handleDeleteContact
+            );
+
+        });
+
+
     } catch (error) {
 
         console.error(
@@ -547,7 +592,7 @@ async function loadContacts() {
         contactsTableBody.innerHTML = `
             <tr>
                 <td
-                    colspan="6"
+                    colspan="7"
                     style="text-align: center;"
                 >
                     Unable to load contact messages.
@@ -696,6 +741,136 @@ async function handleStatusChange(event) {
 
 
 // ========================================
+// DELETE CONTACT
+// ========================================
+
+async function handleDeleteContact(event) {
+
+    const button =
+        event.currentTarget;
+
+
+    const contactId =
+        button.dataset.contactId;
+
+
+    if (!contactId) {
+
+        console.error(
+            "Contact ID is missing."
+        );
+
+        return;
+    }
+
+
+    // ========================================
+    // CONFIRM DELETION
+    // ========================================
+
+    const confirmed =
+        window.confirm(
+            "Are you sure you want to delete this contact message?\n\nThis action cannot be undone."
+        );
+
+
+    if (!confirmed) {
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Deleting...";
+
+
+    clearError();
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/api/contact/admin/contacts/${contactId}`,
+                {
+                    method: "DELETE",
+
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        // ========================================
+        // AUTHORIZATION CHECK
+        // ========================================
+
+        if (
+            handleUnauthorized(response)
+        ) {
+
+            return;
+        }
+
+
+        // ========================================
+        // READ RESPONSE
+        // ========================================
+
+        const result =
+            await response.json();
+
+
+        // ========================================
+        // CHECK SERVER RESULT
+        // ========================================
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Failed to delete contact message."
+            );
+        }
+
+
+        // ========================================
+        // RELOAD CONTACTS
+        // ========================================
+
+        await loadContacts();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete contact error:",
+            error
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "Delete";
+
+
+        showError(
+            error.message ||
+            "Unable to delete contact message."
+        );
+    }
+}
+
+
+// ========================================
 // SHOW CONTACTS
 // ========================================
 
@@ -800,10 +975,7 @@ if (logoutBtn) {
 // IMPORTANT:
 // main.js dynamically imports this
 // module after DOMContentLoaded.
-//
 // Therefore we initialize immediately.
-// DO NOT wrap this in another
-// DOMContentLoaded listener.
 // ========================================
 
 if (ensureAdmin()) {
