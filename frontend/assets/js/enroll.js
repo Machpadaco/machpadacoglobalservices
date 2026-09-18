@@ -29,6 +29,60 @@ let currentCourse = null;
 
 
 // ========================================
+// PROTECTED COURSE PAGES
+// ========================================
+
+const protectedCoursePages = {
+    "software-development-premium":
+        "software-development-course.html",
+
+    "phone-engineering-premium":
+        "phone-engineering-course.html",
+
+    "digital-marketing-premium":
+        "digital-marketing-course.html",
+
+    "property-management-virtual-assistance-premium":
+        "property-management-virtual-assistance-course.html"
+};
+
+
+// ========================================
+// SET COURSE ACCESS LINK
+// ========================================
+
+function setCourseAccessLink() {
+
+    const accessLink =
+        document.getElementById("courseAccessLink");
+
+    if (!accessLink) {
+        return;
+    }
+
+    const targetPage =
+        protectedCoursePages[courseSlug];
+
+    if (targetPage) {
+
+        accessLink.setAttribute(
+            "href",
+            targetPage
+        );
+
+    } else {
+
+        accessLink.setAttribute(
+            "href",
+            "join-community.html#premium-training"
+        );
+
+    }
+
+}
+
+
+// ========================================
 // STATUS MESSAGE
 // ========================================
 
@@ -102,6 +156,8 @@ async function loadCourse() {
             form.hidden = true;
         }
 
+        setCourseAccessLink();
+
         return;
     }
 
@@ -150,12 +206,14 @@ async function loadCourse() {
         // ========================================
 
         if (courseName) {
+
             courseName.textContent =
                 currentCourse.name;
         }
 
 
         if (courseDescription) {
+
             courseDescription.textContent =
                 currentCourse.description;
         }
@@ -184,6 +242,13 @@ async function loadCourse() {
                     ? formatMoney(currentCourse.price)
                     : "Fee not configured";
         }
+
+
+        // ========================================
+        // SET PROTECTED COURSE LINK
+        // ========================================
+
+        setCourseAccessLink();
 
 
         // ========================================
@@ -220,18 +285,21 @@ async function loadCourse() {
 
 
         if (fullName) {
+
             fullName.value =
                 user?.fullName || "";
         }
 
 
         if (email) {
+
             email.value =
                 user?.email || "";
         }
 
 
         if (phone) {
+
             phone.value =
                 user?.phone || "";
         }
@@ -263,6 +331,7 @@ async function loadCourse() {
             "Unable to load enrollment information.",
             "error"
         );
+
     }
 
 }
@@ -395,6 +464,10 @@ async function loadExistingEnrollment() {
         }
 
 
+        // ========================================
+        // VERIFIED ENROLLMENT
+        // ========================================
+
         if (existing.status === "verified") {
 
             if (form) {
@@ -405,10 +478,15 @@ async function loadExistingEnrollment() {
                 paymentSection.hidden = true;
             }
 
+            // Make absolutely sure the protected
+            // course link is correctly assigned.
+            setCourseAccessLink();
+
             showStatus(
                 "You already have verified access to this course. Please open your student course area.",
                 "success"
             );
+
 
         } else if (existing.status === "pending") {
 
@@ -650,4 +728,9 @@ console.log(
 );
 
 
+// Set the link immediately.
+setCourseAccessLink();
+
+
+// Load the selected course.
 loadCourse();
