@@ -1,19 +1,8 @@
 // ========================================
-// MACHpadaco Premium Enrolment
+// Machpadaco Premium Enrolment
 // ========================================
 
-// ========================================
-// BACKEND API
-// ========================================
-
-// Use local backend during development
-// Use Render backend when the website is live
-
-const API_BASE_URL =
-    (window.location.hostname === "localhost" ||
-     window.location.hostname === "127.0.0.1")
-        ? "http://localhost:5000"
-        : "https://machpadacoglobalservices-api.onrender.com";
+import API_BASE_URL from "./config.js";
 
 const token = localStorage.getItem("token");
 const userJson = localStorage.getItem("user");
@@ -23,62 +12,31 @@ const courseName = document.getElementById("course-name");
 const courseDescription = document.getElementById("course-description");
 const coursePrice = document.getElementById("course-price");
 const selectedCourse = document.getElementById("course");
-
-const paymentSection =
-    document.getElementById("payment-section");
-
-const paymentAmount =
-    document.getElementById("payment-amount");
-
-const paymentReference =
-    document.getElementById("payment-reference");
-
-const paymentForm =
-    document.getElementById("payment-form");
-
-const enrollmentStatus =
-    document.getElementById("enrollment-status");
-
-const bankName =
-    document.getElementById("bank-name");
-
-const accountName =
-    document.getElementById("account-name");
-
-const accountNumber =
-    document.getElementById("account-number");
-
-const whatsappLink =
-    document.getElementById("whatsapp-payment-link");
-
-
-// ========================================
-// STEP 4 — COURSE ACCESS LINK
-// ========================================
-
-const courseAccessLink =
-    document.getElementById("courseAccessLink");
-
-
-// ========================================
-// GET SELECTED COURSE FROM URL
-// ========================================
+const paymentSection = document.getElementById("payment-section");
+const paymentAmount = document.getElementById("payment-amount");
+const paymentReference = document.getElementById("payment-reference");
+const paymentForm = document.getElementById("payment-form");
+const enrollmentStatus = document.getElementById("enrollment-status");
+const bankName = document.getElementById("bank-name");
+const accountName = document.getElementById("account-name");
+const accountNumber = document.getElementById("account-number");
+const whatsappLink = document.getElementById("whatsapp-payment-link");
 
 const courseSlug =
-    new URLSearchParams(
-        window.location.search
-    ).get("course");
+    new URLSearchParams(window.location.search).get("course");
 
 let currentCourse = null;
 
 
 // ========================================
-// SHOW STATUS MESSAGE
+// STATUS MESSAGE
 // ========================================
 
 function showStatus(message, type = "info") {
 
-    if (!enrollmentStatus) return;
+    if (!enrollmentStatus) {
+        return;
+    }
 
     enrollmentStatus.textContent = message;
 
@@ -90,25 +48,22 @@ function showStatus(message, type = "info") {
 
 
 // ========================================
-// FORMAT NIGERIAN CURRENCY
+// FORMAT MONEY
 // ========================================
 
 function formatMoney(amount) {
 
-    return new Intl.NumberFormat(
-        "en-NG",
-        {
-            style: "currency",
-            currency: "NGN",
-            maximumFractionDigits: 0
-        }
-    ).format(amount);
+    return new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        maximumFractionDigits: 0
+    }).format(amount);
 
 }
 
 
 // ========================================
-// REDIRECT USER TO ACCOUNT
+// CHECK LOGIN
 // ========================================
 
 function redirectToAccount() {
@@ -131,62 +86,11 @@ function redirectToAccount() {
 
 
 // ========================================
-// STEP 4 — SET COURSE ACCESS LINK
-// ========================================
-
-function setCourseAccessLink() {
-
-    if (!courseAccessLink) {
-        return;
-    }
-
-
-    // Protected learning pages
-    const protectedCoursePages = {
-
-        "software-development-premium":
-            "software-development-course.html",
-
-        "phone-engineering-premium":
-            "phone-engineering-course.html",
-
-        "digital-marketing-premium":
-            "digital-marketing-course.html",
-
-        "property-management-virtual-assistance-premium":
-            "property-management-virtual-assistance-course.html"
-
-    };
-
-
-    // Check whether the selected course
-    // has a protected learning page
-    if (
-        courseSlug &&
-        protectedCoursePages[courseSlug]
-    ) {
-
-        courseAccessLink.href =
-            protectedCoursePages[courseSlug];
-
-    } else {
-
-        // No valid course selected
-        courseAccessLink.href =
-            "community.html";
-
-    }
-
-}
-
-
-// ========================================
-// LOAD COURSE INFORMATION
+// LOAD SELECTED COURSE
 // ========================================
 
 async function loadCourse() {
 
-    // Check whether a course was selected
     if (!courseSlug) {
 
         showStatus(
@@ -198,14 +102,10 @@ async function loadCourse() {
             form.hidden = true;
         }
 
-        // Still initialise Step 4
-        setCourseAccessLink();
-
         return;
     }
 
 
-    // Check login
     if (!redirectToAccount()) {
         return;
     }
@@ -213,58 +113,23 @@ async function loadCourse() {
 
     try {
 
-        console.log(
-            "Loading course:",
-            courseSlug
-        );
-
-        console.log(
-            "Course API:",
+        const response = await fetch(
             `${API_BASE_URL}/api/enrollments/courses`
         );
 
 
-        // Request course catalogue
-        const response =
-            await fetch(
-                `${API_BASE_URL}/api/enrollments/courses`
-            );
+        const result = await response.json();
 
 
-        // Check HTTP response
-        if (!response.ok) {
-
-            throw new Error(
-                `Course API returned HTTP ${response.status}`
-            );
-
-        }
-
-
-        const result =
-            await response.json();
-
-
-        console.log(
-            "Course API response:",
-            result
-        );
-
-
-        if (
-            !result.success ||
-            !Array.isArray(result.data)
-        ) {
+        if (!response.ok || !result.success) {
 
             throw new Error(
                 result.message ||
                 "Unable to load courses."
             );
-
         }
 
 
-        // Find selected course
         currentCourse =
             result.data.find(
                 course =>
@@ -277,27 +142,22 @@ async function loadCourse() {
             throw new Error(
                 "The selected course could not be found."
             );
-
         }
 
 
         // ========================================
-        // DISPLAY COURSE INFORMATION
+        // COURSE INFORMATION
         // ========================================
 
         if (courseName) {
-
             courseName.textContent =
                 currentCourse.name;
-
         }
 
 
         if (courseDescription) {
-
             courseDescription.textContent =
                 currentCourse.description;
-
         }
 
 
@@ -307,7 +167,6 @@ async function loadCourse() {
                 currentCourse.price > 0
                     ? formatMoney(currentCourse.price)
                     : "Fee not configured";
-
         }
 
 
@@ -315,7 +174,6 @@ async function loadCourse() {
 
             selectedCourse.value =
                 currentCourse.name;
-
         }
 
 
@@ -325,12 +183,11 @@ async function loadCourse() {
                 currentCourse.price > 0
                     ? formatMoney(currentCourse.price)
                     : "Fee not configured";
-
         }
 
 
         // ========================================
-        // LOAD LOGGED-IN USER INFORMATION
+        // LOGGED-IN USER INFORMATION
         // ========================================
 
         let user = null;
@@ -345,55 +202,50 @@ async function loadCourse() {
         } catch (error) {
 
             console.warn(
-                "Could not read stored user information."
+                "Stored user information could not be read.",
+                error
             );
 
         }
 
 
-        const fullNameInput =
+        const fullName =
             document.getElementById("full-name");
 
-        const emailInput =
+        const email =
             document.getElementById("email");
 
-        const phoneInput =
+        const phone =
             document.getElementById("phone");
 
 
-        if (fullNameInput) {
-
-            fullNameInput.value =
+        if (fullName) {
+            fullName.value =
                 user?.fullName || "";
-
         }
 
 
-        if (emailInput) {
-
-            emailInput.value =
+        if (email) {
+            email.value =
                 user?.email || "";
-
         }
 
 
-        if (phoneInput) {
-
-            phoneInput.value =
+        if (phone) {
+            phone.value =
                 user?.phone || "";
-
         }
 
 
         // ========================================
-        // LOAD PAYMENT DETAILS
+        // PAYMENT INFORMATION
         // ========================================
 
         await loadPaymentDetails();
 
 
         // ========================================
-        // CHECK EXISTING ENROLLMENT
+        // EXISTING ENROLLMENT
         // ========================================
 
         await loadExistingEnrollment();
@@ -406,13 +258,11 @@ async function loadCourse() {
             error
         );
 
-
         showStatus(
             error.message ||
             "Unable to load enrollment information.",
             "error"
         );
-
     }
 
 }
@@ -426,44 +276,23 @@ async function loadPaymentDetails() {
 
     try {
 
-        console.log(
-            "Loading payment details..."
+        const response = await fetch(
+            `${API_BASE_URL}/api/enrollments/payment-details`
         );
-
-
-        const response =
-            await fetch(
-                `${API_BASE_URL}/api/enrollments/payment-details`
-            );
-
-
-        if (!response.ok) {
-
-            console.warn(
-                `Payment API returned HTTP ${response.status}`
-            );
-
-            return;
-        }
 
 
         const result =
             await response.json();
 
 
-        console.log(
-            "Payment API response:",
-            result
-        );
+        if (!response.ok || !result.success) {
 
-
-        if (
-            !result.success ||
-            !result.data
-        ) {
+            console.warn(
+                "Payment details request failed:",
+                result.message
+            );
 
             return;
-
         }
 
 
@@ -472,7 +301,6 @@ async function loadPaymentDetails() {
             bankName.textContent =
                 result.data.bankName ||
                 "Contact Machpadaco";
-
         }
 
 
@@ -481,7 +309,6 @@ async function loadPaymentDetails() {
             accountName.textContent =
                 result.data.accountName ||
                 "Machpadaco Global Services";
-
         }
 
 
@@ -490,7 +317,6 @@ async function loadPaymentDetails() {
             accountNumber.textContent =
                 result.data.accountNumber ||
                 "Not configured";
-
         }
 
 
@@ -525,45 +351,26 @@ async function loadExistingEnrollment() {
 
     try {
 
-        const response =
-            await fetch(
-                `${API_BASE_URL}/api/enrollments/my`,
-                {
-                    headers: {
-                        Authorization:
-                            `Bearer ${token}`
-                    }
+        const response = await fetch(
+            `${API_BASE_URL}/api/enrollments/my`,
+            {
+                headers: {
+                    Authorization:
+                        `Bearer ${token}`
                 }
-            );
+            }
+        );
 
 
-        // Token expired
         if (response.status === 401) {
 
-            localStorage.removeItem(
-                "token"
-            );
-
-            localStorage.removeItem(
-                "user"
-            );
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
 
             window.location.href =
                 "login.html";
 
             return;
-
-        }
-
-
-        if (!response.ok) {
-
-            console.warn(
-                `Enrollment API returned HTTP ${response.status}`
-            );
-
-            return;
-
         }
 
 
@@ -571,13 +378,8 @@ async function loadExistingEnrollment() {
             await response.json();
 
 
-        if (
-            !result.success ||
-            !Array.isArray(result.data)
-        ) {
-
+        if (!response.ok || !result.success) {
             return;
-
         }
 
 
@@ -592,10 +394,6 @@ async function loadExistingEnrollment() {
             return;
         }
 
-
-        // ========================================
-        // VERIFIED
-        // ========================================
 
         if (existing.status === "verified") {
 
@@ -612,42 +410,20 @@ async function loadExistingEnrollment() {
                 "success"
             );
 
-        }
-
-
-        // ========================================
-        // PENDING
-        // ========================================
-
-        else if (existing.status === "pending") {
+        } else if (existing.status === "pending") {
 
             if (form) {
                 form.hidden = true;
             }
 
             if (paymentSection) {
-                paymentSection.hidden = true;
+                paymentSection.hidden = false;
             }
 
             showStatus(
                 "Your enrollment is pending payment verification. You do not need to submit another enrollment.",
                 "info"
             );
-
-        }
-
-
-        // ========================================
-        // REJECTED
-        // ========================================
-
-        else if (existing.status === "rejected") {
-
-            showStatus(
-                "Your previous enrollment was rejected. You may submit a new payment reference.",
-                "error"
-            );
-
         }
 
 
@@ -664,7 +440,7 @@ async function loadExistingEnrollment() {
 
 
 // ========================================
-// STEP 1 → CONTINUE TO PAYMENT
+// ENROLLMENT FORM
 // ========================================
 
 if (form) {
@@ -687,7 +463,6 @@ if (form) {
                 );
 
                 return;
-
             }
 
 
@@ -699,17 +474,15 @@ if (form) {
                     behavior: "smooth",
                     block: "start"
                 });
-
             }
 
         }
     );
-
 }
 
 
 // ========================================
-// STEP 2 → SUBMIT PAYMENT REFERENCE
+// PAYMENT FORM
 // ========================================
 
 if (paymentForm) {
@@ -721,33 +494,18 @@ if (paymentForm) {
             event.preventDefault();
 
 
-            // Check course
             if (
                 !currentCourse ||
-                currentCourse.price <= 0
+                currentCourse.price <= 0 ||
+                !token
             ) {
-
-                showStatus(
-                    "This course fee has not been configured yet. Please contact Machpadaco.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            // Check login
-            if (!token) {
 
                 redirectToAccount();
 
                 return;
-
             }
 
 
-            // Get payment reference
             const reference =
                 paymentReference?.value.trim();
 
@@ -760,7 +518,6 @@ if (paymentForm) {
                 );
 
                 return;
-
             }
 
 
@@ -776,16 +533,10 @@ if (paymentForm) {
 
                 button.textContent =
                     "Submitting...";
-
             }
 
 
             try {
-
-                console.log(
-                    "Submitting enrollment..."
-                );
-
 
                 const response =
                     await fetch(
@@ -794,24 +545,18 @@ if (paymentForm) {
                             method: "POST",
 
                             headers: {
-
                                 "Content-Type":
                                     "application/json",
 
                                 Authorization:
                                     `Bearer ${token}`
-
                             },
 
                             body: JSON.stringify({
-
                                 courseSlug,
-
                                 paymentReference:
                                     reference
-
                             })
-
                         }
                     );
 
@@ -820,28 +565,15 @@ if (paymentForm) {
                     await response.json();
 
 
-                console.log(
-                    "Enrollment submission response:",
-                    result
-                );
-
-
-                // Token expired
                 if (response.status === 401) {
 
-                    localStorage.removeItem(
-                        "token"
-                    );
-
-                    localStorage.removeItem(
-                        "user"
-                    );
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
 
                     window.location.href =
                         "login.html";
 
                     return;
-
                 }
 
 
@@ -854,11 +586,9 @@ if (paymentForm) {
                         result.message ||
                         "Enrollment submission failed."
                     );
-
                 }
 
 
-                // Hide payment form
                 paymentForm.hidden = true;
 
 
@@ -891,7 +621,6 @@ if (paymentForm) {
 
                     button.textContent =
                         "Submit Payment for Verification";
-
                 }
 
             }
@@ -903,7 +632,7 @@ if (paymentForm) {
 
 
 // ========================================
-// START
+// INITIALIZE
 // ========================================
 
 console.log(
@@ -911,25 +640,14 @@ console.log(
 );
 
 console.log(
-    "Selected course:",
-    courseSlug
-);
-
-console.log(
     "Backend API:",
     API_BASE_URL
 );
 
+console.log(
+    "Selected course:",
+    courseSlug
+);
 
-// ========================================
-// INITIALIZE STEP 4 LINK
-// ========================================
-
-setCourseAccessLink();
-
-
-// ========================================
-// LOAD ENROLLMENT PAGE
-// ========================================
 
 loadCourse();
