@@ -1,10 +1,18 @@
 // ========================================
-// Machpadaco Admin Contacts
+// MACHpadaco Global Services
+// Admin Contacts Dashboard
+// ========================================
+
+
+// ========================================
+// API CONFIGURATION
 // ========================================
 
 const API_BASE_URL =
-    (window.location.hostname === "localhost" ||
-     window.location.hostname === "127.0.0.1")
+    (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    )
         ? "http://localhost:5000"
         : "https://machpadacoglobalservices-api.onrender.com";
 
@@ -13,9 +21,11 @@ const API_BASE_URL =
 // AUTHENTICATION
 // ========================================
 
-const token = localStorage.getItem("token");
+const token =
+    localStorage.getItem("token");
 
-const userJson = localStorage.getItem("user");
+const userJson =
+    localStorage.getItem("user");
 
 let user = null;
 
@@ -36,7 +46,7 @@ try {
 
 
 // ========================================
-// PAGE ELEMENTS
+// DOM ELEMENTS
 // ========================================
 
 const contactsSection =
@@ -76,7 +86,16 @@ const enrollmentsMessage =
 
 function ensureAdmin() {
 
-    if (!token || !user || user.role !== "admin") {
+    if (!token) {
+
+        window.location.href =
+            "admin-login.html";
+
+        return false;
+    }
+
+
+    if (!user || user.role !== "admin") {
 
         localStorage.removeItem("token");
 
@@ -87,6 +106,7 @@ function ensureAdmin() {
 
         return false;
     }
+
 
     return true;
 }
@@ -113,6 +133,7 @@ function handleUnauthorized(response) {
         return true;
     }
 
+
     return false;
 }
 
@@ -125,6 +146,7 @@ async function readResponseJson(response) {
 
     const contentType =
         response.headers.get("content-type") || "";
+
 
     if (
         !contentType.includes("application/json")
@@ -139,54 +161,80 @@ async function readResponseJson(response) {
         );
     }
 
+
     return await response.json();
 }
 
 
 // ========================================
-// SHOW CONTACT MESSAGES
+// ESCAPE HTML
+// ========================================
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+// ========================================
+// SHOW MESSAGE
+// ========================================
+
+function showContactsMessage(message) {
+
+    if (!contactsMessage) {
+        return;
+    }
+
+    contactsMessage.textContent =
+        message || "";
+
+    contactsMessage.hidden =
+        !message;
+}
+
+
+// ========================================
+// CLEAR CONTACT MESSAGE
+// ========================================
+
+function clearContactsMessage() {
+
+    if (!contactsMessage) {
+        return;
+    }
+
+    contactsMessage.textContent = "";
+
+    contactsMessage.hidden = true;
+}
+
+
+// ========================================
+// SHOW CONTACTS SECTION
 // ========================================
 
 function showContacts() {
 
     if (contactsSection) {
-
         contactsSection.hidden = false;
-
     }
+
 
     if (enrollmentsSection) {
-
         enrollmentsSection.hidden = true;
-
     }
 
-    if (contactsMessage) {
 
-        contactsMessage.textContent = "";
+    clearContactsMessage();
 
-    }
-
-    if (enrollmentsMessage) {
-
-        enrollmentsMessage.textContent = "";
-
-    }
 
     loadContacts();
-
-}
-
-
-// ========================================
-// SHOW PREMIUM ENROLLMENTS PAGE
-// ========================================
-
-function showEnrollmentsPage() {
-
-    window.location.href =
-        "/admin-enrollments.html";
-
 }
 
 
@@ -200,9 +248,15 @@ async function loadContacts() {
         return;
     }
 
+
     if (!contactsTableBody) {
+        console.error(
+            "contacts-table-body was not found."
+        );
+
         return;
     }
+
 
     contactsTableBody.innerHTML = `
         <tr>
@@ -212,32 +266,33 @@ async function loadContacts() {
         </tr>
     `;
 
-    if (contactsMessage) {
 
-        contactsMessage.textContent = "";
+    clearContactsMessage();
 
-    }
 
     try {
 
-        const response = await fetch(
-            `${API_BASE_URL}/api/contact/admin/contacts`,
-            {
-                method: "GET",
+        const response =
+            await fetch(
+                `${API_BASE_URL}/api/contact/admin/contacts`,
+                {
+                    method: "GET",
 
-                headers: {
-                    Authorization:
-                        `Bearer ${token}`
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`
+                    }
                 }
-            }
-        );
+            );
 
 
         // ========================================
         // AUTHORIZATION CHECK
         // ========================================
 
-        if (handleUnauthorized(response)) {
+        if (
+            handleUnauthorized(response)
+        ) {
             return;
         }
 
@@ -263,7 +318,6 @@ async function loadContacts() {
                 result.message ||
                 "Unable to load contact messages."
             );
-
         }
 
 
@@ -300,59 +354,62 @@ async function loadContacts() {
         // ========================================
 
         contactsTableBody.innerHTML =
-            contacts.map(contact => {
+            contacts
+                .map(contact => {
 
-                const createdAt =
-                    contact.createdAt
-                        ? new Date(
-                            contact.createdAt
-                        ).toLocaleString()
-                        : "";
+                    const createdAt =
+                        contact.createdAt
+                            ? new Date(
+                                contact.createdAt
+                            ).toLocaleString()
+                            : "";
 
 
-                return `
-                    <tr>
+                    return `
+                        <tr>
 
-                        <td>
-                            ${escapeHtml(
-                                contact.name || ""
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    contact.name || ""
+                                )}
+                            </td>
 
-                        <td>
-                            ${escapeHtml(
-                                contact.email || ""
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    contact.email || ""
+                                )}
+                            </td>
 
-                        <td>
-                            ${escapeHtml(
-                                contact.subject || ""
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    contact.subject || ""
+                                )}
+                            </td>
 
-                        <td>
-                            ${escapeHtml(
-                                contact.message || ""
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    contact.message || ""
+                                )}
+                            </td>
 
-                        <td>
-                            ${escapeHtml(
-                                contact.status || "new"
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    contact.status ||
+                                    "pending"
+                                )}
+                            </td>
 
-                        <td>
-                            ${escapeHtml(
-                                createdAt
-                            )}
-                        </td>
+                            <td>
+                                ${escapeHtml(
+                                    createdAt
+                                )}
+                            </td>
 
-                    </tr>
-                `;
+                        </tr>
+                    `;
 
-            }).join("");
+                })
+                .join("");
 
 
     } catch (error) {
@@ -363,10 +420,6 @@ async function loadContacts() {
         );
 
 
-        // ========================================
-        // DISPLAY ERROR
-        // ========================================
-
         contactsTableBody.innerHTML = `
             <tr>
                 <td colspan="6">
@@ -376,466 +429,22 @@ async function loadContacts() {
         `;
 
 
-        if (contactsMessage) {
-
-            contactsMessage.textContent =
-                error.message ||
-                "Unable to load contact messages.";
-
-        }
-
+        showContactsMessage(
+            error.message ||
+            "Unable to load contact messages."
+        );
     }
-
 }
 
 
 // ========================================
-// LOAD PREMIUM ENROLLMENTS
+// SHOW PREMIUM ENROLLMENTS PAGE
 // ========================================
 
-async function loadEnrollments() {
+function showEnrollmentsPage() {
 
-    if (!ensureAdmin()) {
-        return;
-    }
-
-    if (!enrollmentsTableBody) {
-        return;
-    }
-
-    enrollmentsTableBody.innerHTML = `
-        <tr>
-            <td colspan="8">
-                Loading premium enrollments...
-            </td>
-        </tr>
-    `;
-
-    if (enrollmentsMessage) {
-
-        enrollmentsMessage.textContent = "";
-
-    }
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE_URL}/api/enrollments/admin`,
-            {
-                method: "GET",
-
-                headers: {
-                    Authorization:
-                        `Bearer ${token}`
-                }
-            }
-        );
-
-
-        // ========================================
-        // AUTHORIZATION CHECK
-        // ========================================
-
-        if (handleUnauthorized(response)) {
-            return;
-        }
-
-
-        // ========================================
-        // READ SERVER RESPONSE
-        // ========================================
-
-        const result =
-            await readResponseJson(response);
-
-
-        // ========================================
-        // CHECK SERVER RESULT
-        // ========================================
-
-        if (
-            !response.ok ||
-            !result.success
-        ) {
-
-            throw new Error(
-                result.message ||
-                "Unable to load premium enrollments."
-            );
-
-        }
-
-
-        // ========================================
-        // GET ENROLLMENTS
-        // ========================================
-
-        const enrollments =
-            Array.isArray(result.data)
-                ? result.data
-                : [];
-
-
-        // ========================================
-        // NO ENROLLMENTS
-        // ========================================
-
-        if (!enrollments.length) {
-
-            enrollmentsTableBody.innerHTML = `
-                <tr>
-                    <td colspan="8">
-                        No premium enrollments found.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        // ========================================
-        // DISPLAY ENROLLMENTS
-        // ========================================
-
-        enrollmentsTableBody.innerHTML =
-            enrollments.map(enrollment => {
-
-                const createdAt =
-                    enrollment.createdAt
-                        ? new Date(
-                            enrollment.createdAt
-                        ).toLocaleString()
-                        : "";
-
-
-                const userName =
-                    enrollment.user?.name ||
-                    enrollment.user?.fullName ||
-                    "";
-
-
-                const userEmail =
-                    enrollment.user?.email ||
-                    "";
-
-
-                const amount =
-                    Number(
-                        enrollment.amount || 0
-                    ).toLocaleString(
-                        "en-NG",
-                        {
-                            style: "currency",
-                            currency: "NGN"
-                        }
-                    );
-
-
-                return `
-                    <tr>
-
-                        <td>
-                            ${escapeHtml(
-                                userName
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                userEmail
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                enrollment.courseName ||
-                                enrollment.courseSlug ||
-                                ""
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                amount
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                enrollment.paymentReference ||
-                                ""
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                enrollment.status ||
-                                "pending"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                createdAt
-                            )}
-                        </td>
-
-                        <td>
-
-                            <div class="admin-action-buttons">
-
-                                <button
-                                    type="button"
-                                    class="verify-enrollment-btn"
-                                    data-id="${escapeHtml(
-                                        enrollment._id
-                                    )}"
-                                    ${enrollment.status === "verified"
-                                        ? "disabled"
-                                        : ""}
-                                >
-                                    Verify
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    class="reject-enrollment-btn"
-                                    data-id="${escapeHtml(
-                                        enrollment._id
-                                    )}"
-                                    ${enrollment.status === "rejected"
-                                        ? "disabled"
-                                        : ""}
-                                >
-                                    Reject
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-                `;
-
-            }).join("");
-
-
-        // ========================================
-        // ATTACH ACTION BUTTONS
-        // ========================================
-
-        attachEnrollmentActions();
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading enrollments:",
-            error
-        );
-
-
-        enrollmentsTableBody.innerHTML = `
-            <tr>
-                <td colspan="8">
-                    Unable to load premium enrollments.
-                </td>
-            </tr>
-        `;
-
-
-        if (enrollmentsMessage) {
-
-            enrollmentsMessage.textContent =
-                error.message ||
-                "Unable to load premium enrollments.";
-
-        }
-
-    }
-
-}
-
-
-// ========================================
-// UPDATE ENROLLMENT STATUS
-// ========================================
-
-async function updateEnrollment(
-    enrollmentId,
-    status
-) {
-
-    if (!ensureAdmin()) {
-        return;
-    }
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE_URL}/api/enrollments/admin/${encodeURIComponent(
-                enrollmentId
-            )}`,
-            {
-                method: "PATCH",
-
-                headers: {
-
-                    "Content-Type":
-                        "application/json",
-
-                    Authorization:
-                        `Bearer ${token}`
-
-                },
-
-                body: JSON.stringify({
-                    status
-                })
-
-            }
-        );
-
-
-        // ========================================
-        // AUTHORIZATION CHECK
-        // ========================================
-
-        if (handleUnauthorized(response)) {
-            return;
-        }
-
-
-        // ========================================
-        // READ RESPONSE
-        // ========================================
-
-        const result =
-            await readResponseJson(response);
-
-
-        // ========================================
-        // CHECK RESULT
-        // ========================================
-
-        if (
-            !response.ok ||
-            !result.success
-        ) {
-
-            throw new Error(
-                result.message ||
-                "Unable to update enrollment."
-            );
-
-        }
-
-
-        // ========================================
-        // REFRESH ENROLLMENTS
-        // ========================================
-
-        await loadEnrollments();
-
-
-    } catch (error) {
-
-        console.error(
-            "Error updating enrollment:",
-            error
-        );
-
-
-        if (enrollmentsMessage) {
-
-            enrollmentsMessage.textContent =
-                error.message ||
-                "Unable to update enrollment.";
-
-        }
-
-    }
-
-}
-
-
-// ========================================
-// ATTACH ENROLLMENT ACTIONS
-// ========================================
-
-function attachEnrollmentActions() {
-
-    const verifyButtons =
-        document.querySelectorAll(
-            ".verify-enrollment-btn"
-        );
-
-
-    verifyButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            async () => {
-
-                const enrollmentId =
-                    button.dataset.id;
-
-
-                if (!enrollmentId) {
-                    return;
-                }
-
-
-                button.disabled = true;
-
-
-                await updateEnrollment(
-                    enrollmentId,
-                    "verified"
-                );
-
-            }
-        );
-
-    });
-
-
-    const rejectButtons =
-        document.querySelectorAll(
-            ".reject-enrollment-btn"
-        );
-
-
-    rejectButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            async () => {
-
-                const enrollmentId =
-                    button.dataset.id;
-
-
-                if (!enrollmentId) {
-                    return;
-                }
-
-
-                button.disabled = true;
-
-
-                await updateEnrollment(
-                    enrollmentId,
-                    "rejected"
-                );
-
-            }
-        );
-
-    });
-
+    window.location.href =
+        "admin-enrollments.html";
 }
 
 
@@ -851,23 +460,6 @@ function logout() {
 
     window.location.href =
         "admin-login.html";
-
-}
-
-
-// ========================================
-// ESCAPE HTML
-// ========================================
-
-function escapeHtml(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
 }
 
 
@@ -881,7 +473,6 @@ if (messagesViewBtn) {
         "click",
         showContacts
     );
-
 }
 
 
@@ -891,7 +482,6 @@ if (enrollmentsViewBtn) {
         "click",
         showEnrollmentsPage
     );
-
 }
 
 
@@ -899,23 +489,8 @@ if (refreshBtn) {
 
     refreshBtn.addEventListener(
         "click",
-        async () => {
-
-            await loadContacts();
-
-
-            if (
-                enrollmentsSection &&
-                !enrollmentsSection.hidden
-            ) {
-
-                await loadEnrollments();
-
-            }
-
-        }
+        loadContacts
     );
-
 }
 
 
@@ -923,25 +498,26 @@ if (logoutBtn) {
 
     logoutBtn.addEventListener(
         "click",
-        logout
-    );
+        event => {
 
+            event.preventDefault();
+
+            logout();
+        }
+    );
 }
 
 
 // ========================================
 // INITIAL LOAD
+// IMPORTANT:
+// This module is dynamically imported by
+// main.js after DOMContentLoaded.
+// Therefore we MUST NOT add another
+// DOMContentLoaded listener here.
 // ========================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+if (ensureAdmin()) {
 
-        if (!ensureAdmin()) {
-            return;
-        }
-
-        showContacts();
-
-    }
-);
+    showContacts();
+}
