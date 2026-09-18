@@ -46,6 +46,37 @@ try {
 
 
 // ========================================
+// CHECK LOGIN / ADMIN
+// ========================================
+
+function ensureAdmin() {
+
+    if (!token) {
+
+        window.location.href =
+            "/admin-login";
+
+        return false;
+    }
+
+
+    if (!user || user.role !== "admin") {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        window.location.href =
+            "/admin-login";
+
+        return false;
+    }
+
+
+    return true;
+}
+
+
+// ========================================
 // DOM ELEMENTS
 // ========================================
 
@@ -70,45 +101,170 @@ const logoutBtn =
 const contactsTableBody =
     document.getElementById("contacts-table-body");
 
-const enrollmentsTableBody =
-    document.getElementById("enrollments-table-body");
-
 const contactsMessage =
     document.getElementById("contacts-message");
 
-const enrollmentsMessage =
-    document.getElementById("enrollments-message");
+const adminError =
+    document.getElementById("admin-error");
 
 
 // ========================================
-// ENSURE ADMIN
+// ESCAPE HTML
 // ========================================
 
-function ensureAdmin() {
+function escapeHTML(value) {
 
-    if (!token) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
-        window.location.href =
-            "admin-login.html";
-
-        return false;
+        return "";
     }
 
 
-    if (!user || user.role !== "admin") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
-        localStorage.removeItem("token");
 
-        localStorage.removeItem("user");
+// ========================================
+// SHOW ERROR
+// ========================================
 
-        window.location.href =
-            "admin-login.html";
+function showError(message) {
 
-        return false;
+    if (adminError) {
+
+        adminError.textContent =
+            message || "";
+
+        adminError.hidden =
+            !message;
     }
 
 
-    return true;
+    if (contactsMessage) {
+
+        contactsMessage.textContent =
+            message || "";
+
+        contactsMessage.hidden =
+            !message;
+    }
+}
+
+
+// ========================================
+// CLEAR ERROR
+// ========================================
+
+function clearError() {
+
+    if (adminError) {
+
+        adminError.textContent = "";
+
+        adminError.hidden = true;
+    }
+
+
+    if (contactsMessage) {
+
+        contactsMessage.textContent = "";
+
+        contactsMessage.hidden = true;
+    }
+}
+
+
+// ========================================
+// FORMAT DATE
+// ========================================
+
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+
+        return "N/A";
+    }
+
+
+    const date =
+        new Date(dateValue);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "N/A";
+    }
+
+
+    return date.toLocaleString();
+}
+
+
+// ========================================
+// STATUS SELECT
+// ========================================
+
+function createStatusSelect(contact) {
+
+    const currentStatus =
+        contact.status || "pending";
+
+
+    return `
+        <select
+            class="contact-status-select"
+            data-contact-id="${escapeHTML(contact._id)}"
+            data-previous-status="${escapeHTML(currentStatus)}"
+            aria-label="Change contact status"
+        >
+
+            <option
+                value="pending"
+                ${
+                    currentStatus === "pending"
+                        ? "selected"
+                        : ""
+                }
+            >
+                Pending
+            </option>
+
+            <option
+                value="reviewed"
+                ${
+                    currentStatus === "reviewed"
+                        ? "selected"
+                        : ""
+                }
+            >
+                Reviewed
+            </option>
+
+            <option
+                value="contacted"
+                ${
+                    currentStatus === "contacted"
+                        ? "selected"
+                        : ""
+                }
+            >
+                Contacted
+            </option>
+
+        </select>
+    `;
 }
 
 
@@ -124,117 +280,16 @@ function handleUnauthorized(response) {
     ) {
 
         localStorage.removeItem("token");
-
         localStorage.removeItem("user");
 
         window.location.href =
-            "admin-login.html";
+            "/admin-login";
 
         return true;
     }
 
 
     return false;
-}
-
-
-// ========================================
-// SAFELY READ JSON RESPONSE
-// ========================================
-
-async function readResponseJson(response) {
-
-    const contentType =
-        response.headers.get("content-type") || "";
-
-
-    if (
-        !contentType.includes("application/json")
-    ) {
-
-        const text =
-            await response.text();
-
-        throw new Error(
-            text ||
-            `Server returned HTTP ${response.status}.`
-        );
-    }
-
-
-    return await response.json();
-}
-
-
-// ========================================
-// ESCAPE HTML
-// ========================================
-
-function escapeHtml(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-// ========================================
-// SHOW MESSAGE
-// ========================================
-
-function showContactsMessage(message) {
-
-    if (!contactsMessage) {
-        return;
-    }
-
-    contactsMessage.textContent =
-        message || "";
-
-    contactsMessage.hidden =
-        !message;
-}
-
-
-// ========================================
-// CLEAR CONTACT MESSAGE
-// ========================================
-
-function clearContactsMessage() {
-
-    if (!contactsMessage) {
-        return;
-    }
-
-    contactsMessage.textContent = "";
-
-    contactsMessage.hidden = true;
-}
-
-
-// ========================================
-// SHOW CONTACTS SECTION
-// ========================================
-
-function showContacts() {
-
-    if (contactsSection) {
-        contactsSection.hidden = false;
-    }
-
-
-    if (enrollmentsSection) {
-        enrollmentsSection.hidden = true;
-    }
-
-
-    clearContactsMessage();
-
-
-    loadContacts();
 }
 
 
@@ -249,7 +304,11 @@ async function loadContacts() {
     }
 
 
+    clearError();
+
+
     if (!contactsTableBody) {
+
         console.error(
             "contacts-table-body was not found."
         );
@@ -258,16 +317,20 @@ async function loadContacts() {
     }
 
 
+    // ========================================
+    // LOADING MESSAGE
+    // ========================================
+
     contactsTableBody.innerHTML = `
         <tr>
-            <td colspan="6">
-                Loading contact messages...
+            <td
+                colspan="6"
+                style="text-align: center;"
+            >
+                Loading messages...
             </td>
         </tr>
     `;
-
-
-    clearContactsMessage();
 
 
     try {
@@ -293,6 +356,7 @@ async function loadContacts() {
         if (
             handleUnauthorized(response)
         ) {
+
             return;
         }
 
@@ -302,7 +366,7 @@ async function loadContacts() {
         // ========================================
 
         const result =
-            await readResponseJson(response);
+            await response.json();
 
 
         // ========================================
@@ -316,7 +380,7 @@ async function loadContacts() {
 
             throw new Error(
                 result.message ||
-                "Unable to load contact messages."
+                "Failed to retrieve contact messages."
             );
         }
 
@@ -335,11 +399,14 @@ async function loadContacts() {
         // NO CONTACTS
         // ========================================
 
-        if (!contacts.length) {
+        if (contacts.length === 0) {
 
             contactsTableBody.innerHTML = `
                 <tr>
-                    <td colspan="6">
+                    <td
+                        colspan="6"
+                        style="text-align: center;"
+                    >
                         No contact messages found.
                     </td>
                 </tr>
@@ -351,58 +418,95 @@ async function loadContacts() {
 
         // ========================================
         // DISPLAY CONTACTS
+        //
+        // COLUMN ORDER:
+        // DATE
+        // NAME
+        // EMAIL
+        // SERVICE
+        // MESSAGE
+        // STATUS
         // ========================================
 
         contactsTableBody.innerHTML =
             contacts
                 .map(contact => {
 
-                    const createdAt =
-                        contact.createdAt
-                            ? new Date(
-                                contact.createdAt
-                            ).toLocaleString()
-                            : "";
+                    const name =
+                        contact.name ||
+                        contact.fullName ||
+                        "N/A";
+
+
+                    const email =
+                        contact.email ||
+                        "N/A";
+
+
+                    const service =
+                        contact.service ||
+                        "N/A";
+
+
+                    const message =
+                        contact.message ||
+                        "";
+
+
+                    const date =
+                        formatDate(
+                            contact.createdAt
+                        );
 
 
                     return `
                         <tr>
 
+                            <!-- DATE -->
                             <td>
-                                ${escapeHtml(
-                                    contact.name || ""
-                                )}
+                                ${escapeHTML(date)}
                             </td>
 
+
+                            <!-- NAME -->
                             <td>
-                                ${escapeHtml(
-                                    contact.email || ""
-                                )}
+                                <strong>
+                                    ${escapeHTML(name)}
+                                </strong>
                             </td>
 
+
+                            <!-- EMAIL -->
                             <td>
-                                ${escapeHtml(
-                                    contact.subject || ""
-                                )}
+                                ${
+                                    email !== "N/A"
+                                        ? `
+                                            <a
+                                                href="mailto:${escapeHTML(email)}"
+                                            >
+                                                ${escapeHTML(email)}
+                                            </a>
+                                          `
+                                        : "N/A"
+                                }
                             </td>
 
+
+                            <!-- SERVICE -->
                             <td>
-                                ${escapeHtml(
-                                    contact.message || ""
-                                )}
+                                ${escapeHTML(service)}
                             </td>
 
+
+                            <!-- MESSAGE -->
                             <td>
-                                ${escapeHtml(
-                                    contact.status ||
-                                    "pending"
-                                )}
+                                ${escapeHTML(message)}
                             </td>
 
+
+                            <!-- STATUS -->
                             <td>
-                                ${escapeHtml(
-                                    createdAt
-                                )}
+                                ${createStatusSelect(contact)}
                             </td>
 
                         </tr>
@@ -412,59 +516,235 @@ async function loadContacts() {
                 .join("");
 
 
+        // ========================================
+        // ATTACH STATUS EVENTS
+        // ========================================
+
+        const statusSelects =
+            document.querySelectorAll(
+                ".contact-status-select"
+            );
+
+
+        statusSelects.forEach(select => {
+
+            select.addEventListener(
+                "change",
+                handleStatusChange
+            );
+
+        });
+
+
     } catch (error) {
 
         console.error(
-            "Error loading contacts:",
+            "Admin contacts error:",
             error
         );
 
 
         contactsTableBody.innerHTML = `
             <tr>
-                <td colspan="6">
+                <td
+                    colspan="6"
+                    style="text-align: center;"
+                >
                     Unable to load contact messages.
                 </td>
             </tr>
         `;
 
 
-        showContactsMessage(
+        showError(
             error.message ||
-            "Unable to load contact messages."
+            "Failed to load contact messages."
         );
     }
 }
 
 
 // ========================================
-// SHOW PREMIUM ENROLLMENTS PAGE
+// UPDATE CONTACT STATUS
+// ========================================
+
+async function handleStatusChange(event) {
+
+    const select =
+        event.target;
+
+
+    const contactId =
+        select.dataset.contactId;
+
+
+    const newStatus =
+        select.value;
+
+
+    const previousStatus =
+        select.dataset.previousStatus ||
+        "pending";
+
+
+    if (!contactId) {
+
+        console.error(
+            "Contact ID is missing."
+        );
+
+        return;
+    }
+
+
+    select.disabled = true;
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/api/contact/admin/contacts/${contactId}`,
+                {
+                    method: "PATCH",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+
+                        Authorization:
+                            `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+                        status: newStatus
+                    })
+                }
+            );
+
+
+        // ========================================
+        // AUTHORIZATION CHECK
+        // ========================================
+
+        if (
+            handleUnauthorized(response)
+        ) {
+
+            return;
+        }
+
+
+        // ========================================
+        // READ RESPONSE
+        // ========================================
+
+        const result =
+            await response.json();
+
+
+        // ========================================
+        // CHECK RESULT
+        // ========================================
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Failed to update contact status."
+            );
+        }
+
+
+        // ========================================
+        // SAVE SUCCESSFUL STATUS
+        // ========================================
+
+        select.dataset.previousStatus =
+            newStatus;
+
+
+        clearError();
+
+
+    } catch (error) {
+
+        console.error(
+            "Status update error:",
+            error
+        );
+
+
+        select.value =
+            previousStatus;
+
+
+        showError(
+            error.message ||
+            "Unable to update contact status."
+        );
+
+
+    } finally {
+
+        select.disabled = false;
+    }
+}
+
+
+// ========================================
+// SHOW CONTACTS
+// ========================================
+
+function showContacts() {
+
+    if (contactsSection) {
+
+        contactsSection.hidden =
+            false;
+    }
+
+
+    if (enrollmentsSection) {
+
+        enrollmentsSection.hidden =
+            true;
+    }
+
+
+    loadContacts();
+}
+
+
+// ========================================
+// PREMIUM ENROLLMENTS
 // ========================================
 
 function showEnrollmentsPage() {
 
     window.location.href =
-        "admin-enrollments.html";
+        "/admin-enrollments.html";
 }
 
 
 // ========================================
-// LOGOUT
+// REFRESH BUTTON
 // ========================================
 
-function logout() {
+if (refreshBtn) {
 
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("user");
-
-    window.location.href =
-        "admin-login.html";
+    refreshBtn.addEventListener(
+        "click",
+        loadContacts
+    );
 }
 
 
 // ========================================
-// EVENT LISTENERS
+// CONTACT MESSAGES BUTTON
 // ========================================
 
 if (messagesViewBtn) {
@@ -476,6 +756,10 @@ if (messagesViewBtn) {
 }
 
 
+// ========================================
+// PREMIUM ENROLLMENTS BUTTON
+// ========================================
+
 if (enrollmentsViewBtn) {
 
     enrollmentsViewBtn.addEventListener(
@@ -485,14 +769,9 @@ if (enrollmentsViewBtn) {
 }
 
 
-if (refreshBtn) {
-
-    refreshBtn.addEventListener(
-        "click",
-        loadContacts
-    );
-}
-
+// ========================================
+// LOGOUT
+// ========================================
 
 if (logoutBtn) {
 
@@ -502,7 +781,14 @@ if (logoutBtn) {
 
             event.preventDefault();
 
-            logout();
+
+            localStorage.removeItem("token");
+
+            localStorage.removeItem("user");
+
+
+            window.location.href =
+                "/admin-login";
         }
     );
 }
@@ -510,11 +796,14 @@ if (logoutBtn) {
 
 // ========================================
 // INITIAL LOAD
+//
 // IMPORTANT:
-// This module is dynamically imported by
-// main.js after DOMContentLoaded.
-// Therefore we MUST NOT add another
-// DOMContentLoaded listener here.
+// main.js dynamically imports this
+// module after DOMContentLoaded.
+//
+// Therefore we initialize immediately.
+// DO NOT wrap this in another
+// DOMContentLoaded listener.
 // ========================================
 
 if (ensureAdmin()) {
