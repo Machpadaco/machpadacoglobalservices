@@ -79,6 +79,7 @@ function ensureAdmin() {
     if (!token || !user || user.role !== "admin") {
 
         localStorage.removeItem("token");
+
         localStorage.removeItem("user");
 
         window.location.href =
@@ -88,6 +89,57 @@ function ensureAdmin() {
     }
 
     return true;
+}
+
+
+// ========================================
+// HANDLE UNAUTHORIZED RESPONSE
+// ========================================
+
+function handleUnauthorized(response) {
+
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
+
+        localStorage.removeItem("token");
+
+        localStorage.removeItem("user");
+
+        window.location.href =
+            "admin-login.html";
+
+        return true;
+    }
+
+    return false;
+}
+
+
+// ========================================
+// SAFELY READ JSON RESPONSE
+// ========================================
+
+async function readResponseJson(response) {
+
+    const contentType =
+        response.headers.get("content-type") || "";
+
+    if (
+        !contentType.includes("application/json")
+    ) {
+
+        const text =
+            await response.text();
+
+        throw new Error(
+            text ||
+            `Server returned HTTP ${response.status}.`
+        );
+    }
+
+    return await response.json();
 }
 
 
@@ -174,29 +226,38 @@ async function loadContacts() {
                 method: "GET",
 
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization:
+                        `Bearer ${token}`
                 }
             }
         );
 
-        if (
-            response.status === 401 ||
-            response.status === 403
-        ) {
 
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
+        // ========================================
+        // AUTHORIZATION CHECK
+        // ========================================
 
-            window.location.href =
-                "admin-login.html";
-
+        if (handleUnauthorized(response)) {
             return;
         }
 
-        const result =
-            await response.json();
 
-        if (!response.ok || !result.success) {
+        // ========================================
+        // READ SERVER RESPONSE
+        // ========================================
+
+        const result =
+            await readResponseJson(response);
+
+
+        // ========================================
+        // CHECK SERVER RESULT
+        // ========================================
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
             throw new Error(
                 result.message ||
@@ -205,8 +266,20 @@ async function loadContacts() {
 
         }
 
+
+        // ========================================
+        // GET CONTACTS
+        // ========================================
+
         const contacts =
-            result.data || [];
+            Array.isArray(result.data)
+                ? result.data
+                : [];
+
+
+        // ========================================
+        // NO CONTACTS
+        // ========================================
 
         if (!contacts.length) {
 
@@ -221,6 +294,11 @@ async function loadContacts() {
             return;
         }
 
+
+        // ========================================
+        // DISPLAY CONTACTS
+        // ========================================
+
         contactsTableBody.innerHTML =
             contacts.map(contact => {
 
@@ -230,6 +308,7 @@ async function loadContacts() {
                             contact.createdAt
                         ).toLocaleString()
                         : "";
+
 
                 return `
                     <tr>
@@ -275,12 +354,18 @@ async function loadContacts() {
 
             }).join("");
 
+
     } catch (error) {
 
         console.error(
             "Error loading contacts:",
             error
         );
+
+
+        // ========================================
+        // DISPLAY ERROR
+        // ========================================
 
         contactsTableBody.innerHTML = `
             <tr>
@@ -289,6 +374,7 @@ async function loadContacts() {
                 </td>
             </tr>
         `;
+
 
         if (contactsMessage) {
 
@@ -339,29 +425,38 @@ async function loadEnrollments() {
                 method: "GET",
 
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization:
+                        `Bearer ${token}`
                 }
             }
         );
 
-        if (
-            response.status === 401 ||
-            response.status === 403
-        ) {
 
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
+        // ========================================
+        // AUTHORIZATION CHECK
+        // ========================================
 
-            window.location.href =
-                "admin-login.html";
-
+        if (handleUnauthorized(response)) {
             return;
         }
 
-        const result =
-            await response.json();
 
-        if (!response.ok || !result.success) {
+        // ========================================
+        // READ SERVER RESPONSE
+        // ========================================
+
+        const result =
+            await readResponseJson(response);
+
+
+        // ========================================
+        // CHECK SERVER RESULT
+        // ========================================
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
             throw new Error(
                 result.message ||
@@ -370,8 +465,20 @@ async function loadEnrollments() {
 
         }
 
+
+        // ========================================
+        // GET ENROLLMENTS
+        // ========================================
+
         const enrollments =
-            result.data || [];
+            Array.isArray(result.data)
+                ? result.data
+                : [];
+
+
+        // ========================================
+        // NO ENROLLMENTS
+        // ========================================
 
         if (!enrollments.length) {
 
@@ -386,6 +493,11 @@ async function loadEnrollments() {
             return;
         }
 
+
+        // ========================================
+        // DISPLAY ENROLLMENTS
+        // ========================================
+
         enrollmentsTableBody.innerHTML =
             enrollments.map(enrollment => {
 
@@ -396,14 +508,17 @@ async function loadEnrollments() {
                         ).toLocaleString()
                         : "";
 
+
                 const userName =
                     enrollment.user?.name ||
                     enrollment.user?.fullName ||
                     "";
 
+
                 const userEmail =
                     enrollment.user?.email ||
                     "";
+
 
                 const amount =
                     Number(
@@ -415,6 +530,7 @@ async function loadEnrollments() {
                             currency: "NGN"
                         }
                     );
+
 
                 return `
                     <tr>
@@ -482,6 +598,7 @@ async function loadEnrollments() {
                                     Verify
                                 </button>
 
+
                                 <button
                                     type="button"
                                     class="reject-enrollment-btn"
@@ -504,7 +621,13 @@ async function loadEnrollments() {
 
             }).join("");
 
+
+        // ========================================
+        // ATTACH ACTION BUTTONS
+        // ========================================
+
         attachEnrollmentActions();
+
 
     } catch (error) {
 
@@ -513,6 +636,7 @@ async function loadEnrollments() {
             error
         );
 
+
         enrollmentsTableBody.innerHTML = `
             <tr>
                 <td colspan="8">
@@ -520,6 +644,7 @@ async function loadEnrollments() {
                 </td>
             </tr>
         `;
+
 
         if (enrollmentsMessage) {
 
@@ -557,37 +682,48 @@ async function updateEnrollment(
                 method: "PATCH",
 
                 headers: {
+
                     "Content-Type":
                         "application/json",
 
                     Authorization:
                         `Bearer ${token}`
+
                 },
 
                 body: JSON.stringify({
                     status
                 })
+
             }
         );
 
-        if (
-            response.status === 401 ||
-            response.status === 403
-        ) {
 
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
+        // ========================================
+        // AUTHORIZATION CHECK
+        // ========================================
 
-            window.location.href =
-                "admin-login.html";
-
+        if (handleUnauthorized(response)) {
             return;
         }
 
-        const result =
-            await response.json();
 
-        if (!response.ok || !result.success) {
+        // ========================================
+        // READ RESPONSE
+        // ========================================
+
+        const result =
+            await readResponseJson(response);
+
+
+        // ========================================
+        // CHECK RESULT
+        // ========================================
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
 
             throw new Error(
                 result.message ||
@@ -596,7 +732,13 @@ async function updateEnrollment(
 
         }
 
+
+        // ========================================
+        // REFRESH ENROLLMENTS
+        // ========================================
+
         await loadEnrollments();
+
 
     } catch (error) {
 
@@ -604,6 +746,7 @@ async function updateEnrollment(
             "Error updating enrollment:",
             error
         );
+
 
         if (enrollmentsMessage) {
 
@@ -629,6 +772,7 @@ function attachEnrollmentActions() {
             ".verify-enrollment-btn"
         );
 
+
     verifyButtons.forEach(button => {
 
         button.addEventListener(
@@ -638,9 +782,14 @@ function attachEnrollmentActions() {
                 const enrollmentId =
                     button.dataset.id;
 
+
                 if (!enrollmentId) {
                     return;
                 }
+
+
+                button.disabled = true;
+
 
                 await updateEnrollment(
                     enrollmentId,
@@ -658,6 +807,7 @@ function attachEnrollmentActions() {
             ".reject-enrollment-btn"
         );
 
+
     rejectButtons.forEach(button => {
 
         button.addEventListener(
@@ -667,9 +817,14 @@ function attachEnrollmentActions() {
                 const enrollmentId =
                     button.dataset.id;
 
+
                 if (!enrollmentId) {
                     return;
                 }
+
+
+                button.disabled = true;
+
 
                 await updateEnrollment(
                     enrollmentId,
@@ -691,6 +846,7 @@ function attachEnrollmentActions() {
 function logout() {
 
     localStorage.removeItem("token");
+
     localStorage.removeItem("user");
 
     window.location.href =
@@ -743,16 +899,17 @@ if (refreshBtn) {
 
     refreshBtn.addEventListener(
         "click",
-        () => {
+        async () => {
 
-            loadContacts();
+            await loadContacts();
+
 
             if (
                 enrollmentsSection &&
                 !enrollmentsSection.hidden
             ) {
 
-                loadEnrollments();
+                await loadEnrollments();
 
             }
 
