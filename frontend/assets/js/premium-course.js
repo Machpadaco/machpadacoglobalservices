@@ -1,164 +1,475 @@
 // ========================================
 // MACHpadaco Global Services
-// Protected Premium Course Access
+// Protected Premium Course Controller
 // ========================================
 
 
 // ========================================
-// API
+// API CONFIGURATION
 // ========================================
-
-// Local development
-// → http://localhost:5000
-//
-// Live Render website
-// → https://machpadacoglobalservices-api.onrender.com
 
 const API_BASE_URL =
-    (window.location.hostname === "localhost" ||
-     window.location.hostname === "127.0.0.1")
+    (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    )
         ? "http://localhost:5000"
         : "https://machpadacoglobalservices-api.onrender.com";
 
-const API_URL = `${API_BASE_URL}/api/enrollments`;
 
-
-const token = localStorage.getItem("token");
-
-// Get the course slug from the HTML page
-const courseSlug = document.body.dataset.courseSlug;
-
-// Course content area
-const courseContent = document.querySelector("main");
+const API_BASE =
+    `${API_BASE_URL}/api/enrollments`;
 
 
 // ========================================
-// PUBLIC COURSE PAGE
+// PAGE ELEMENTS
 // ========================================
 
-// The public premium/enrollment page uses the same
-// course slug as the protected course.
+const app =
+    document.getElementById(
+        "premiumCourseApp"
+    );
+
+const loading =
+    document.getElementById(
+        "premiumCourseLoading"
+    );
+
+const courseTitle =
+    document.getElementById(
+        "courseTitle"
+    );
+
+const courseIntro =
+    document.getElementById(
+        "courseIntro"
+    );
+
+
+// ========================================
+// GET COURSE SLUG
+// ========================================
 //
-// Example:
-// property-management-virtual-assistance-premium
-// becomes:
-// property-management-virtual-assistance-premium.html
+// IMPORTANT:
+// The protected course pages use:
+// data-course-slug="..."
+//
+// We also keep the URL ?course=... option
+// as a fallback.
+// ========================================
 
-const publicCoursePage = courseSlug
-    ? `${courseSlug}.html`
-    : "community.html";
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const courseSlug =
+    document.body?.dataset?.courseSlug ||
+    params.get("course");
 
 
 // ========================================
-// HIDE COURSE CONTENT WHILE ACCESS IS CHECKED
+// CURRENT PAGE URL
 // ========================================
 
-if (courseContent) {
-    courseContent.style.display = "none";
+function currentPageUrl() {
+
+    return (
+        `${window.location.pathname}` +
+        `${window.location.search}`
+    );
 }
 
 
 // ========================================
-// CHECK LOGIN
+// REDIRECT TO LOGIN
 // ========================================
 
-if (!token) {
+function redirectToLogin() {
 
-    const nextPage =
-        window.location.pathname +
-        window.location.search;
+    const next =
+        encodeURIComponent(
+            currentPageUrl()
+        );
+
 
     window.location.href =
-        `login.html?next=${encodeURIComponent(nextPage)}`;
-
+        `login.html?next=${next}`;
 }
 
 
 // ========================================
-// CHECK PAID COURSE ACCESS
+// REDIRECT TO ENROLLMENT
+// ========================================
+
+function redirectToEnrollment() {
+
+    const next =
+        encodeURIComponent(
+            courseSlug || ""
+        );
+
+
+    window.location.href =
+        `enroll.html?course=${next}`;
+}
+
+
+// ========================================
+// REDIRECT TO COMMUNITY
+// ========================================
+
+function redirectToCommunity() {
+
+    window.location.href =
+        "join-community.html#premium-training";
+}
+
+
+// ========================================
+// SHOW LOADING
+// ========================================
+
+function showLoading() {
+
+    if (loading) {
+
+        loading.hidden =
+            false;
+    }
+
+
+    if (app) {
+
+        app.hidden =
+            true;
+    }
+}
+
+
+// ========================================
+// SHOW COURSE
+// ========================================
+
+function showCourse() {
+
+    if (loading) {
+
+        loading.hidden =
+            true;
+    }
+
+
+    if (app) {
+
+        app.hidden =
+            false;
+    }
+}
+
+
+// ========================================
+// CLEAR SESSION
+// ========================================
+
+function clearSession() {
+
+    localStorage.removeItem(
+        "token"
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
+}
+
+
+// ========================================
+// CHECK COURSE ACCESS
 // ========================================
 
 async function checkCourseAccess() {
 
+    showLoading();
+
+
+    // ========================================
+    // VERIFY COURSE SLUG
+    // ========================================
+
     if (!courseSlug) {
 
-        console.error("Course slug is missing.");
-
-        alert(
-            "Unable to identify this course. Please return to the course page."
+        console.error(
+            "PREMIUM COURSE ERROR: No course slug found."
         );
 
-        window.location.href =
-            "community.html";
+
+        redirectToCommunity();
 
         return;
     }
 
-    try {
 
-        const response = await fetch(
-            `${API_URL}/access/${courseSlug}`,
-            {
-                method: "GET",
+    console.log(
+        "Protected course slug:",
+        courseSlug
+    );
 
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            }
+
+    // ========================================
+    // VERIFY LOGIN
+    // ========================================
+
+    const token =
+        localStorage.getItem(
+            "token"
         );
 
 
-        const data = await response.json();
+    if (!token) {
+
+        redirectToLogin();
+
+        return;
+    }
+
+
+    try {
+
+        // ========================================
+        // CHECK ACCESS WITH BACKEND
+        // ========================================
+
+        const response =
+            await fetch(
+                `${API_BASE}/access/${encodeURIComponent(courseSlug)}`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        Authorization:
+                            `Bearer ${token}`
+                    }
+                }
+            );
 
 
         // ========================================
-        // ACCESS GRANTED
+        // READ RESPONSE
+        // ========================================
+
+        let data = {};
+
+
+        try {
+
+            data =
+                await response.json();
+
+        } catch (jsonError) {
+
+            console.warn(
+                "Course access response was not valid JSON.",
+                jsonError
+            );
+
+        }
+
+
+        // ========================================
+        // AUTHENTICATION FAILURE
         // ========================================
 
         if (
-            response.ok &&
-            data.success &&
-            data.hasAccess
+            response.status === 401
         ) {
 
-            if (courseContent) {
-                courseContent.style.display = "";
-            }
+            clearSession();
+
+            redirectToLogin();
 
             return;
         }
 
 
         // ========================================
-        // ACCESS DENIED
+        // COURSE NOT FOUND
         // ========================================
 
-        alert(
-            "You do not have verified access to this course. Please complete your enrollment and payment."
-        );
+        if (
+            response.status === 404
+        ) {
 
-        window.location.href =
-            publicCoursePage;
+            console.error(
+                "Course not found:",
+                courseSlug,
+                data.message
+            );
+
+
+            if (courseIntro) {
+
+                courseIntro.textContent =
+                    data.message ||
+                    "The selected course could not be found.";
+            }
+
+
+            if (loading) {
+
+                loading.hidden =
+                    true;
+            }
+
+
+            if (app) {
+
+                app.hidden =
+                    false;
+            }
+
+
+            return;
+        }
+
+
+        // ========================================
+        // OTHER SERVER ERROR
+        // ========================================
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to verify course access."
+            );
+        }
+
+
+        // ========================================
+        // ACCESS NOT GRANTED
+        // ========================================
+
+        if (!data.hasAccess) {
+
+            redirectToEnrollment();
+
+            return;
+        }
+
+
+        // ========================================
+        // VERIFIED ACCESS
+        // ========================================
+
+        if (courseTitle) {
+
+            courseTitle.textContent =
+                data.course?.name ||
+                "Premium Course";
+        }
+
+
+        if (courseIntro) {
+
+            courseIntro.textContent =
+                "You have verified access to this premium learning area. Continue your structured training from here.";
+        }
+
+
+        // ========================================
+        // DISPLAY COURSE
+        // ========================================
+
+        showCourse();
+
 
     } catch (error) {
 
         console.error(
-            "COURSE ACCESS ERROR:",
+            "PREMIUM COURSE ACCESS ERROR:",
             error
         );
 
-        alert(
-            "Unable to verify your course access. Please try again."
+
+        if (courseIntro) {
+
+            courseIntro.textContent =
+                "We could not verify your course access. Please try again.";
+        }
+
+
+        if (loading) {
+
+            loading.hidden =
+                true;
+        }
+
+
+        if (app) {
+
+            app.hidden =
+                false;
+        }
+
+
+        // ========================================
+        // RETRY BUTTON
+        // ========================================
+
+        const retryButton =
+            document.createElement(
+                "button"
+            );
+
+
+        retryButton.type =
+            "button";
+
+
+        retryButton.className =
+            "community-btn community-btn-primary";
+
+
+        retryButton.textContent =
+            "Try Again";
+
+
+        retryButton.addEventListener(
+            "click",
+            checkCourseAccess
         );
 
-        window.location.href =
-            publicCoursePage;
+
+        const actionArea =
+            document.querySelector(
+                ".premium-course-actions"
+            );
+
+
+        if (
+            actionArea &&
+            !actionArea.querySelector(
+                ".access-retry-button"
+            )
+        ) {
+
+            retryButton.classList.add(
+                "access-retry-button"
+            );
+
+
+            actionArea.prepend(
+                retryButton
+            );
+        }
     }
 }
 
 
 // ========================================
-// START ACCESS CHECK
+// START
 // ========================================
 
 checkCourseAccess();
