@@ -699,3 +699,88 @@ body.admin-contacts-page {
     }
 
 }
+
+/* ========================================
+   CONTACT TABLE - DELETE BUTTON
+======================================== */
+
+.delete-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    min-width: 78px;
+
+    border: 1px solid #dc3545;
+    border-radius: 6px;
+
+    background: #dc3545;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Hover */
+
+.delete-contact-btn:hover {
+    background: #bb2d3b;
+    border-color: #b02a37;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Click */
+
+.delete-contact-btn:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* Disabled / Deleting */
+
+.delete-contact-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* Delete column */
+
+.contacts-table th:last-child,
+.contacts-table td:last-child {
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+/* Keep the delete action compact */
+
+.contacts-table td:last-child {
+    width: 100px;
+}
