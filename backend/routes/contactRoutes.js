@@ -42,7 +42,8 @@ router.post('/', async (req, res) => {
 
             return res.status(400).json({
                 success: false,
-                message: 'Name, email, service and message are required.'
+                message:
+                    'Name, email, service and message are required.'
             });
 
         }
@@ -243,6 +244,103 @@ router.patch(
 
                 message:
                     'Failed to update status.'
+
+            });
+
+        }
+
+    }
+);
+
+
+// ====================================================
+// PROTECTED ADMIN ROUTE: Delete Contact Message
+// DELETE /api/contact/admin/contacts/:id
+// ====================================================
+
+router.delete(
+    '/admin/contacts/:id',
+    authMiddleware,
+    adminMiddleware,
+    async (req, res) => {
+
+        try {
+
+            const deletedContact =
+                await Contact.findByIdAndDelete(
+                    req.params.id
+                );
+
+
+            // ====================================================
+            // CONTACT NOT FOUND
+            // ====================================================
+
+            if (!deletedContact) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        'Contact message not found.'
+
+                });
+
+            }
+
+
+            // ====================================================
+            // SUCCESS RESPONSE
+            // ====================================================
+
+            res.status(200).json({
+
+                success: true,
+
+                message:
+                    'Contact message deleted successfully.'
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                'Delete Contact Error:',
+                error
+            );
+
+
+            // ====================================================
+            // INVALID MONGODB ID
+            // ====================================================
+
+            if (
+                error.name === 'CastError'
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        'Invalid contact ID.'
+
+                });
+
+            }
+
+
+            // ====================================================
+            // SERVER ERROR
+            // ====================================================
+
+            res.status(500).json({
+
+                success: false,
+
+                message:
+                    'Failed to delete contact message.'
 
             });
 
