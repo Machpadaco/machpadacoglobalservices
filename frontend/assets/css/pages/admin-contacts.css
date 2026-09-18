@@ -6,7 +6,7 @@
 
 /* ========================================
    ADMIN PAGE
-   ======================================== */
+======================================== */
 
 body.admin-contacts-page {
 
@@ -24,7 +24,7 @@ body.admin-contacts-page {
 
 /* ========================================
    ADMIN HEADER
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .admin-header {
 
@@ -56,7 +56,7 @@ body.admin-contacts-page {
 
 /* ========================================
    LOGOUT BUTTON
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .logout-btn {
 
@@ -86,7 +86,7 @@ body.admin-contacts-page {
 
 /* ========================================
    MAIN CONTAINER
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .admin-container {
 
@@ -104,7 +104,7 @@ body.admin-contacts-page {
 
 /* ========================================
    CONTROLS
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .controls-bar {
 
@@ -160,7 +160,7 @@ body.admin-contacts-page {
 
 /* ========================================
    ADMIN CONTROLS
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .admin-controls {
 
@@ -176,7 +176,7 @@ body.admin-contacts-page {
 
 /* ========================================
    REFRESH BUTTON
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .refresh-btn {
 
@@ -216,7 +216,7 @@ body.admin-contacts-page {
 
 /* ========================================
    CONTACT TABLE WRAPPER
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table-wrapper {
 
@@ -238,13 +238,13 @@ body.admin-contacts-page {
 
 /* ========================================
    CONTACT TABLE
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table {
 
     width: 100%;
 
-    min-width: 1050px;
+    min-width: 1250px;
 
     border-collapse: collapse;
 
@@ -258,7 +258,7 @@ body.admin-contacts-page {
 
 /* ========================================
    TABLE CELLS
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table th,
 .admin-contacts-page .contacts-table td {
@@ -279,13 +279,13 @@ body.admin-contacts-page {
 
 /* ========================================
    TABLE HEADER
-   ======================================== */
+======================================== */
 
-.admin-contacts-page .contacts-table th {
+.admin-contacts-page .contacts-table thead th {
 
-    background-color: #102a43;
+    background-color: #102a43 !important;
 
-    color: #ffffff;
+    color: #ffffff !important;
 
     font-size: 0.78rem;
 
@@ -301,7 +301,7 @@ body.admin-contacts-page {
 
 /* ========================================
    COLUMN WIDTHS
-   ======================================== */
+======================================== */
 
 /* DATE */
 
@@ -367,9 +367,40 @@ body.admin-contacts-page {
 }
 
 
+/* DELETE */
+
+.admin-contacts-page .contacts-table th:nth-child(7),
+.admin-contacts-page .contacts-table td:nth-child(7) {
+
+    width: 110px;
+
+    min-width: 110px;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   DELETE HEADER
+======================================== */
+
+.admin-contacts-page .contacts-table thead th:nth-child(7) {
+
+    background-color: #102a43 !important;
+
+    color: #ffffff !important;
+
+    text-align: center !important;
+
+    font-weight: 700;
+}
+
+
 /* ========================================
    TABLE BODY
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table tbody tr {
 
@@ -393,7 +424,7 @@ body.admin-contacts-page {
 
 /* ========================================
    TABLE TEXT
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table td {
 
@@ -413,7 +444,7 @@ body.admin-contacts-page {
 
 /* ========================================
    EMAIL LINKS
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table td a {
 
@@ -437,7 +468,7 @@ body.admin-contacts-page {
 
 /* ========================================
    MESSAGE CELL
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table td:nth-child(5) {
 
@@ -451,7 +482,7 @@ body.admin-contacts-page {
 
 /* ========================================
    STATUS DROPDOWN
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contact-status-select {
 
@@ -516,8 +547,85 @@ body.admin-contacts-page {
 
 
 /* ========================================
+   DELETE BUTTON
+======================================== */
+
+.admin-contacts-page .delete-contact-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    min-width: 78px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #dc3545;
+
+    border-radius: 6px;
+
+    background-color: #dc3545;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.admin-contacts-page .delete-contact-btn:hover {
+
+    background-color: #bb2d3b;
+
+    border-color: #b02a37;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.admin-contacts-page .delete-contact-btn:active {
+
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+.admin-contacts-page .delete-contact-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: wait;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* ========================================
    LOADING / EMPTY MESSAGE
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table td[colspan] {
 
@@ -533,7 +641,7 @@ body.admin-contacts-page {
 
 /* ========================================
    ERROR MESSAGE
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .admin-error {
 
@@ -555,7 +663,7 @@ body.admin-contacts-page {
 
 /* ========================================
    TABLE SCROLLBAR
-   ======================================== */
+======================================== */
 
 .admin-contacts-page .contacts-table-wrapper::-webkit-scrollbar {
 
@@ -587,7 +695,7 @@ body.admin-contacts-page {
 
 /* ========================================
    TABLET
-   ======================================== */
+======================================== */
 
 @media (max-width: 900px) {
 
@@ -607,7 +715,7 @@ body.admin-contacts-page {
 
 /* ========================================
    MOBILE
-   ======================================== */
+======================================== */
 
 @media (max-width: 768px) {
 
@@ -658,7 +766,7 @@ body.admin-contacts-page {
 
     .admin-contacts-page .contacts-table {
 
-        min-width: 1050px;
+        min-width: 1250px;
     }
 
 
@@ -675,7 +783,7 @@ body.admin-contacts-page {
 
 /* ========================================
    SMALL MOBILE
-   ======================================== */
+======================================== */
 
 @media (max-width: 480px) {
 
@@ -698,89 +806,4 @@ body.admin-contacts-page {
         font-size: 0.9rem;
     }
 
-}
-
-/* ========================================
-   CONTACT TABLE - DELETE BUTTON
-======================================== */
-
-.delete-contact-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 8px 14px;
-
-    min-width: 78px;
-
-    border: 1px solid #dc3545;
-    border-radius: 6px;
-
-    background: #dc3545;
-    color: #ffffff;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    line-height: 1.2;
-
-    cursor: pointer;
-
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Hover */
-
-.delete-contact-btn:hover {
-    background: #bb2d3b;
-    border-color: #b02a37;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-
-/* Click */
-
-.delete-contact-btn:active {
-    transform: translateY(0);
-
-    box-shadow: none;
-}
-
-
-/* Disabled / Deleting */
-
-.delete-contact-btn:disabled {
-    opacity: 0.65;
-
-    cursor: not-allowed;
-
-    transform: none;
-
-    box-shadow: none;
-}
-
-
-/* Delete column */
-
-.contacts-table th:last-child,
-.contacts-table td:last-child {
-    text-align: center;
-
-    white-space: nowrap;
-}
-
-
-/* Keep the delete action compact */
-
-.contacts-table td:last-child {
-    width: 100px;
 }
