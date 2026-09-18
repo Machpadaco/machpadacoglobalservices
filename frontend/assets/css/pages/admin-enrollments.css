@@ -5,232 +5,541 @@
 
 
 /* ========================================
-   ENROLLMENT TABLE WRAPPER
-   ======================================== */
+   ADMIN PAGE
+======================================== */
 
-.enrollment-table-wrapper {
+body.admin-enrollments-page {
+
+    margin: 0;
+
+    padding: 0;
+
+    background-color: #f4f6f8;
+
+    color: #1f2937;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
+.admin-enrollments-page
+.admin-enrollments-container {
+
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 45px 25px 70px;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.admin-enrollments-page
+.admin-enrollments-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding: 28px 30px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #d9e1e8;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(16, 42, 67, 0.08);
+}
+
+
+/* ========================================
+   PAGE TITLE
+======================================== */
+
+.admin-enrollments-page
+.admin-enrollments-title {
+
+    flex: 1;
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-title
+.admin-eyebrow {
+
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    color: #007bff;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-title h1 {
+
+    margin: 0 0 10px;
+
+    color: #102a43;
+
+    font-size: 2.1rem;
+
+    line-height: 1.2;
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-title p {
+
+    margin: 0;
+
+    color: #52667a;
+
+    line-height: 1.6;
+
+    font-size: 0.96rem;
+}
+
+
+/* ========================================
+   PAGE ACTIONS
+======================================== */
+
+.admin-enrollments-page
+.admin-enrollments-actions {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    min-width: 190px;
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-actions button {
+
+    width: 100%;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: #007bff;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-actions button:hover {
+
+    background-color: #0056b3;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(0, 86, 179, 0.2);
+}
+
+
+.admin-enrollments-page
+.admin-enrollments-actions button:active {
+
+    transform: translateY(0);
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+.admin-enrollments-page
+#logout-enrollments {
+
+    background-color: #ef4444;
+}
+
+
+.admin-enrollments-page
+#logout-enrollments:hover {
+
+    background-color: #dc2626;
+}
+
+
+/* ========================================
+   ADMIN MESSAGE
+======================================== */
+
+.admin-enrollments-page
+.admin-enrollment-message {
+
+    margin-bottom: 25px;
+
+    padding: 14px 16px;
+
+    border-radius: 7px;
+
+    background-color: #eff6ff;
+
+    border: 1px solid #93c5fd;
+
+    color: #1e40af;
+
+    line-height: 1.5;
+
+    font-size: 0.9rem;
+}
+
+
+.admin-enrollments-page
+.admin-enrollment-message[hidden] {
+
+    display: none;
 }
 
 
 /* ========================================
    COURSE PRICING SECTION
-   ======================================== */
+======================================== */
 
+.admin-enrollments-page
 .admin-course-pricing {
+
     width: 100%;
-    margin-bottom: 40px;
+
+    margin-bottom: 45px;
+
+    padding: 28px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #d9e1e8;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(16, 42, 67, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   SECTION HEADER
+======================================== */
+
+.admin-enrollments-page
+.admin-section-header {
+
+    margin-bottom: 25px;
+}
+
+
+.admin-enrollments-page
+.admin-section-header
+.admin-eyebrow {
+
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    color: #007bff;
+
+    font-size: 0.76rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+
+    text-transform: uppercase;
+}
+
+
+.admin-enrollments-page
+.admin-section-header h2 {
+
+    margin: 0 0 8px;
+
+    color: #102a43;
+
+    font-size: 1.55rem;
+
+    line-height: 1.25;
+}
+
+
+.admin-enrollments-page
+.admin-section-header p {
+
+    margin: 0;
+
+    color: #52667a;
+
+    line-height: 1.6;
+
+    font-size: 0.92rem;
 }
 
 
 /* ========================================
    COURSE PRICING HEADER
-   ======================================== */
+======================================== */
 
+.admin-enrollments-page
 .admin-course-pricing-header {
+
     margin-bottom: 20px;
 }
 
+
+.admin-enrollments-page
 .admin-course-pricing-header h2 {
+
     margin: 0 0 8px;
 }
 
+
+.admin-enrollments-page
 .admin-course-pricing-header p {
+
     margin: 0;
 }
 
 
 /* ========================================
    COURSE PRICING TABLE WRAPPER
-   ======================================== */
+======================================== */
 
+.admin-enrollments-page
 .course-pricing-table-wrapper {
+
     width: 100%;
+
     overflow-x: auto;
+
     overflow-y: hidden;
+
+    background-color: #ffffff;
+
+    border: 1px solid #b8c4d0;
+
+    border-radius: 9px;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 
 /* ========================================
    COURSE PRICING TABLE
-   ======================================== */
+======================================== */
 
-.admin-contacts-page .course-pricing-admin-table {
+.admin-enrollments-page
+.course-pricing-admin-table {
+
     width: 100%;
-    min-width: 800px;
+
+    min-width: 850px;
+
     border-collapse: collapse;
+
     table-layout: fixed;
-}
 
-
-/* ========================================
-   COURSE PRICING COLUMN WIDTHS
-   ======================================== */
-
-
-/* COURSE */
-
-.admin-contacts-page
-.course-pricing-admin-table
-.course-pricing-col-course {
-
-    width: 360px;
-}
-
-
-/* CURRENT FEE */
-
-.admin-contacts-page
-.course-pricing-admin-table
-.course-pricing-col-current {
-
-    width: 160px;
-}
-
-
-/* NEW FEE */
-
-.admin-contacts-page
-.course-pricing-admin-table
-.course-pricing-col-new {
-
-    width: 180px;
-}
-
-
-/* ACTION */
-
-.admin-contacts-page
-.course-pricing-admin-table
-.course-pricing-col-action {
-
-    width: 180px;
-}
-
-
-/* ========================================
-   COURSE PRICING TABLE HEADERS
-   ======================================== */
-
-.admin-contacts-page
-.course-pricing-admin-table th {
-
-    padding: 14px 12px;
-
-    text-align: left;
-
-    vertical-align: middle;
-
-    white-space: nowrap;
-
-    font-weight: 700;
+    background-color: #ffffff;
 }
 
 
 /* ========================================
    COURSE PRICING TABLE CELLS
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
+.course-pricing-admin-table th,
+.admin-enrollments-page
 .course-pricing-admin-table td {
 
-    padding: 14px 12px;
+    padding: 15px 16px;
+
+    border: 1px solid #b8c4d0;
 
     text-align: left;
 
     vertical-align: middle;
+
+    line-height: 1.5;
+
+    box-sizing: border-box;
 }
 
 
 /* ========================================
-   COURSE COLUMN
-   ======================================== */
+   COURSE PRICING TABLE HEADER
+======================================== */
 
-.admin-contacts-page
-.course-pricing-admin-table th:nth-child(1),
-.admin-contacts-page
-.course-pricing-admin-table td:nth-child(1) {
+.admin-enrollments-page
+.course-pricing-admin-table thead th {
 
-    width: 360px;
+    background-color: #102a43 !important;
 
-    overflow-wrap: break-word;
+    color: #ffffff !important;
 
-    word-break: break-word;
-}
+    font-size: 0.78rem;
 
+    font-weight: 700;
 
-/* ========================================
-   CURRENT FEE COLUMN
-   ======================================== */
+    text-transform: uppercase;
 
-.admin-contacts-page
-.course-pricing-admin-table th:nth-child(2),
-.admin-contacts-page
-.course-pricing-admin-table td:nth-child(2) {
-
-    width: 160px;
+    letter-spacing: 0.5px;
 
     white-space: nowrap;
-
-    font-weight: 600;
 }
 
 
 /* ========================================
-   NEW FEE COLUMN
-   ======================================== */
+   COURSE PRICING COLUMN WIDTHS
+======================================== */
 
-.admin-contacts-page
-.course-pricing-admin-table th:nth-child(3),
-.admin-contacts-page
-.course-pricing-admin-table td:nth-child(3) {
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-pricing-col-course {
 
-    width: 180px;
+    width: 45%;
+}
+
+
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-pricing-col-current {
+
+    width: 17%;
+}
+
+
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-pricing-col-new {
+
+    width: 18%;
+}
+
+
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-pricing-col-action {
+
+    width: 20%;
+
+    text-align: center !important;
 }
 
 
 /* ========================================
-   ACTION COLUMN
-   ======================================== */
+   COURSE PRICING TABLE BODY
+======================================== */
 
-.admin-contacts-page
-.course-pricing-admin-table th:nth-child(4),
-.admin-contacts-page
-.course-pricing-admin-table td:nth-child(4) {
+.admin-enrollments-page
+.course-pricing-admin-table tbody tr {
 
-    width: 180px;
+    background-color: #ffffff;
 
-    min-width: 180px;
+    transition:
+        background-color 0.2s ease;
+}
 
-    white-space: nowrap;
+
+.admin-enrollments-page
+.course-pricing-admin-table tbody tr:nth-child(even) {
+
+    background-color: #f8fafc;
+}
+
+
+.admin-enrollments-page
+.course-pricing-admin-table tbody tr:hover {
+
+    background-color: #eef7ff;
 }
 
 
 /* ========================================
    COURSE NAME
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-pricing-course strong {
 
     display: block;
 
     margin-bottom: 5px;
+
+    color: #102a43;
+
+    font-weight: 700;
 }
 
 
 /* ========================================
    COURSE DESCRIPTION
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-pricing-course small {
 
     display: block;
+
+    color: #64748b;
 
     line-height: 1.5;
 
@@ -243,10 +552,26 @@
 
 
 /* ========================================
-   COURSE PRICE INPUT
-   ======================================== */
+   CURRENT FEE
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
+.course-pricing-admin-table
+td:nth-child(2) {
+
+    color: #102a43;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   COURSE PRICE INPUT
+======================================== */
+
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-price-input {
 
@@ -256,53 +581,60 @@
 
     padding: 9px 10px;
 
-    border: 1px solid #ccc;
+    border: 1px solid #b8c4d0;
 
     border-radius: 6px;
 
-    background: #ffffff;
+    background-color: #ffffff;
 
-    color: inherit;
+    color: #334155;
 
     font-family: inherit;
 
     font-size: 0.9rem;
 
     box-sizing: border-box;
-}
-
-
-/* ========================================
-   COURSE PRICE INPUT FOCUS
-   ======================================== */
-
-.admin-contacts-page
-.course-pricing-admin-table
-.course-price-input:focus {
 
     outline: none;
 
-    border-color: #087f23;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-price-input:focus {
+
+    border-color: #007bff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 123, 255, 0.12);
 }
 
 
 /* ========================================
    UPDATE PRICE BUTTON
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-price-update {
 
-    display: inline-block;
+    display: inline-flex;
 
-    padding: 9px 12px;
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 9px 15px;
 
     border: none;
 
     border-radius: 6px;
 
-    background: #087f23;
+    background-color: #16a34a;
 
     color: #ffffff;
 
@@ -312,43 +644,57 @@
 
     font-size: 0.85rem;
 
-    font-weight: 600;
+    font-weight: 700;
 
     white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-/* ========================================
-   UPDATE PRICE BUTTON HOVER
-   ======================================== */
-
-.admin-contacts-page
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-price-update:hover {
 
-    opacity: 0.85;
+    background-color: #15803d;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 8px rgba(22, 163, 74, 0.18);
 }
 
 
-/* ========================================
-   UPDATE PRICE BUTTON DISABLED
-   ======================================== */
+.admin-enrollments-page
+.course-pricing-admin-table
+.course-price-update:active {
 
-.admin-contacts-page
+    transform: translateY(0);
+}
+
+
+.admin-enrollments-page
 .course-pricing-admin-table
 .course-price-update:disabled {
 
     opacity: 0.6;
 
     cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
 }
 
 
 /* ========================================
    COURSE PRICING MESSAGE
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 #course-pricing-message {
 
     margin-bottom: 20px;
@@ -359,11 +705,7 @@
 }
 
 
-/* ========================================
-   HIDDEN COURSE PRICING MESSAGE
-   ======================================== */
-
-.admin-contacts-page
+.admin-enrollments-page
 #course-pricing-message[hidden] {
 
     display: none;
@@ -371,25 +713,126 @@
 
 
 /* ========================================
-   ENROLLMENT TABLE
-   ======================================== */
+   ENROLLMENTS SECTION
+======================================== */
 
-.admin-contacts-page .enrollments-admin-table {
+.admin-enrollments-page
+.admin-enrollments-section {
+
     width: 100%;
+
+    margin-bottom: 45px;
+
+    padding: 28px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #d9e1e8;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(16, 42, 67, 0.07);
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   ENROLLMENT TABLE WRAPPER
+======================================== */
+
+.admin-enrollments-page
+.enrollment-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    background-color: #ffffff;
+
+    border: 1px solid #b8c4d0;
+
+    border-radius: 9px;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* ========================================
+   ENROLLMENT TABLE
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table {
+
+    width: 100%;
+
     min-width: 1250px;
+
     border-collapse: collapse;
+
     table-layout: fixed;
+
+    background-color: #ffffff;
+}
+
+
+/* ========================================
+   ENROLLMENT TABLE CELLS
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table th,
+.admin-enrollments-page
+.enrollments-admin-table td {
+
+    padding: 14px 15px;
+
+    border: 1px solid #b8c4d0;
+
+    text-align: left;
+
+    vertical-align: middle;
+
+    line-height: 1.5;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   ENROLLMENT TABLE HEADER
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table thead th {
+
+    background-color: #102a43 !important;
+
+    color: #ffffff !important;
+
+    font-size: 0.77rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.45px;
+
+    white-space: nowrap;
 }
 
 
 /* ========================================
    FIXED COLUMN WIDTHS
-   ======================================== */
-
+======================================== */
 
 /* DATE */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-date {
 
@@ -399,7 +842,7 @@
 
 /* STUDENT */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-student {
 
@@ -409,7 +852,7 @@
 
 /* EMAIL */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-email {
 
@@ -419,7 +862,7 @@
 
 /* COURSE */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-course {
 
@@ -429,7 +872,7 @@
 
 /* AMOUNT */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-amount {
 
@@ -439,7 +882,7 @@
 
 /* PAYMENT REFERENCE */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-reference {
 
@@ -449,7 +892,7 @@
 
 /* STATUS */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-status {
 
@@ -459,84 +902,88 @@
 
 /* ACTION */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-col-action {
 
     width: 180px;
+
+    min-width: 180px;
+
+    text-align: center !important;
 }
 
 
 /* ========================================
-   TABLE HEADERS
-   ======================================== */
+   ENROLLMENT TABLE BODY
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table th {
+.admin-enrollments-page
+.enrollments-admin-table tbody tr {
 
-    padding: 14px 12px;
+    background-color: #ffffff;
 
-    text-align: left;
+    transition:
+        background-color 0.2s ease;
+}
 
-    vertical-align: middle;
 
-    white-space: nowrap;
+.admin-enrollments-page
+.enrollments-admin-table tbody tr:nth-child(even) {
+
+    background-color: #f8fafc;
+}
+
+
+.admin-enrollments-page
+.enrollments-admin-table tbody tr:hover {
+
+    background-color: #eef7ff;
+}
+
+
+/* ========================================
+   ENROLLMENT TABLE TEXT
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table td {
+
+    color: #334155;
+
+    font-size: 0.88rem;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   STUDENT NAME
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(2) {
+
+    color: #102a43;
 
     font-weight: 700;
 }
 
 
 /* ========================================
-   TABLE CELLS
-   ======================================== */
+   STUDENT EMAIL
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table td {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(3) a {
 
-    padding: 14px 12px;
+    color: #0066cc;
 
-    text-align: left;
-
-    vertical-align: middle;
-}
-
-
-/* ========================================
-   DATE COLUMN
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(1),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(1) {
-
-    width: 140px;
-}
-
-
-/* ========================================
-   STUDENT COLUMN
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(2),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(2) {
-
-    width: 150px;
-}
-
-
-/* ========================================
-   EMAIL COLUMN
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(3),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(3) {
-
-    width: 190px;
+    text-decoration: none;
 
     overflow-wrap: anywhere;
 
@@ -544,48 +991,55 @@
 }
 
 
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(3) a:hover {
+
+    color: #0056b3;
+
+    text-decoration: underline;
+}
+
+
 /* ========================================
-   COURSE COLUMN
-   ======================================== */
+   COURSE
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(4),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(4) {
-
-    width: 180px;
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(4) {
 
     overflow-wrap: break-word;
+
+    word-break: break-word;
 }
 
 
 /* ========================================
-   AMOUNT COLUMN
-   ======================================== */
+   AMOUNT
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(5),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(5) {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(5) {
 
-    width: 100px;
+    color: #102a43;
+
+    font-weight: 700;
 
     white-space: nowrap;
-
-    font-weight: 600;
 }
 
 
 /* ========================================
-   PAYMENT REFERENCE COLUMN
-   ======================================== */
+   PAYMENT REFERENCE
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(6),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(6) {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(6) {
 
-    width: 230px;
+    font-weight: 600;
 
     overflow-wrap: anywhere;
 
@@ -593,44 +1047,9 @@
 }
 
 
-/* ========================================
-   STATUS COLUMN
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(7),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(7) {
-
-    width: 120px;
-
-    white-space: nowrap;
-}
-
-
-/* ========================================
-   ACTION COLUMN
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table th:nth-child(8),
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(8) {
-
-    width: 180px;
-
-    min-width: 180px;
-
-    white-space: nowrap;
-}
-
-
-/* ========================================
-   PAYMENT REFERENCE TEXT
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(6) strong {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(6) strong {
 
     display: block;
 
@@ -641,133 +1060,142 @@
 
 
 /* ========================================
-   STUDENT EMAIL
-   ======================================== */
+   STATUS
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(3) a {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(7) {
 
-    overflow-wrap: anywhere;
+    white-space: nowrap;
 
-    word-break: break-word;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.admin-enrollments-page
+.enrollments-admin-table
+.enrollment-action {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 0.82rem;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
 /* ========================================
    VERIFY BUTTON
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-action.verify {
 
-    display: inline-block;
+    background-color: #16a34a;
 
-    padding: 9px 12px;
-
-    margin-right: 8px;
+    margin-right: 7px;
 
     margin-bottom: 4px;
+}
 
-    border: none;
 
-    border-radius: 6px;
+.admin-enrollments-page
+.enrollments-admin-table
+.enrollment-action.verify:hover {
 
-    background: #087f23;
+    background-color: #15803d;
 
-    color: #ffffff;
+    transform: translateY(-1px);
 
-    cursor: pointer;
-
-    font-family: inherit;
-
-    font-size: 0.85rem;
-
-    font-weight: 600;
-
-    white-space: nowrap;
+    box-shadow:
+        0 3px 8px rgba(22, 163, 74, 0.2);
 }
 
 
 /* ========================================
    REJECT BUTTON
-   ======================================== */
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-action.reject {
 
-    display: inline-block;
-
-    padding: 9px 12px;
-
-    margin-right: 0;
+    background-color: #dc3545;
 
     margin-bottom: 4px;
-
-    border: none;
-
-    border-radius: 6px;
-
-    background: #dc3545;
-
-    color: #ffffff;
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    font-size: 0.85rem;
-
-    font-weight: 600;
-
-    white-space: nowrap;
 }
 
 
-/* ========================================
-   BUTTON HOVER
-   ======================================== */
-
-.admin-contacts-page
-.enrollments-admin-table
-.enrollment-action.verify:hover {
-
-    opacity: 0.85;
-}
-
-
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-action.reject:hover {
 
-    opacity: 0.85;
+    background-color: #b91c1c;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 3px 8px rgba(220, 53, 69, 0.2);
 }
 
 
 /* ========================================
-   DISABLED BUTTON
-   ======================================== */
+   DISABLED ACTION BUTTONS
+======================================== */
 
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-action.verify:disabled,
-.admin-contacts-page
+.admin-enrollments-page
 .enrollments-admin-table
 .enrollment-action.reject:disabled {
 
     opacity: 0.6;
 
     cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
 }
 
 
 /* ========================================
-   ACCESS GRANTED / REJECTED
-   ======================================== */
+   ACTION STATUS TEXT
+======================================== */
 
-.admin-contacts-page
-.enrollments-admin-table td:nth-child(8) span {
+.admin-enrollments-page
+.enrollments-admin-table
+td:nth-child(8) span {
 
     font-weight: 600;
 
@@ -776,34 +1204,234 @@
 
 
 /* ========================================
-   MOBILE / SMALL SCREEN
-   ======================================== */
+   LOADING / EMPTY ROW
+======================================== */
+
+.admin-enrollments-page
+.course-pricing-admin-table
+td[colspan],
+.admin-enrollments-page
+.enrollments-admin-table
+td[colspan] {
+
+    text-align: center;
+
+    padding: 35px 20px;
+
+    color: #64748b;
+
+    font-weight: 500;
+}
+
+
+/* ========================================
+   SCROLLBARS
+======================================== */
+
+.admin-enrollments-page
+.course-pricing-table-wrapper::-webkit-scrollbar,
+.admin-enrollments-page
+.enrollment-table-wrapper::-webkit-scrollbar {
+
+    height: 9px;
+}
+
+
+.admin-enrollments-page
+.course-pricing-table-wrapper::-webkit-scrollbar-track,
+.admin-enrollments-page
+.enrollment-table-wrapper::-webkit-scrollbar-track {
+
+    background: #e2e8f0;
+
+    border-radius: 10px;
+}
+
+
+.admin-enrollments-page
+.course-pricing-table-wrapper::-webkit-scrollbar-thumb,
+.admin-enrollments-page
+.enrollment-table-wrapper::-webkit-scrollbar-thumb {
+
+    background: #94a3b8;
+
+    border-radius: 10px;
+}
+
+
+.admin-enrollments-page
+.course-pricing-table-wrapper::-webkit-scrollbar-thumb:hover,
+.admin-enrollments-page
+.enrollment-table-wrapper::-webkit-scrollbar-thumb:hover {
+
+    background: #64748b;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
 
 @media (max-width: 900px) {
 
-    .enrollment-table-wrapper {
+    .admin-enrollments-page
+    .admin-enrollments-container {
 
-        overflow-x: auto;
+        padding: 35px 20px 60px;
     }
 
 
-    .admin-contacts-page
+    .admin-enrollments-page
+    .admin-enrollments-header {
+
+        align-items: flex-start;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-title h1 {
+
+        font-size: 1.8rem;
+    }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .admin-enrollments-page
+    .admin-enrollments-container {
+
+        padding: 25px 15px 50px;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-header {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 22px;
+
+        gap: 20px;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-title h1 {
+
+        font-size: 1.6rem;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-actions {
+
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .admin-enrollments-page
+    .admin-course-pricing,
+    .admin-enrollments-page
+    .admin-enrollments-section {
+
+        padding: 20px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .admin-enrollments-page
+    .admin-section-header h2 {
+
+        font-size: 1.35rem;
+    }
+
+
+    .admin-enrollments-page
+    .course-pricing-admin-table {
+
+        min-width: 850px;
+    }
+
+
+    .admin-enrollments-page
     .enrollments-admin-table {
 
         min-width: 1250px;
     }
 
 
-    .course-pricing-table-wrapper {
+    .admin-enrollments-page
+    .course-pricing-admin-table th,
+    .admin-enrollments-page
+    .course-pricing-admin-table td,
+    .admin-enrollments-page
+    .enrollments-admin-table th,
+    .admin-enrollments-page
+    .enrollments-admin-table td {
 
-        overflow-x: auto;
+        padding: 12px;
+
+        font-size: 0.83rem;
+    }
+
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+    .admin-enrollments-page
+    .admin-enrollments-container {
+
+        padding-left: 10px;
+
+        padding-right: 10px;
     }
 
 
-    .admin-contacts-page
-    .course-pricing-admin-table {
+    .admin-enrollments-page
+    .admin-enrollments-header {
 
-        min-width: 800px;
+        padding: 18px;
+    }
+
+
+    .admin-enrollments-page
+    .admin-course-pricing,
+    .admin-enrollments-page
+    .admin-enrollments-section {
+
+        padding: 16px;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-title h1 {
+
+        font-size: 1.4rem;
+    }
+
+
+    .admin-enrollments-page
+    .admin-enrollments-title p,
+    .admin-enrollments-page
+    .admin-section-header p {
+
+        font-size: 0.87rem;
     }
 
 }
