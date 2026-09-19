@@ -2,10 +2,12 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+    <!-- Homepage -->
     <url>
         <loc>https://machpadaco.com/</loc>
     </url>
 
+    <!-- Main public pages -->
     <url>
         <loc>https://machpadaco.com/about.html</loc>
     </url>
@@ -31,6 +33,10 @@
     </url>
 
     <url>
+        <loc>https://machpadaco.com/virtual-assistance.html</loc>
+    </url>
+
+    <url>
         <loc>https://machpadaco.com/community.html</loc>
     </url>
 
@@ -43,15 +49,28 @@
     </url>
 
     <url>
+        <loc>https://machpadaco.com/pricing.html</loc>
+    </url>
+
+    <url>
         <loc>https://machpadaco.com/contact.html</loc>
     </url>
 
+    <!-- Public premium training information pages -->
     <url>
-        <loc>https://machpadaco.com/login.html</loc>
+        <loc>https://machpadaco.com/software-development-premium.html</loc>
     </url>
 
     <url>
-        <loc>https://machpadaco.com/signup.html</loc>
+        <loc>https://machpadaco.com/phone-engineering-premium.html</loc>
+    </url>
+
+    <url>
+        <loc>https://machpadaco.com/digital-marketing-premium.html</loc>
+    </url>
+
+    <url>
+        <loc>https://machpadaco.com/property-management-virtual-assistance-premium.html</loc>
     </url>
 
 </urlset>
