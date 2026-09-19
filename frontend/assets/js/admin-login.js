@@ -233,8 +233,17 @@ if (!loginForm) {
                     // REDIRECT TO ADMIN DASHBOARD
                     // ========================================
 
+                    const adminDashboardURL =
+                        (
+                            window.location.hostname === "localhost" ||
+                            window.location.hostname === "127.0.0.1"
+                        )
+                            ? "http://localhost:5000/admin"
+                            : "/admin-contacts.html";
+
+
                     window.location.replace(
-                        `${API_BASE_URL}/admin`
+                        adminDashboardURL
                     );
 
                     return;
