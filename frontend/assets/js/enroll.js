@@ -2,7 +2,14 @@
 // Machpadaco Premium Enrolment
 // ========================================
 
-import API_BASE_URL from "./config.js";
+// Backend API server
+const API_BASE_URL =
+    (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    )
+        ? "http://localhost:5000"
+        : "https://machpadacoglobalservices-api.onrender.com";
 
 const token = localStorage.getItem("token");
 const userJson = localStorage.getItem("user");
