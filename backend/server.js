@@ -10,6 +10,20 @@ require("dotenv").config();
 const app = express();
 
 // ==============================
+// FORCE HTTP TO HTTPS REDIRECT
+// ==============================
+app.use((req, res, next) => {
+    // Detect unencrypted HTTP requests from reverse proxies/load balancers
+    const isHttp = req.headers["x-forwarded-proto"] === "http" || req.protocol === "http";
+
+    if (isHttp && process.env.NODE_ENV === "production") {
+        return res.redirect(301, `https://${req.headers.host}${req.url}`);
+    }
+
+    next();
+});
+
+// ==============================
 // CREATE HTTP SERVER
 // ==============================
 const server = http.createServer(app);
@@ -320,15 +334,6 @@ const contactRoutes = require("./routes/contactRoutes");
 // ==============================
 // PREMIUM ENROLLMENT ROUTES
 // ==============================
-// Handles:
-// - Course catalogue
-// - Course prices
-// - Payment details
-// - Student enrollment
-// - Payment reference submission
-// - Student enrollment history
-// - Premium course access
-// - Admin verification/rejection
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 
 // ==============================
