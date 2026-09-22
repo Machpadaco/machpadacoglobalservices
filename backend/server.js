@@ -14,10 +14,18 @@ const app = express();
 // ==============================
 app.use((req, res, next) => {
     // Detect unencrypted HTTP requests from reverse proxies/load balancers
-    const isHttp = req.headers["x-forwarded-proto"] === "http" || req.protocol === "http";
+    const isHttp =
+        req.headers["x-forwarded-proto"] === "http" ||
+        req.protocol === "http";
 
-    if (isHttp && process.env.NODE_ENV === "production") {
-        return res.redirect(301, `https://${req.headers.host}${req.url}`);
+    if (
+        isHttp &&
+        process.env.NODE_ENV === "production"
+    ) {
+        return res.redirect(
+            301,
+            `https://${req.headers.host}${req.url}`
+        );
     }
 
     next();
@@ -33,8 +41,17 @@ const server = http.createServer(app);
 // ==============================
 const io = new Server(server, {
     cors: {
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"]
+        origin: [
+            "https://machpadaco.com",
+            "https://www.machpadaco.com"
+        ],
+        methods: [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+        ]
     }
 });
 
@@ -46,15 +63,77 @@ app.set("io", io);
 // ==============================
 // GLOBAL MIDDLEWARE
 // ==============================
-app.use(cors());
 
-app.use(express.json({
-    limit: "10mb"
-}));
+const allowedOrigins = [
+    // Production
+    "https://machpadaco.com",
+    "https://www.machpadaco.com",
 
-app.use(express.urlencoded({
-    extended: true
-}));
+    // Local development
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+
+            // Allow requests without an Origin header
+            // e.g. Postman or server-to-server requests
+            if (!origin) {
+                return callback(null, true);
+            }
+
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            console.log(
+                "❌ CORS blocked origin:",
+                origin
+            );
+
+            return callback(
+                new Error("Not allowed by CORS")
+            );
+        },
+
+        methods: [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS"
+        ],
+
+        allowedHeaders: [
+            "Content-Type",
+            "Authorization"
+        ],
+
+        credentials: true
+    })
+);
+
+// ==============================
+// HANDLE CORS PREFLIGHT REQUESTS
+// ==============================
+app.options("*", cors());
+
+app.use(
+    express.json({
+        limit: "10mb"
+    })
+);
+
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
 
 // ==============================
 // STATIC FRONTEND FOLDER
@@ -63,7 +142,11 @@ app.use(express.urlencoded({
 // (CSS, JS, Images, HTML)
 app.use(
     express.static(
-        path.resolve(__dirname, "..", "frontend")
+        path.resolve(
+            __dirname,
+            "..",
+            "frontend"
+        )
     )
 );
 
@@ -80,7 +163,10 @@ app.use((req, res, next) => {
 // ==============================
 io.on("connection", (socket) => {
 
-    console.log("⚡ User Connected:", socket.id);
+    console.log(
+        "⚡ User Connected:",
+        socket.id
+    );
 
     // ==============================
     // REGISTER USER PRIVATE ROOM
@@ -89,11 +175,13 @@ io.on("connection", (socket) => {
 
         if (!userId) return;
 
-        const roomId = userId.toString();
+        const roomId =
+            userId.toString();
 
         socket.join(roomId);
 
-        socket.userIdString = roomId;
+        socket.userIdString =
+            roomId;
 
         console.log(
             `👤 User joined private room: ${roomId}`
@@ -103,134 +191,220 @@ io.on("connection", (socket) => {
     // ==============================
     // JOIN COMMUNITY CHANNEL
     // ==============================
-    socket.on("joinChannelTopic", (topicName) => {
+    socket.on(
+        "joinChannelTopic",
+        (topicName) => {
 
-        if (!topicName) return;
+            if (!topicName) return;
 
-        const existingRooms = Array.from(socket.rooms);
+            const existingRooms =
+                Array.from(socket.rooms);
 
-        existingRooms.forEach((room) => {
+            existingRooms.forEach(
+                (room) => {
 
-            if (
-                room !== socket.id &&
-                room !== socket.userIdString
-            ) {
-                socket.leave(room);
-            }
+                    if (
+                        room !== socket.id &&
+                        room !== socket.userIdString
+                    ) {
+                        socket.leave(room);
+                    }
 
-        });
+                }
+            );
 
-        socket.join(topicName);
+            socket.join(topicName);
 
-        console.log(
-            `📡 ${socket.id} joined channel: ${topicName}`
-        );
-    });
+            console.log(
+                `📡 ${socket.id} joined channel: ${topicName}`
+            );
+        }
+    );
 
     // ==============================
     // POST EVENTS
     // ==============================
-    socket.on("postCreated", (topic = "general") => {
-        io.to(topic).emit("postCreated");
-    });
+    socket.on(
+        "postCreated",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "postCreated"
+            );
+        }
+    );
 
-    socket.on("postUpdated", (topic = "general") => {
-        io.to(topic).emit("postUpdated");
-    });
+    socket.on(
+        "postUpdated",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "postUpdated"
+            );
+        }
+    );
 
-    socket.on("postDeleted", (topic = "general") => {
-        io.to(topic).emit("postDeleted");
-    });
+    socket.on(
+        "postDeleted",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "postDeleted"
+            );
+        }
+    );
 
     // ==============================
     // LIKE EVENTS
     // ==============================
-    socket.on("likeUpdated", (topic = "general") => {
-        io.to(topic).emit("likeUpdated");
-    });
+    socket.on(
+        "likeUpdated",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "likeUpdated"
+            );
+        }
+    );
 
     // ==============================
     // COMMENT EVENTS
     // ==============================
-    socket.on("commentAdded", (topic = "general") => {
-        io.to(topic).emit("commentAdded");
-    });
+    socket.on(
+        "commentAdded",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "commentAdded"
+            );
+        }
+    );
 
-    socket.on("commentUpdated", (topic = "general") => {
-        io.to(topic).emit("commentUpdated");
-    });
+    socket.on(
+        "commentUpdated",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "commentUpdated"
+            );
+        }
+    );
 
-    socket.on("commentDeleted", (topic = "general") => {
-        io.to(topic).emit("commentDeleted");
-    });
+    socket.on(
+        "commentDeleted",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "commentDeleted"
+            );
+        }
+    );
 
     // ==============================
     // REPLY EVENTS
     // ==============================
-    socket.on("replyAdded", (topic = "general") => {
-        io.to(topic).emit("replyAdded");
-    });
+    socket.on(
+        "replyAdded",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "replyAdded"
+            );
+        }
+    );
 
-    socket.on("replyUpdated", (topic = "general") => {
-        io.to(topic).emit("replyUpdated");
-    });
+    socket.on(
+        "replyUpdated",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "replyUpdated"
+            );
+        }
+    );
 
-    socket.on("replyDeleted", (topic = "general") => {
-        io.to(topic).emit("replyDeleted");
-    });
+    socket.on(
+        "replyDeleted",
+        (topic = "general") => {
+            io.to(topic).emit(
+                "replyDeleted"
+            );
+        }
+    );
 
     // ==============================
     // NOTIFICATION EVENTS
     // ==============================
-    socket.on("sendNotification", (payload) => {
+    socket.on(
+        "sendNotification",
+        (payload) => {
 
-        if (!payload || !payload.recipient) return;
+            if (
+                !payload ||
+                !payload.recipient
+            ) return;
 
-        const recipientRoom =
-            payload.recipient.toString();
+            const recipientRoom =
+                payload.recipient.toString();
 
-        io.to(recipientRoom).emit(
-            "notificationReceived",
-            payload
-        );
+            io.to(recipientRoom).emit(
+                "notificationReceived",
+                payload
+            );
 
-        console.log(
-            `🔔 Notification sent to ${recipientRoom}`
-        );
-    });
-
-    socket.on("notificationUpdated", (recipientId) => {
-
-        if (!recipientId) {
-            io.emit("notificationUpdated");
-            return;
+            console.log(
+                `🔔 Notification sent to ${recipientRoom}`
+            );
         }
+    );
 
-        io.to(recipientId.toString())
-            .emit("notificationUpdated");
-    });
+    socket.on(
+        "notificationUpdated",
+        (recipientId) => {
 
-    socket.on("notificationRead", (recipientId) => {
+            if (!recipientId) {
+                io.emit(
+                    "notificationUpdated"
+                );
+                return;
+            }
 
-        if (!recipientId) {
-            io.emit("notificationUpdated");
-            return;
+            io.to(
+                recipientId.toString()
+            ).emit(
+                "notificationUpdated"
+            );
         }
+    );
 
-        io.to(recipientId.toString())
-            .emit("notificationUpdated");
-    });
+    socket.on(
+        "notificationRead",
+        (recipientId) => {
 
-    socket.on("notificationDeleted", (recipientId) => {
+            if (!recipientId) {
+                io.emit(
+                    "notificationUpdated"
+                );
+                return;
+            }
 
-        if (!recipientId) {
-            io.emit("notificationUpdated");
-            return;
+            io.to(
+                recipientId.toString()
+            ).emit(
+                "notificationUpdated"
+            );
         }
+    );
 
-        io.to(recipientId.toString())
-            .emit("notificationUpdated");
-    });
+    socket.on(
+        "notificationDeleted",
+        (recipientId) => {
+
+            if (!recipientId) {
+                io.emit(
+                    "notificationUpdated"
+                );
+                return;
+            }
+
+            io.to(
+                recipientId.toString()
+            ).emit(
+                "notificationUpdated"
+            );
+        }
+    );
 
     // ==============================
     // DISCONNECT
@@ -249,109 +423,159 @@ io.on("connection", (socket) => {
 // ==============================
 // PAGE ROUTES
 // ==============================
-app.get("/pricing.html", (req, res) => {
+app.get(
+    "/pricing.html",
+    (req, res) => {
 
-    res.sendFile(
-        path.resolve(
-            __dirname,
-            "..",
-            "frontend",
-            "pricing.html"
-        )
-    );
+        res.sendFile(
+            path.resolve(
+                __dirname,
+                "..",
+                "frontend",
+                "pricing.html"
+            )
+        );
 
-});
+    }
+);
 
-app.get("/community.html", (req, res) => {
+app.get(
+    "/community.html",
+    (req, res) => {
 
-    res.sendFile(
-        path.resolve(
-            __dirname,
-            "..",
-            "frontend",
-            "community.html"
-        )
-    );
+        res.sendFile(
+            path.resolve(
+                __dirname,
+                "..",
+                "frontend",
+                "community.html"
+            )
+        );
 
-});
+    }
+);
 
 // ==============================
 // ADMIN PAGE ROUTES
 // ==============================
-app.get("/admin-login", (req, res) => {
+app.get(
+    "/admin-login",
+    (req, res) => {
 
-    res.sendFile(
-        path.resolve(
-            __dirname,
-            "..",
-            "frontend",
-            "admin-login.html"
-        )
-    );
+        res.sendFile(
+            path.resolve(
+                __dirname,
+                "..",
+                "frontend",
+                "admin-login.html"
+            )
+        );
 
-});
+    }
+);
 
-app.get("/admin", (req, res) => {
+app.get(
+    "/admin",
+    (req, res) => {
 
-    res.sendFile(
-        path.resolve(
-            __dirname,
-            "..",
-            "frontend",
-            "admin-contacts.html"
-        )
-    );
+        res.sendFile(
+            path.resolve(
+                __dirname,
+                "..",
+                "frontend",
+                "admin-contacts.html"
+            )
+        );
 
-});
+    }
+);
 
 // ==============================
 // TEST / ROOT ROUTE
 // ==============================
-app.get("/", (req, res) => {
+app.get(
+    "/",
+    (req, res) => {
 
-    res.sendFile(
-        path.resolve(
-            __dirname,
-            "..",
-            "frontend",
-            "index.html"
-        )
-    );
+        res.sendFile(
+            path.resolve(
+                __dirname,
+                "..",
+                "frontend",
+                "index.html"
+            )
+        );
 
-});
+    }
+);
 
 // ==============================
 // ROUTES IMPORTS
 // ==============================
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/user");
-const postRoutes = require("./routes/post");
-const commentRoutes = require("./routes/comment");
-const replyRoutes = require("./routes/reply");
-const notificationRoutes = require("./routes/notificationRoutes");
-const contactRoutes = require("./routes/contactRoutes");
+const authRoutes =
+    require("./routes/authRoutes");
+
+const userRoutes =
+    require("./routes/user");
+
+const postRoutes =
+    require("./routes/post");
+
+const commentRoutes =
+    require("./routes/comment");
+
+const replyRoutes =
+    require("./routes/reply");
+
+const notificationRoutes =
+    require("./routes/notificationRoutes");
+
+const contactRoutes =
+    require("./routes/contactRoutes");
 
 // ==============================
 // PREMIUM ENROLLMENT ROUTES
 // ==============================
-const enrollmentRoutes = require("./routes/enrollmentRoutes");
+const enrollmentRoutes =
+    require("./routes/enrollmentRoutes");
 
 // ==============================
 // API ROUTES
 // ==============================
-app.use("/api/auth", authRoutes);
+app.use(
+    "/api/auth",
+    authRoutes
+);
 
-app.use("/api/user", userRoutes);
+app.use(
+    "/api/user",
+    userRoutes
+);
 
-app.use("/api/posts", postRoutes);
+app.use(
+    "/api/posts",
+    postRoutes
+);
 
-app.use("/api/comment", commentRoutes);
+app.use(
+    "/api/comment",
+    commentRoutes
+);
 
-app.use("/api/reply", replyRoutes);
+app.use(
+    "/api/reply",
+    replyRoutes
+);
 
-app.use("/api/notification", notificationRoutes);
+app.use(
+    "/api/notification",
+    notificationRoutes
+);
 
-app.use("/api/contact", contactRoutes);
+app.use(
+    "/api/contact",
+    contactRoutes
+);
 
 // ==============================
 // PREMIUM ENROLLMENT API
@@ -364,22 +588,29 @@ app.use(
 // ==============================
 // DATABASE CONNECTION
 // ==============================
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(
+    process.env.MONGO_URI
+)
 
     .then(() => {
 
-        console.log("✅ MongoDB Connected");
+        console.log(
+            "✅ MongoDB Connected"
+        );
 
         const PORT =
             process.env.PORT || 5000;
 
-        server.listen(PORT, () => {
+        server.listen(
+            PORT,
+            () => {
 
-            console.log(
-                `🚀 Server running on port ${PORT}`
-            );
+                console.log(
+                    `🚀 Server running on port ${PORT}`
+                );
 
-        });
+            }
+        );
 
     })
 
