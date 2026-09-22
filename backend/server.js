@@ -10,6 +10,11 @@ require("dotenv").config();
 const app = express();
 
 // ==============================
+// TRUST REVERSE PROXY (RENDER)
+// ==============================
+app.set("trust proxy", 1);
+
+// ==============================
 // FORCE HTTP TO HTTPS REDIRECT
 // ==============================
 app.use((req, res, next) => {
