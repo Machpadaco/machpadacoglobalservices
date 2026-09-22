@@ -121,7 +121,8 @@ app.use(
 // ==============================
 // HANDLE CORS PREFLIGHT REQUESTS
 // ==============================
-app.options("*", cors());
+// Updated for compatibility with newer path-to-regexp / Express syntax
+app.options(/(.*)/, cors());
 
 app.use(
     express.json({
