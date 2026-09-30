@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
 
+Disallow: /admin-contacts.html
+Disallow: /admin-enrollments.html
+Disallow: /admin-login.html
+
+Disallow: /enroll.html
+Disallow: /login.html
+Disallow: /profile.html
+Disallow: /signup.html
+Disallow: /student-dashboard.html
+
 Sitemap: https://machpadaco.com/sitemap.xml
